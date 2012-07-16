@@ -8,6 +8,7 @@
           <element id="module-output" name="FeedMeFeed" />
           <element id="module-output" name="Administration" />
           <element id="module-output" name="User" />
+          <element id="module-output" name="Commons" />
         </element>
       </element>
       <element id="gwt-compiler-output" facet="Administration/gwt/GWT" />

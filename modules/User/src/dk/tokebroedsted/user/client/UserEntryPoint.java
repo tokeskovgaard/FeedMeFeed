@@ -4,18 +4,27 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
-/**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 16-07-12
- * Time: 16:08
- * To change this template use File | Settings | File Templates.
- */
 public class UserEntryPoint implements EntryPoint{
 
     @Override
     public void onModuleLoad() {
-        RootPanel rootPanel = RootPanel.get("gwt");
-        rootPanel.add(new Label("Virker"));
+        final RootPanel rootPanel = RootPanel.get("gwt");
+        Label label = new Label("Virker");
+        label.setStyleName("ExampleLabel");
+        rootPanel.add(label);
+
+       /* UserServiceAsync userService = UserService.App.getInstance();
+
+        userService.getMessage("MOJNS",new AsyncCallback<String>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                rootPanel.add(new Label(result));
+            }
+        });*/
     }
 }
