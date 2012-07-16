@@ -10,5 +10,8 @@ public class AdministrationPage extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletOutputStream out = resp.getOutputStream();
         out.println("Du ramte lige Administrationsiden");
+
+        out.println("<script type=\"text/javascript\" language=\"javascript\" src=\"administration/Administration.nocache.js\"></script>");
+        out.println("<div id=\"gwt\"></div>");
     }
 }

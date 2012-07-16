@@ -3,9 +3,12 @@
   <component name="FacetManager">
     <facet type="gwt" name="GWT">
       <configuration>
-        <setting name="compilerMaxHeapSize" value="128" />
+        <setting name="compilerMaxHeapSize" value="1024" />
         <setting name="gwtScriptOutputStyle" value="DETAILED" />
-        <setting name="gwtSdkUrl" value="file://C:/Program Files (x86)/Java/gwt-2.5.0.rc1" />
+        <setting name="gwtSdkUrl" value="file://$GWT_PATH$" />
+        <packaging>
+          <module name="dk.tokebroedsted.administration.Administration" path="/Administration" />
+        </packaging>
       </configuration>
     </facet>
   </component>

@@ -4,6 +4,19 @@
     <entry_points version="2.0" />
   </component>
   <component name="IdProvider" IDEtalkID="DCC212AD4A14B6634D1590D19D4DF06A" />
+  <component name="ProjectFacetManager">
+    <default-configurations>
+      <entry facet-type="gwt">
+        <default-facet-configuration>
+          <configuration>
+            <setting name="compilerMaxHeapSize" value="1024" />
+            <setting name="gwtScriptOutputStyle" value="DETAILED" />
+            <setting name="gwtSdkUrl" value="file://$GWT_PATH$" />
+          </configuration>
+        </default-facet-configuration>
+      </entry>
+    </default-configurations>
+  </component>
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>

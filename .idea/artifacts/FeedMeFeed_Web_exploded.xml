@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="FeedMeFeed:Web exploded">
-    <output-path>$PROJECT_DIR$/build/artifacts/FeedMeFeed_Web_exploded</output-path>
+  <artifact type="exploded-war" build-on-make="true" name="FeedMeFeed:Web exploded">
+    <output-path>C:/Tomcat7/webapps/FeedMeFeed</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="FeedMeFeed/web/Web" />
       <element id="directory" name="WEB-INF">
@@ -10,6 +10,8 @@
           <element id="module-output" name="User" />
         </element>
       </element>
+      <element id="gwt-compiler-output" facet="Administration/gwt/GWT" />
+      <element id="gwt-compiler-output" facet="User/gwt/GWT" />
     </root>
   </artifact>
 </component>
