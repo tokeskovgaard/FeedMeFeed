@@ -9,6 +9,9 @@
           <element id="module-output" name="Administration" />
           <element id="module-output" name="User" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="mysql-connector-java-5.1.21-bin" />
+        </element>
       </element>
       <element id="gwt-compiler-output" facet="Administration/gwt/GWT" />
       <element id="gwt-compiler-output" facet="User/gwt/GWT" />

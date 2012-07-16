@@ -22,6 +22,7 @@
     <orderEntry type="module" module-name="Administration" />
     <orderEntry type="module" module-name="User" />
     <orderEntry type="library" name="gwt-user" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.21-bin" level="project" />
   </component>
 </module>
 
