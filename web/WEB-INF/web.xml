@@ -24,5 +24,4 @@
         <servlet-name>User</servlet-name>
         <url-pattern>/User</url-pattern>
     </servlet-mapping>
-
 </web-app>

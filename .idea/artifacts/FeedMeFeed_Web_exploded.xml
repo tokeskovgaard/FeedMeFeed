@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" build-on-make="true" name="FeedMeFeed:Web exploded">
-    <output-path>C:/Tomcat7/webapps/FeedMeFeed</output-path>
+  <artifact type="exploded-war" name="FeedMeFeed:Web exploded">
+    <output-path>$WEBAPP_PATH$</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="FeedMeFeed/web/Web" />
       <element id="directory" name="WEB-INF">

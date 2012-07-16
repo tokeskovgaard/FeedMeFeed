@@ -9,9 +9,11 @@ public class AdministrationPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletOutputStream out = resp.getOutputStream();
+        out.println("<html><body>");
         out.println("Du ramte lige Administrationsiden");
 
-        out.println("<script type=\"text/javascript\" language=\"javascript\" src=\"administration/Administration.nocache.js\"></script>");
+        out.println("<script type=\"text/javascript\" language=\"javascript\" src=\"Administration/administration.nocache.js\"></script>");
         out.println("<div id=\"gwt\"></div>");
+        out.println("</body></html>");
     }
 }
