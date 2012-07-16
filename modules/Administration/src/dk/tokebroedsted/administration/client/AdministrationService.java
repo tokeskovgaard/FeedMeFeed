@@ -7,7 +7,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("tokebroedstedService")
 public interface AdministrationService extends RemoteService {
     // Sample interface method of remote interface
-    String getMessage(String msg);
+    String getMessage();
 
     /**
      * Utility/Convenience class.

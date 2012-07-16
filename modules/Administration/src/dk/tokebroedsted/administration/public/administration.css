@@ -10,6 +10,48 @@ body, td, a, div, .p {
     font-family: arial, sans-serif
 }
 
-.ExampleLabel {
-    color: red;
+
+.feed-item-setup-view{
+
 }
+
+.feed-item-preview {
+    background-color: #FFF;
+    border: 1px black solid;
+    resize: both;
+    position: absolute;
+    overflow: hidden;
+}
+
+.calculation-view {
+  display: inline;
+}
+
+.input-view {
+    display: inline;
+}
+
+.question-view {
+    display: inline;
+}
+
+.settings-panel {
+    display: inline;
+}
+
+.new-input-item-dialog {
+    padding: 10px;
+    border: 1px solid black;
+    width: 400px;
+    height: 200px;
+}
+
+.adjustable-item {
+    border: 1px dashed #808080;
+    background-color: #d3d3d3;
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    resize: both;
+}
+

@@ -1,9 +1,8 @@
 package dk.tokebroedsted.administration.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import dk.tokebroedsted.administration.client.view.FeedItemSetup;
 
 public class AdministrationEntryPoint implements EntryPoint {
 
@@ -11,21 +10,18 @@ public class AdministrationEntryPoint implements EntryPoint {
     public void onModuleLoad() {
         final RootPanel rootPanel = RootPanel.get("gwt");
 
-        Label titel = new Label("Yeeha!");
-        rootPanel.add(titel);
+        rootPanel.add(new FeedItemSetup());
 
-
-        AdministrationServiceAsync instance = AdministrationService.App.getInstance();
-        instance.getMessage("Mojne", new AsyncCallback<String>() {
+        /*AdministrationServiceAsync instance = AdministrationService.App.getInstance();
+        instance.getMessage(new AsyncCallback<String>() {
             @Override
             public void onFailure(Throwable caught) {
-                //To change body of implemented methods use File | Settings | File Templates.
             }
 
             @Override
             public void onSuccess(String result) {
                 rootPanel.add(new Label(result));
             }
-        });
+        });*/
     }
 }
