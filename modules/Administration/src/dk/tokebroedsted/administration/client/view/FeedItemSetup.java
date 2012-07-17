@@ -11,11 +11,8 @@ import dk.tokebroedsted.administration.client.pagesetup.HTMLSetup;
 import java.util.ArrayList;
 
 public class FeedItemSetup extends FlowPanel {
-    private ArrayList<InputItem> inputItems = new ArrayList<InputItem>();
-    ArrayList<QuestionItem> questionItems = new ArrayList<QuestionItem>();
-    ArrayList<CalculationItem> calculationItems = new ArrayList<CalculationItem>();
+    public Feed feed;
 
-    public FeedItem feedItem;
     public PreviewView previewView;
     private HTMLSetup htmlSetup;
     private SettingsPanel settingsPanel;
@@ -26,7 +23,7 @@ public class FeedItemSetup extends FlowPanel {
 
     public FeedItemSetup(AdministrationServiceAsync administrationService) {
         this.administrationService = administrationService;
-        feedItem = new FeedItem();
+        feed = new Feed();
         this.setStyleName("feed-item-setup-view");
 
         setupView();
@@ -98,12 +95,12 @@ public class FeedItemSetup extends FlowPanel {
         calculationItemView.updateView();
     }
 
-    void addInputItem(InputItem item) {
-        inputItems.add(item);
+    void addInputItem(FeedInput feedInput) {
+        feed.feedInputList.add(feedInput);
     }
 
 
-    public ArrayList<InputItem> getInputItems() {
-        return inputItems;
+    public Feed getFeed() {
+        return feed;
     }
 }

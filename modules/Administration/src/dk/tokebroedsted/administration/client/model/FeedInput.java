@@ -5,7 +5,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 import java.io.Serializable;
 
-public class InputItem implements IsSerializable, Serializable {
+public class FeedInput implements IsSerializable, Serializable {
 
     public enum Type {string,image,number}
 
@@ -16,7 +16,6 @@ public class InputItem implements IsSerializable, Serializable {
     public void setName(String name) {
         this.name = name;
 
-        //TODO lav id rigtigt.
         id = Random.nextInt();
     }
 
@@ -33,7 +32,7 @@ public class InputItem implements IsSerializable, Serializable {
     }
 
 
-    public InputItem() {
+    public FeedInput() {
     }
 
     public String getName() {

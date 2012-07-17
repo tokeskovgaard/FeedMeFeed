@@ -1,13 +1,11 @@
 package dk.tokebroedsted.administration.client.pagesetup;
 
 import com.google.gwt.event.dom.client.*;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
-import dk.tokebroedsted.administration.client.model.InputItem;
+import dk.tokebroedsted.administration.client.model.FeedInput;
 import dk.tokebroedsted.administration.client.view.FeedItemSetup;
 
 public class HTMLSetup extends FlowPanel {
@@ -56,8 +54,8 @@ public class HTMLSetup extends FlowPanel {
 
         //TODO make sure it is safe html
         String htmlText = html.getText();
-        for (InputItem inputItem : feedItemSetup.getInputItems()) {
-            htmlText = htmlText.replaceAll(inputItem.getVariableId(), inputItem.getName());
+        for (FeedInput feedInput : feedItemSetup.getFeed().feedInputList) {
+            htmlText = htmlText.replaceAll(feedInput.getVariableId(), feedInput.getName());
         }
 
         return new HTML(cssText + htmlText);

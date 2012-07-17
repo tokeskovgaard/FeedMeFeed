@@ -3,7 +3,7 @@ package dk.tokebroedsted.administration.client.view;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import dk.tokebroedsted.administration.client.model.CalculationItem;
+import dk.tokebroedsted.administration.client.model.Calculation;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,7 +24,7 @@ public class CalculationItemView extends FlowPanel {
         clear();
 
         add(new Label("Udregninger"));
-        for (CalculationItem calculation : feedItemSetup.calculationItems) {
+        for (Calculation calculation : feedItemSetup.getFeed().calculations) {
             add(new Label(calculation.getName()));
         }
         Button userInput = new Button("Tilføj ny beregning");

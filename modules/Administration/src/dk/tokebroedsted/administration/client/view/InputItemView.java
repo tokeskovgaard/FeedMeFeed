@@ -3,7 +3,7 @@ package dk.tokebroedsted.administration.client.view;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
-import dk.tokebroedsted.administration.client.model.InputItem;
+import dk.tokebroedsted.administration.client.model.FeedInput;
 
 public class InputItemView extends FlowPanel{
 
@@ -20,8 +20,8 @@ public class InputItemView extends FlowPanel{
         Label titel = new Label("Brugerinputs");
         titel.addStyleName("titel");
         add(titel);
-        for (InputItem inputItem : feedItemSetup.getInputItems()) {
-            Label listItem = new Label(inputItem.getDisplayName());
+        for (FeedInput feedInput : feedItemSetup.getFeed().feedInputList) {
+            Label listItem = new Label(feedInput.getDisplayName());
             listItem.addStyleName("list-item");
             add(listItem);
         }
@@ -44,7 +44,7 @@ public class InputItemView extends FlowPanel{
 
                 content.add(new Label("Type:"));
                 final ListBox typeListBox = new ListBox();
-                for (InputItem.Type type : InputItem.Type.values()) {
+                for (FeedInput.Type type : FeedInput.Type.values()) {
                     typeListBox.addItem(type.name());
                 }
                 content.add(typeListBox);
@@ -54,13 +54,13 @@ public class InputItemView extends FlowPanel{
                 saveButton.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {
-                        InputItem inputItem = new InputItem();
-                        inputItem.setName(nameInput.getValue());
+                        FeedInput feedInput = new FeedInput();
+                        feedInput.setName(nameInput.getValue());
 
                         int selectedIndex = typeListBox.getSelectedIndex();
-                        inputItem.setType(typeListBox.getValue(selectedIndex));
+                        feedInput.setType(typeListBox.getValue(selectedIndex));
 
-                        feedItemSetup.addInputItem(inputItem);
+                        feedItemSetup.addInputItem(feedInput);
                         dialog.hide();
                         feedItemSetup.updateViews();
                     }

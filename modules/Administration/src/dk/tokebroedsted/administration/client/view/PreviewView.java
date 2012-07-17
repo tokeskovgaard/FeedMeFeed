@@ -1,7 +1,6 @@
 package dk.tokebroedsted.administration.client.view;
 
 import com.google.gwt.user.client.ui.*;
-import dk.tokebroedsted.administration.client.model.InputItem;
 
 public class PreviewView extends AbsolutePanel {
 
@@ -13,9 +12,9 @@ public class PreviewView extends AbsolutePanel {
     }
 
     void updateView() {
-        setHeight(feedItemSetup.feedItem.getHeight() + "px");
-        setWidth(feedItemSetup.feedItem.getWidth() + "px");
-        getElement().getStyle().setBackgroundColor(feedItemSetup.feedItem.getColor());
+        setHeight(feedItemSetup.feed.getHeight() + "px");
+        setWidth(feedItemSetup.feed.getWidth() + "px");
+        getElement().getStyle().setBackgroundColor(feedItemSetup.feed.getColor());
 
     }
 
@@ -27,8 +26,8 @@ public class PreviewView extends AbsolutePanel {
     @Override
     public void setSize(String width, String height) {
         super.setSize(width, height);
-        feedItemSetup.feedItem.setWidth(Integer.parseInt(width));
-        feedItemSetup.feedItem.setHeight(Integer.parseInt(height));
+        feedItemSetup.feed.setWidth(Integer.parseInt(width));
+        feedItemSetup.feed.setHeight(Integer.parseInt(height));
         feedItemSetup.updateViews();
     }
 }

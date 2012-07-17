@@ -11,11 +11,11 @@ import java.io.Serializable;
  * Time: 17:22
  * To change this template use File | Settings | File Templates.
  */
-public class CalculationItem implements IsSerializable, Serializable {
+public class Calculation implements IsSerializable, Serializable {
 
     private String name;
 
-    public CalculationItem() {
+    public Calculation() {
     }
 
     public String getName() {

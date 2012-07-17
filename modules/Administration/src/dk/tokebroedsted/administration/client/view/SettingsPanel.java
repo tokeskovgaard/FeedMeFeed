@@ -20,19 +20,19 @@ public class SettingsPanel extends FlowPanel {
         FlowPanel heightInputPanel = new FlowPanel();
         heightInputPanel.add(new InlineLabel("Højde: "));
         final TextBox heightInput = new TextBox();
-        heightInput.setValue(String.valueOf(feedItemSetup.feedItem.getHeight()));
+        heightInput.setValue(String.valueOf(feedItemSetup.feed.getHeight()));
         heightInputPanel.add(heightInput);
 
         FlowPanel widthInputPanel = new FlowPanel();
         widthInputPanel.add(new InlineLabel("Bredde: "));
         final TextBox widthInput = new TextBox();
-        widthInput.setValue(String.valueOf(feedItemSetup.feedItem.getWidth()));
+        widthInput.setValue(String.valueOf(feedItemSetup.feed.getWidth()));
         widthInputPanel.add(widthInput);
 
         FlowPanel colorInputPanel = new FlowPanel();
         colorInputPanel.add(new InlineLabel("Farve: "));
         final TextBox colorInput = new TextBox();
-        colorInput.setValue(feedItemSetup.feedItem.getColor());
+        colorInput.setValue(feedItemSetup.feed.getColor());
         colorInputPanel.add(colorInput);
 
         add(heightInputPanel);
@@ -42,9 +42,9 @@ public class SettingsPanel extends FlowPanel {
         ChangeHandler changeHappenedHandler = new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
-                feedItemSetup.feedItem.setWidth(Integer.parseInt(widthInput.getValue()));
-                feedItemSetup.feedItem.setHeight(Integer.parseInt(heightInput.getValue()));
-                feedItemSetup.feedItem.setColor(colorInput.getValue());
+                feedItemSetup.feed.setWidth(Integer.parseInt(widthInput.getValue()));
+                feedItemSetup.feed.setHeight(Integer.parseInt(heightInput.getValue()));
+                feedItemSetup.feed.setColor(colorInput.getValue());
 
                 feedItemSetup.updateViews();
             }

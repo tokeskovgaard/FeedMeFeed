@@ -3,7 +3,7 @@ package dk.tokebroedsted.administration.client.view;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import dk.tokebroedsted.administration.client.model.QuestionItem;
+import dk.tokebroedsted.administration.client.model.Question;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,7 +25,7 @@ public class QuestionItemView extends FlowPanel {
     void updateView() {
         clear();
         add(new Label("Spørgsmål"));
-        for (QuestionItem questionItem : feedItemSetup.questionItems) {
+        for (Question questionItem : feedItemSetup.getFeed().questions) {
             add(new Label(questionItem.getName()));
         }
         Button userInput = new Button("Tilføj nyt spørgsmål");
