@@ -104,7 +104,7 @@ public class UserCookie {
         return sb.toString();
 
     }
-
+    //TODO: Upgrade for security for session hoaxing
     public void updateAndCheckSession(String referrerPage) throws IOException {
         updateSession();
         HttpSession session = req.getSession(true);
