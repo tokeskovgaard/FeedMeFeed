@@ -1,4 +1,5 @@
-package dk.tokebroedsted.administration.client.view;
+/*
+package dk.tokebroedsted.administration.client.draganddrop;
 
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -6,15 +7,15 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public final class DraggableWidgetWrapper extends SimplePanel implements HasMouseDownHandlers, HasMouseMoveHandlers, HasMouseUpHandlers {
+public final class AdjustableItems extends SimplePanel implements HasMouseDownHandlers, HasMouseMoveHandlers, HasMouseUpHandlers {
 
     private boolean dragging = false;
     private int dragStartX;
     private int dragStartY;
 
-    public DraggableWidgetWrapper(Widget widget) {
-        add(widget);
+    public AdjustableItems(Widget widget) {
         setStyleName("adjustable-item");
+        add(widget);
 
         addMouseDownHandler(new MouseDownHandler() {
             @Override
@@ -44,6 +45,7 @@ public final class DraggableWidgetWrapper extends SimplePanel implements HasMous
                     // values should always remain be positive.
                     int newX = Math.max(0, event.getX() + getAbsoluteLeft() - dragStartX);
                     int newY = Math.max(0, event.getY() + getAbsoluteTop() - dragStartY);
+
                     DOM.setStyleAttribute(getElement(), "left", String.valueOf(newX));
                     DOM.setStyleAttribute(getElement(), "top", String.valueOf(newY));
                 }
@@ -65,4 +67,4 @@ public final class DraggableWidgetWrapper extends SimplePanel implements HasMous
     public HandlerRegistration addMouseUpHandler(MouseUpHandler handler) {
         return addDomHandler(handler, MouseUpEvent.getType());
     }
-}
+}*/

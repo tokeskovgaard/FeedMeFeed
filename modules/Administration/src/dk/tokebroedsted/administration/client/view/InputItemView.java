@@ -17,9 +17,13 @@ public class InputItemView extends FlowPanel{
     void updateView() {
         clear();
 
-        add(new Label("Brugerinputs"));
-        for (InputItem inputItem : feedItemSetup.inputItems) {
-            add(new Label(inputItem.getName()));
+        Label titel = new Label("Brugerinputs");
+        titel.addStyleName("titel");
+        add(titel);
+        for (InputItem inputItem : feedItemSetup.getInputItems()) {
+            Label listItem = new Label(inputItem.getDisplayName());
+            listItem.addStyleName("list-item");
+            add(listItem);
         }
         Button userInput = new Button("Tilføj nyt bruger input");
         userInput.addClickHandler(new ClickHandler() {
@@ -56,7 +60,7 @@ public class InputItemView extends FlowPanel{
                         int selectedIndex = typeListBox.getSelectedIndex();
                         inputItem.setType(typeListBox.getValue(selectedIndex));
 
-                        feedItemSetup.inputItems.add(inputItem);
+                        feedItemSetup.addInputItem(inputItem);
                         dialog.hide();
                         feedItemSetup.updateViews();
                     }

@@ -5,16 +5,18 @@ import dk.tokebroedsted.administration.client.model.CalculationItem;
 import dk.tokebroedsted.administration.client.model.FeedItem;
 import dk.tokebroedsted.administration.client.model.InputItem;
 import dk.tokebroedsted.administration.client.model.QuestionItem;
+import dk.tokebroedsted.administration.client.pagesetup.HTMLSetup;
 
 import java.util.ArrayList;
 
 public class FeedItemSetup extends FlowPanel {
-    ArrayList<InputItem> inputItems = new ArrayList<InputItem>();
+    private ArrayList<InputItem> inputItems = new ArrayList<InputItem>();
     ArrayList<QuestionItem> questionItems = new ArrayList<QuestionItem>();
     ArrayList<CalculationItem> calculationItems = new ArrayList<CalculationItem>();
 
-    FeedItem feedItem;
-    private FeedItemPreview feedItemPreview;
+    public FeedItem feedItem;
+    public PreviewView previewView;
+    private HTMLSetup htmlSetup;
     private SettingsPanel settingsPanel;
     private CalculationItemView calculationItemView;
     private InputItemView inputItemView;
@@ -30,35 +32,55 @@ public class FeedItemSetup extends FlowPanel {
     private void setupView() {
         this.clear();
 
-        feedItemPreview = new FeedItemPreview(this);
-        add(feedItemPreview);
+
+        FlowPanel leftPanel = new FlowPanel();
+        leftPanel.setStyleName("left-panel");
+        add(leftPanel);
 
         settingsPanel = new SettingsPanel(this);
-        add(settingsPanel);
+        leftPanel.add(settingsPanel);
 
         inputItemView = new InputItemView(this);
-        add(inputItemView);
+        leftPanel.add(inputItemView);
 
         questionItemView = new QuestionItemView(this);
-        add(questionItemView);
+        leftPanel.add(questionItemView);
 
         calculationItemView = new CalculationItemView(this);
-        add(calculationItemView);
+        leftPanel.add(calculationItemView);
+
+        FlowPanel middlePanel = new FlowPanel();
+        middlePanel.setStyleName("middle-panel");
+        add(middlePanel);
+
+        htmlSetup = new HTMLSetup(this);
+        middlePanel.add(htmlSetup);
+
+        FlowPanel rightPanel = new FlowPanel();
+        rightPanel.setStyleName("right-panel");
+        add(rightPanel);
+
+        previewView = new PreviewView(this);
+        rightPanel.add(previewView);
 
         updateViews();
 
     }
 
-    void updateViews() {
-        feedItemPreview.updateView();
+    public void updateViews() {
+        previewView.updateView();
         settingsPanel.updateView();
         inputItemView.updateView();
         questionItemView.updateView();
         calculationItemView.updateView();
     }
 
+    void addInputItem(InputItem item){
+        inputItems.add(item);
+    }
 
 
-
-
+    public ArrayList<InputItem> getInputItems() {
+        return inputItems;
+    }
 }

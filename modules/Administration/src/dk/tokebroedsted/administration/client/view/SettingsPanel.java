@@ -46,7 +46,7 @@ public class SettingsPanel extends FlowPanel {
                 feedItemSetup.feedItem.setHeight(Integer.parseInt(heightInput.getValue()));
                 feedItemSetup.feedItem.setColor(colorInput.getValue());
 
-                updateView();
+                feedItemSetup.updateViews();
             }
         };
 

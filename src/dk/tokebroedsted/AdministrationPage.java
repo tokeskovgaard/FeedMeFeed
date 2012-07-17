@@ -10,8 +10,8 @@ public class AdministrationPage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserCookie cookie = new UserCookie(req, resp);
-        cookie.updateAndCheckSession("Administration");
+//        UserCookie cookie = new UserCookie(req, resp);
+//        cookie.updateAndCheckSession("Administration");
 
         ServletOutputStream out = resp.getOutputStream();
         out.println("<html><head>");
