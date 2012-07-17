@@ -15,6 +15,8 @@ public class Feed implements IsSerializable, Serializable {
     int width = 600;
     int height = 200;
     String color = "#FFF";
+    private String css;
+    private String html;
 
     public Feed() {
     }
@@ -41,5 +43,13 @@ public class Feed implements IsSerializable, Serializable {
 
     public String getColor() {
         return color;
+    }
+
+    public String getCss() {
+        return css;
+    }
+
+    public String getHtml() {
+        return html;
     }
 }

@@ -36,7 +36,7 @@ public class HibernateUtil {
     }
 
     public static void saveSomething(Object object) {
-        logger.debug("Save called for: "+object.toString());
+        logger.info("Save called for: " + object.toString());
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         session.save(object);
@@ -44,7 +44,7 @@ public class HibernateUtil {
     }
 
     public static Object getSomething(Class clazz, Serializable id) {
-        logger.debug("Get called for: "+id);
+        logger.info("Get called for: " + id);
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Object load = session.load(clazz, id);
