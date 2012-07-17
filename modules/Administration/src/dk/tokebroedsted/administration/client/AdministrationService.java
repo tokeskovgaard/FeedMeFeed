@@ -3,13 +3,14 @@ package dk.tokebroedsted.administration.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import dk.tokebroedsted.administration.client.model.Feed;
 
-@RemoteServiceRelativePath("tokebroedstedService")
+@RemoteServiceRelativePath("AdministrationService")
 public interface AdministrationService extends RemoteService {
     // Sample interface method of remote interface
     String getMessage();
 
-    String saveFeed();
+    String saveFeed(Feed feed);
 
     /**
      * Utility/Convenience class.

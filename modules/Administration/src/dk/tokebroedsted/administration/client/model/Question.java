@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class Question implements IsSerializable, Serializable, EditableItem {
 
-    private final int id;
+    private int id;
 
     public enum Type {numeric, open, closed}
 

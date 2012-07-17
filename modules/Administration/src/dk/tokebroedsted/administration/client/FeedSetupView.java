@@ -2,6 +2,7 @@ package dk.tokebroedsted.administration.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import dk.tokebroedsted.administration.client.calculation.CalculationItemView;
@@ -66,15 +67,15 @@ public class FeedSetupView extends FlowPanel {
         saveButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                administrationService.saveFeed(new AsyncCallback<String>() {
+                administrationService.saveFeed(feed, new AsyncCallback<String>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        //To change body of implemented methods use File | Settings | File Templates.
+                        Window.alert(caught.getMessage());
                     }
 
                     @Override
                     public void onSuccess(String result) {
-                        //To change body of implemented methods use File | Settings | File Templates.
+                        Window.alert("WEEE");
                     }
                 });
             }

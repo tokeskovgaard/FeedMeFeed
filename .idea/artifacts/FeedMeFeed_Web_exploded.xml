@@ -13,6 +13,7 @@
           <element id="library" level="project" name="mysql-connector-java-5.1.21-bin" />
           <element id="library" level="project" name="hibernate-4.1.5" />
           <element id="library" level="project" name="log4j" />
+          <element id="library" level="project" name="gwt-libs" />
         </element>
       </element>
       <element id="gwt-compiler-output" facet="User/gwt/GWT" />

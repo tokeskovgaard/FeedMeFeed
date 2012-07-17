@@ -13,11 +13,8 @@ public class AdministrationServiceImpl extends RemoteServiceServlet implements A
     }
 
     @Override
-    public String saveFeed() {
-        Feed feed = new Feed();
-        feed.setCss("CSS");
-        feed.setHtml("TEST");
-        HibernateUtil.saveSomething(feed);
+    public String saveFeed(dk.tokebroedsted.administration.client.model.Feed feed) {
+//        HibernateUtil.saveSomething(feed);
         return "";
     }
 }

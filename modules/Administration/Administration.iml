@@ -19,7 +19,7 @@
     </content>
     <orderEntry type="jdk" jdkName="$JDK_NUMBER$" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="gwt-user" level="project" />
+    <orderEntry type="library" name="gwt-libs" level="project" />
     <orderEntry type="module" module-name="FeedMeFeed" />
   </component>
 </module>

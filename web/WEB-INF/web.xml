@@ -13,13 +13,12 @@
 
     <servlet>
         <servlet-name>AdministrationService</servlet-name>
-        <servlet-class>
-            dk.tokebroedsted.administration.server.AdministrationServiceImpl
-        </servlet-class>
+        <servlet-class>dk.tokebroedsted.administration.server.AdministrationServiceImpl</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>AdministrationService</servlet-name>
-        <url-pattern>/AdministrationService</url-pattern>
+        <url-pattern>/Administration/AdministrationService</url-pattern>
     </servlet-mapping>
 
     <servlet>

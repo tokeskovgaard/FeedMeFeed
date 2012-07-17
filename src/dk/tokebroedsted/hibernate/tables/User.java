@@ -11,10 +11,10 @@ public class User {
     @GeneratedValue
     private int id;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany //(mappedBy = "owner")
     private Set<Feed> createdFeeds;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany //(mappedBy = "owner")
     private Set<FeedItem> subscribedFeeds;
 
     private String loginname, username, password, email;
