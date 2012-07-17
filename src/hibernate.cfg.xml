@@ -1,0 +1,41 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Settings for a local HSQL (testing) database. -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://mydb20.surftown.dk:3306/kagemei_feedme</property>
+        <property name="connection.username">kagemei_fisk</property>
+        <property name="connection.password">feedsaregood</property>
+
+        <!-- Use the C3P0 connection pool. -->
+        <property name="c3p0.min_size">3</property>
+        <property name="c3p0.max_size">5</property>
+        <property name="c3p0.timeout">1800</property>
+
+        <!-- Disable second-level cache. -->
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <property name="cache.use_query_cache">false</property>
+        <property name="cache.use_minimal_puts">false</property>
+        <property name="max_fetch_depth">3</property>
+
+        <!-- Print SQL to stdout. -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!-- Drop and then re-create schema on SessionFactory build, for testing. -->
+        <property name="hbm2ddl.auto">create</property>
+
+        <!-- Bind the getCurrentSession() method to the thread. -->
+        <property name="current_session_context_class">thread</property>
+
+        <mapping package="dk.tokebroedsted.objects"/>
+        <mapping class="dk.tokebroedsted.hibernate.tables.Feed"/>
+        <mapping class="dk.tokebroedsted.hibernate.tables.FeedInput"/>
+        <mapping class="dk.tokebroedsted.hibernate.tables.FeedItem"/>
+        <mapping class="dk.tokebroedsted.hibernate.tables.FeedItemInput"/>
+        <mapping class="dk.tokebroedsted.hibernate.tables.User"/>
+    </session-factory>
+</hibernate-configuration>

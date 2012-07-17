@@ -1,6 +1,9 @@
 package dk.tokebroedsted.objects;
 
 
+import dk.tokebroedsted.hibernate.tables.Feed;
+import dk.tokebroedsted.hibernate.tables.User;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

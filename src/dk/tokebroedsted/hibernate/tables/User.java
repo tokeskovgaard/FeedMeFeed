@@ -1,15 +1,24 @@
-package dk.tokebroedsted.objects;
+package dk.tokebroedsted.hibernate.tables;
 
-import java.security.PublicKey;
 
-/**
- * Created with IntelliJ IDEA.
- * User: mads
- * Date: 7/16/12
- * Time: 5:43 PM
- * To change this template use File | Settings | File Templates.
- */
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class User {
+
+    @Id
+    private int id;
+
+    private String loginname, username, password, email;
+
+    public User(int id, String loginname, String username, String password, String email) {
+        this.id = id;
+        this.loginname = loginname;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 
     public String getLoginname() {
         return loginname;
@@ -51,18 +60,7 @@ public class User {
         this.id = id;
     }
 
-    private String loginname, username, password, email;
-    private int id;
-
     public User() {
         id = -1;
-    }
-
-    public User(int id, String loginname, String username, String password, String email) {
-        this.id = id;
-        this.loginname = loginname;
-        this.username = username;
-        this.password = password;
-        this.email = email;
     }
 }

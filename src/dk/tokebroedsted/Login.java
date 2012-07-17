@@ -1,7 +1,7 @@
 package dk.tokebroedsted;
 
 import dk.tokebroedsted.objects.DatabaseHandler;
-import dk.tokebroedsted.objects.User;
+import dk.tokebroedsted.hibernate.tables.User;
 import dk.tokebroedsted.objects.UserCookie;
 
 import javax.servlet.ServletException;

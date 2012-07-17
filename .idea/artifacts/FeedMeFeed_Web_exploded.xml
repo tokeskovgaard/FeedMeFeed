@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="FeedMeFeed:Web exploded">
+  <artifact type="exploded-war" build-on-make="true" name="FeedMeFeed:Web exploded">
     <output-path>$WEBAPP_PATH$</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="FeedMeFeed/web/Web" />
@@ -14,8 +14,6 @@
           <element id="library" level="project" name="hibernate-4.1.5" />
         </element>
       </element>
-      <element id="gwt-compiler-output" facet="Administration/gwt/GWT" />
-      <element id="gwt-compiler-output" facet="User/gwt/GWT" />
     </root>
   </artifact>
 </component>

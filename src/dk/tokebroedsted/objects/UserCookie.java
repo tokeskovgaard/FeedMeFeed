@@ -1,5 +1,7 @@
 package dk.tokebroedsted.objects;
 
+import dk.tokebroedsted.hibernate.tables.User;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
