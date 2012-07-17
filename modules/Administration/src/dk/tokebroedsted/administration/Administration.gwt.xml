@@ -10,7 +10,7 @@
 
 
     <!-- Specify the app servlets.                   -->
-    <servlet path='/tokebroedstedService' class='dk.tokebroedsted.administration.server.AdministrationServiceImpl'/>
+    <servlet path='/AdministrationService' class='dk.tokebroedsted.administration.server.AdministrationServiceImpl'/>
 
     <stylesheet src="Administration.less"/>
     <set-property name="user.agent" value="safari"/>

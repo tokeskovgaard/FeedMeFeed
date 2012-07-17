@@ -5,9 +5,9 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 import java.io.Serializable;
 
-public class FeedInput implements IsSerializable, Serializable {
+public class FeedInput implements IsSerializable, Serializable, EditableItem {
 
-    public enum Type {string,image,number}
+    public enum Type {string, image, number}
 
     private String name;
     private Type type;
@@ -23,12 +23,14 @@ public class FeedInput implements IsSerializable, Serializable {
         this.type = Type.valueOf(typeName);
     }
 
+    @Override
     public String getDisplayName() {
-        return name+" - "+getVariableId();
+        return name + " - " + getVariableId();
     }
 
-    public String getVariableId(){
-        return "<%input "+id+"%>";
+    @Override
+    public String getVariableId() {
+        return "<%input " + id + "%>";
     }
 
 

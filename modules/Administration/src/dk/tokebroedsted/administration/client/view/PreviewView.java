@@ -1,24 +1,25 @@
 package dk.tokebroedsted.administration.client.view;
 
 import com.google.gwt.user.client.ui.*;
+import dk.tokebroedsted.administration.client.FeedSetupView;
 
 public class PreviewView extends AbsolutePanel {
 
-    private FeedItemSetup feedItemSetup;
+    private FeedSetupView feedItemSetup;
 
-    public PreviewView(FeedItemSetup feedItemSetup) {
+    public PreviewView(FeedSetupView feedItemSetup) {
         this.feedItemSetup = feedItemSetup;
         setStyleName("feed-item-preview");
     }
 
-    void updateView() {
+    public void updateView() {
         setHeight(feedItemSetup.feed.getHeight() + "px");
         setWidth(feedItemSetup.feed.getWidth() + "px");
         getElement().getStyle().setBackgroundColor(feedItemSetup.feed.getColor());
 
     }
 
-    public void updatePreview(HTML html){
+    public void updatePreview(HTML html) {
         this.clear();
         add(html);
     }

@@ -5,11 +5,12 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.TextBox;
+import dk.tokebroedsted.administration.client.FeedSetupView;
 
 public class SettingsPanel extends FlowPanel {
-    private FeedItemSetup feedItemSetup;
+    private FeedSetupView feedItemSetup;
 
-    public SettingsPanel(FeedItemSetup feedItemSetup) {
+    public SettingsPanel(FeedSetupView feedItemSetup) {
         this.feedItemSetup = feedItemSetup;
         setStyleName("settings-panel");
     }

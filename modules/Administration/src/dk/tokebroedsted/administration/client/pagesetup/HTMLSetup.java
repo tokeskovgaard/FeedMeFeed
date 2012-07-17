@@ -6,15 +6,16 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import dk.tokebroedsted.administration.client.model.FeedInput;
-import dk.tokebroedsted.administration.client.view.FeedItemSetup;
+import dk.tokebroedsted.administration.client.FeedSetupView;
+import dk.tokebroedsted.administration.client.model.Question;
 
 public class HTMLSetup extends FlowPanel {
 
-    private FeedItemSetup feedItemSetup;
+    private FeedSetupView feedItemSetup;
     private TextArea html;
     private TextArea css;
 
-    public HTMLSetup(final FeedItemSetup feedItemSetup) {
+    public HTMLSetup(final FeedSetupView feedItemSetup) {
         this.feedItemSetup = feedItemSetup;
 
         Label htmlTitel = new Label("HTML opsætning");
@@ -56,6 +57,10 @@ public class HTMLSetup extends FlowPanel {
         String htmlText = html.getText();
         for (FeedInput feedInput : feedItemSetup.getFeed().feedInputList) {
             htmlText = htmlText.replaceAll(feedInput.getVariableId(), feedInput.getName());
+        }
+
+        for (Question question : feedItemSetup.getFeed().questions) {
+            htmlText = htmlText.replaceAll(question.getVariableId(), question.getName());
         }
 
         return new HTML(cssText + htmlText);

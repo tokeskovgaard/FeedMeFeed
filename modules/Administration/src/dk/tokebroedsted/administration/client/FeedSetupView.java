@@ -1,27 +1,28 @@
-package dk.tokebroedsted.administration.client.view;
+package dk.tokebroedsted.administration.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
-import dk.tokebroedsted.administration.client.AdministrationServiceAsync;
+import dk.tokebroedsted.administration.client.calculation.CalculationItemView;
+import dk.tokebroedsted.administration.client.feedinput.InputItemView;
 import dk.tokebroedsted.administration.client.model.*;
 import dk.tokebroedsted.administration.client.pagesetup.HTMLSetup;
+import dk.tokebroedsted.administration.client.question.QuestionItemView;
+import dk.tokebroedsted.administration.client.view.*;
 
-import java.util.ArrayList;
-
-public class FeedItemSetup extends FlowPanel {
+public class FeedSetupView extends FlowPanel {
     public Feed feed;
 
     public PreviewView previewView;
     private HTMLSetup htmlSetup;
-    private SettingsPanel settingsPanel;
+    //    private SettingsPanel settingsPanel;
     private CalculationItemView calculationItemView;
     private InputItemView inputItemView;
     private QuestionItemView questionItemView;
     private AdministrationServiceAsync administrationService;
 
-    public FeedItemSetup(AdministrationServiceAsync administrationService) {
+    public FeedSetupView(AdministrationServiceAsync administrationService) {
         this.administrationService = administrationService;
         feed = new Feed();
         this.setStyleName("feed-item-setup-view");
@@ -36,9 +37,6 @@ public class FeedItemSetup extends FlowPanel {
         FlowPanel leftPanel = new FlowPanel();
         leftPanel.setStyleName("left-panel");
         add(leftPanel);
-
-        settingsPanel = new SettingsPanel(this);
-        leftPanel.add(settingsPanel);
 
         inputItemView = new InputItemView(this);
         leftPanel.add(inputItemView);
@@ -89,18 +87,25 @@ public class FeedItemSetup extends FlowPanel {
 
     public void updateViews() {
         previewView.updateView();
-        settingsPanel.updateView();
+//        settingsPanel.updateView();
         inputItemView.updateView();
         questionItemView.updateView();
         calculationItemView.updateView();
     }
 
-    void addInputItem(FeedInput feedInput) {
+    public void addInputItem(FeedInput feedInput) {
         feed.feedInputList.add(feedInput);
+        inputItemView.updateView();
     }
 
 
     public Feed getFeed() {
         return feed;
+    }
+
+
+    public void addQuestion(Question question) {
+        feed.questions.add(question);
+        questionItemView.updateView();
     }
 }

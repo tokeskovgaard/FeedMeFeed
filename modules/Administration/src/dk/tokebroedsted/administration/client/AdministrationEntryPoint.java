@@ -2,7 +2,6 @@ package dk.tokebroedsted.administration.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
-import dk.tokebroedsted.administration.client.view.FeedItemSetup;
 
 public class AdministrationEntryPoint implements EntryPoint {
 
@@ -11,7 +10,7 @@ public class AdministrationEntryPoint implements EntryPoint {
         final RootPanel rootPanel = RootPanel.get("gwt");
 
         AdministrationServiceAsync administrationService = AdministrationService.App.getInstance();
-        rootPanel.add(new FeedItemSetup(administrationService));
+        rootPanel.add(new FeedSetupView(administrationService));
 
         /*AdministrationServiceAsync instance = AdministrationService.App.getInstance();
         instance.getMessage(new AsyncCallback<String>() {

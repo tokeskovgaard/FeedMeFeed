@@ -1,8 +1,9 @@
-package dk.tokebroedsted.administration.client.view;
+package dk.tokebroedsted.administration.client.calculation;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import dk.tokebroedsted.administration.client.FeedSetupView;
 import dk.tokebroedsted.administration.client.model.Calculation;
 
 /**
@@ -13,9 +14,9 @@ import dk.tokebroedsted.administration.client.model.Calculation;
  * To change this template use File | Settings | File Templates.
  */
 public class CalculationItemView extends FlowPanel {
-    private FeedItemSetup feedItemSetup;
+    private FeedSetupView feedItemSetup;
 
-    public CalculationItemView(FeedItemSetup feedItemSetup) {
+    public CalculationItemView(FeedSetupView feedItemSetup) {
         this.feedItemSetup = feedItemSetup;
         setStyleName("calculation-view");
     }

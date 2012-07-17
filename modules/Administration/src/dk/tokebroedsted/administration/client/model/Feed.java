@@ -3,13 +3,14 @@ package dk.tokebroedsted.administration.client.model;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Feed implements IsSerializable, Serializable {
 
-    public List<FeedInput> feedInputList;
-    public List<Question> questions;
-    public List<Calculation> calculations;
+    public List<FeedInput> feedInputList = new ArrayList<FeedInput>();
+    public List<Question> questions = new ArrayList<Question>();
+    public List<Calculation> calculations = new ArrayList<Calculation>();
 
     int width = 600;
     int height = 200;
