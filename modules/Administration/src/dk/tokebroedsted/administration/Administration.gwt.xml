@@ -13,5 +13,5 @@
     <servlet path='/tokebroedstedService' class='dk.tokebroedsted.administration.server.AdministrationServiceImpl'/>
 
     <stylesheet src="Administration.less"/>
-    <set-property name="user.agent" value="safari" />
+    <!--<set-property name="user.agent" value="safari" />-->
 </module>

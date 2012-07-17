@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import dk.tokebroedsted.user.client.model.Feed;
+import dk.tokebroedsted.user.client.model.User;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public interface UserService extends RemoteService {
     String getMessage(String msg);
 
     List<Feed> getFeeds();
+    List<User> getUsers();
 
     /**
      * Utility/Convenience class.

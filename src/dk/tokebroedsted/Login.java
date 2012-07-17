@@ -3,6 +3,8 @@ package dk.tokebroedsted;
 import dk.tokebroedsted.objects.DatabaseHandler;
 import dk.tokebroedsted.hibernate.tables.User;
 import dk.tokebroedsted.objects.UserCookie;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -20,8 +22,14 @@ import java.net.URLEncoder;
  */
 public class Login extends HttpServlet{
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        Logger logger = LoggerFactory.getLogger(Login.class);
+        logger.debug("Hello World");
+
+
         ServletOutputStream out = resp.getOutputStream();
 
         checkOrSetSessionID(req, resp);

@@ -22,6 +22,7 @@
     <orderEntry type="library" name="gwt-user" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.21-bin" level="project" />
     <orderEntry type="library" name="hibernate-4.1.5" level="project" />
+    <orderEntry type="library" name="log4j-1.2.17" level="project" />
   </component>
 </module>
 
