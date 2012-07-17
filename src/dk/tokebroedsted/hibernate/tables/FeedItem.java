@@ -1,15 +1,13 @@
 package dk.tokebroedsted.hibernate.tables;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class FeedItem {
 
     @Id
+    @GeneratedValue
     private int id;
 
     @ManyToOne
@@ -18,10 +16,7 @@ public class FeedItem {
     @ManyToOne
     private User owner;
 
-    @OneToMany(mappedBy = "id")
-    private Set<User> subscribers;
-
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "feedItem")
     private Set<FeedItemInput> feedItemInputs;
 
     public int getId() {

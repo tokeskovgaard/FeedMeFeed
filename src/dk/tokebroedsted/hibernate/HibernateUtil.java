@@ -1,6 +1,8 @@
 package dk.tokebroedsted.hibernate;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
@@ -29,11 +31,18 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public static void saveSomething(Object object){
-        sessionFactory.getCurrentSession().save(object);
+    public static void saveSomething(Object object) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(object);
+        transaction.commit();
     }
 
-    public static Object getSomething(Class clazz, Serializable id){
-        return sessionFactory.getCurrentSession().load(clazz,id);
+    public static Object getSomething(Class clazz, Serializable id) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Object load = session.load(clazz, id);
+        transaction.commit();
+        return load;
     }
 }

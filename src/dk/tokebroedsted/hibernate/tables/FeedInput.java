@@ -10,6 +10,7 @@ public class FeedInput {
     private enum Type {string, number, image}
 
     @Id
+    @GeneratedValue
     private int id;
 
     @ManyToOne

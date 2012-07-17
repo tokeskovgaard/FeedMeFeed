@@ -84,6 +84,7 @@ public class FeedItemSetup extends FlowPanel {
                 });
             }
         });
+        add(saveButton);
 
         updateViews();
 
