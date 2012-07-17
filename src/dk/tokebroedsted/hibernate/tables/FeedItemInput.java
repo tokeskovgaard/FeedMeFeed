@@ -2,25 +2,27 @@ package dk.tokebroedsted.hibernate.tables;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-/**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 17-07-12
- * Time: 14:33
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class FeedItemInput {
 
     @Id
-    private int Id;
+    private int id;
+
+    @ManyToOne
+    private Feed feed;
+
+    @ManyToOne
+    private FeedInput feedInput;
+
+    private String value;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        id = id;
     }
 }

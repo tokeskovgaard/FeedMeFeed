@@ -10,7 +10,8 @@ public class AdministrationEntryPoint implements EntryPoint {
     public void onModuleLoad() {
         final RootPanel rootPanel = RootPanel.get("gwt");
 
-        rootPanel.add(new FeedItemSetup());
+        AdministrationServiceAsync administrationService = AdministrationService.App.getInstance();
+        rootPanel.add(new FeedItemSetup(administrationService));
 
         /*AdministrationServiceAsync instance = AdministrationService.App.getInstance();
         instance.getMessage(new AsyncCallback<String>() {

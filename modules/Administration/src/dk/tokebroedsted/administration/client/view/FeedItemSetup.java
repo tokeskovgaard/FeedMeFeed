@@ -1,10 +1,11 @@
 package dk.tokebroedsted.administration.client.view;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
-import dk.tokebroedsted.administration.client.model.CalculationItem;
-import dk.tokebroedsted.administration.client.model.FeedItem;
-import dk.tokebroedsted.administration.client.model.InputItem;
-import dk.tokebroedsted.administration.client.model.QuestionItem;
+import dk.tokebroedsted.administration.client.AdministrationServiceAsync;
+import dk.tokebroedsted.administration.client.model.*;
 import dk.tokebroedsted.administration.client.pagesetup.HTMLSetup;
 
 import java.util.ArrayList;
@@ -21,8 +22,10 @@ public class FeedItemSetup extends FlowPanel {
     private CalculationItemView calculationItemView;
     private InputItemView inputItemView;
     private QuestionItemView questionItemView;
+    private AdministrationServiceAsync administrationService;
 
-    public FeedItemSetup() {
+    public FeedItemSetup(AdministrationServiceAsync administrationService) {
+        this.administrationService = administrationService;
         feedItem = new FeedItem();
         this.setStyleName("feed-item-setup-view");
 
@@ -63,6 +66,25 @@ public class FeedItemSetup extends FlowPanel {
         previewView = new PreviewView(this);
         rightPanel.add(previewView);
 
+
+        Button saveButton = new Button("Gem");
+        saveButton.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                administrationService.saveFeed(new AsyncCallback<String>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        //To change body of implemented methods use File | Settings | File Templates.
+                    }
+
+                    @Override
+                    public void onSuccess(String result) {
+                        //To change body of implemented methods use File | Settings | File Templates.
+                    }
+                });
+            }
+        });
+
         updateViews();
 
     }
@@ -75,7 +97,7 @@ public class FeedItemSetup extends FlowPanel {
         calculationItemView.updateView();
     }
 
-    void addInputItem(InputItem item){
+    void addInputItem(InputItem item) {
         inputItems.add(item);
     }
 

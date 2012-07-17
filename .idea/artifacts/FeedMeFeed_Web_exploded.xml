@@ -14,6 +14,8 @@
           <element id="library" level="project" name="hibernate-4.1.5" />
         </element>
       </element>
+      <element id="gwt-compiler-output" facet="User/gwt/GWT" />
+      <element id="gwt-compiler-output" facet="Administration/gwt/GWT" />
     </root>
   </artifact>
 </component>

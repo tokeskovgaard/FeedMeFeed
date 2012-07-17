@@ -12,7 +12,9 @@ public class Feed {
     @ManyToOne
     private User owner;
 
-    @OneToMany (mappedBy = "id")
+    private String html, css;
+
+    @OneToMany(mappedBy = "id")
     private Set<FeedInput> feedInputs;
 
     public int getId() {
@@ -21,5 +23,37 @@ public class Feed {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public String getHtml() {
+        return html;
+    }
+
+    public void setHtml(String html) {
+        this.html = html;
+    }
+
+    public String getCss() {
+        return css;
+    }
+
+    public void setCss(String css) {
+        this.css = css;
+    }
+
+    public Set<FeedInput> getFeedInputs() {
+        return feedInputs;
+    }
+
+    public void setFeedInputs(Set<FeedInput> feedInputs) {
+        this.feedInputs = feedInputs;
     }
 }

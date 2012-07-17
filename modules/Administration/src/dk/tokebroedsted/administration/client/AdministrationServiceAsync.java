@@ -4,4 +4,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface AdministrationServiceAsync {
     void getMessage(AsyncCallback<String> async);
+
+    void saveFeed(AsyncCallback<String> callback);
 }

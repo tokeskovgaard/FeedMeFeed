@@ -9,6 +9,8 @@ public interface AdministrationService extends RemoteService {
     // Sample interface method of remote interface
     String getMessage();
 
+    String saveFeed();
+
     /**
      * Utility/Convenience class.
      * Use AdministrationService.App.getInstance() to access static instance of tokebroedstedServiceAsync

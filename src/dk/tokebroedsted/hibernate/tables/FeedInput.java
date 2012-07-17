@@ -7,14 +7,13 @@ import javax.persistence.*;
 @Entity
 public class FeedInput {
 
-    private enum Type {string, number,image}
+    private enum Type {string, number, image}
 
     @Id
     private int id;
 
     @ManyToOne
     private Feed feed;
-
 
     private Type type;
 

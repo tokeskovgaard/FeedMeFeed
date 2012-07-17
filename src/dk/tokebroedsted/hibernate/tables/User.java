@@ -13,8 +13,11 @@ public class User {
     @Id
     private int id;
 
-    @OneToMany (mappedBy = "id")
-    private Set<Feed> feeds;
+    @OneToMany(mappedBy = "id")
+    private Set<Feed> createdFeeds;
+
+    @OneToMany(mappedBy = "id")
+    private Set<FeedItem> subscribedFeeds;
 
     private String loginname, username, password, email;
 
