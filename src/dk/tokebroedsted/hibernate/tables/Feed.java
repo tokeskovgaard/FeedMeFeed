@@ -1,9 +1,6 @@
 package dk.tokebroedsted.hibernate.tables;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -12,7 +9,10 @@ public class Feed {
     @Id
     private int id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "feed")
+    @ManyToOne
+    private User owner;
+
+    @OneToMany (mappedBy = "id")
     private Set<FeedInput> feedInputs;
 
     public int getId() {
@@ -21,13 +21,5 @@ public class Feed {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Set<FeedInput> getFeedInputs() {
-        return feedInputs;
-    }
-
-    public void setFeedInputs(Set<FeedInput> feedInputs) {
-        this.feedInputs = feedInputs;
     }
 }

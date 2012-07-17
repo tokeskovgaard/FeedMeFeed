@@ -15,6 +15,7 @@ public class FeedInput {
     @ManyToOne
     private Feed feed;
 
+
     private Type type;
 
     private String name;
@@ -26,30 +27,5 @@ public class FeedInput {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Feed getFeed() {
-        return feed;
-    }
-
-    public void setFeed(Feed feed) {
-        this.feed = feed;
-    }
-
-//    public Type getType() {
-//        return type;
-//    }
-//
-//    public void setType(Type type) {
-//        this.type = type;
-//    }
-
-
-    public String getKey() {
-        return name;
-    }
-
-    public void setKey(String name) {
-        this.name = name;
     }
 }

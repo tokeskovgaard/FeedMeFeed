@@ -3,12 +3,18 @@ package dk.tokebroedsted.hibernate.tables;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 @Entity
 public class User {
 
     @Id
     private int id;
+
+    @OneToMany (mappedBy = "id")
+    private Set<Feed> feeds;
 
     private String loginname, username, password, email;
 
