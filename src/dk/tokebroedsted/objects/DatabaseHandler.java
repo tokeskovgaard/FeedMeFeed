@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -116,4 +117,27 @@ public class DatabaseHandler {
 
     }
 
+    public List<Feed> getFeedsForUser(String user) {
+        try{
+            String sql = "SELECT * FROM Feed WHERE Id = (SELECT Feedid FROM SubscribedToFeed WHERE Userid = ?)";
+            PreparedStatement prest = con.prepareStatement(sql);
+            prest.setString(1, user);
+            ResultSet rs = prest.executeQuery();
+            while (rs.next()){
+
+//                user.setLoginname(rs.getInt("Id"));
+//                user.setEmail(rs.getString("description"));
+//                user.setPassword(rs.getString("html"));
+//                user.setId(rs.getString("css"));
+//                user.setUsername(rs.getInt("ownerid"));
+
+            }
+            prest.close();
+        }
+        catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        return null;
+
+    }
 }
