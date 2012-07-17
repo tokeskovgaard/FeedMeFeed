@@ -3,6 +3,8 @@ package dk.tokebroedsted;
 import dk.tokebroedsted.objects.DatabaseHandler;
 import dk.tokebroedsted.hibernate.tables.User;
 import dk.tokebroedsted.objects.UserCookie;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -18,10 +20,16 @@ import java.net.URLEncoder;
  * Time: 5:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Login extends HttpServlet{
+public class Login extends HttpServlet {
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        Logger logger = LoggerFactory.getLogger(Login.class);
+        logger.debug("Hello World");
+
+
         ServletOutputStream out = resp.getOutputStream();
 
         checkOrSetSessionID(req, resp);
@@ -83,7 +91,7 @@ public class Login extends HttpServlet{
             //TODO: Ordentlig fejlhåndtering og random string ved fejl.
             try {
                 sessionid = generateSessionId();
-            } catch (Exception e){
+            } catch (Exception e) {
 
                 sessionid = "abcde";
             }
@@ -109,10 +117,10 @@ public class Login extends HttpServlet{
             }
         }
         DatabaseHandler dbHandler = new DatabaseHandler();
-        User user = dbHandler.getUser(loginname,password);
-        if(user.getId()>0) {
+        User user = dbHandler.getUser(loginname, password);
+        if (user.getId() > 0) {
             // User with password exists
-            UserCookie cookie =  new UserCookie(req, resp);
+            UserCookie cookie = new UserCookie(req, resp);
             cookie.setCookie(user);
             cookie.updateSession();
             resp.sendRedirect(referrer);

@@ -1,6 +1,8 @@
 <component name="libraryTable">
-  <library name="log4j-over-slf4j-1.6.6">
+  <library name="log4j">
     <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-simple-1.6.6.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/log4j-over-slf4j-1.6.6.jar!/" />
     </CLASSES>
     <JAVADOC />
