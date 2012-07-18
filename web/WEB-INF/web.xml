@@ -23,9 +23,7 @@
 
     <servlet>
         <servlet-name>UserService</servlet-name>
-        <servlet-class>
-            dk.tokebroedsted.user.server.UserServiceImpl
-        </servlet-class>
+        <servlet-class>dk.tokebroedsted.user.server.UserServiceImpl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserService</servlet-name>

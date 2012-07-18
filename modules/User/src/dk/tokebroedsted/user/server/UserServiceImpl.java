@@ -31,7 +31,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
 
     public List<User> getUsers() {
 
-        dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) HibernateUtil.getSomething(dk.tokebroedsted.hibernate.tables.User.class, 0);
+/*        dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) HibernateUtil.getSomething(dk.tokebroedsted.hibernate.tables.User.class, 0);
 
         User userGWT = new User();
         userGWT.setUsername(user.getUsername());
@@ -41,8 +41,8 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         userGWT.setId(user.getId());
 
         ArrayList<User> users = new ArrayList<User>();
-        users.add(userGWT);
+        users.add(userGWT);*/
 
-        return users;
+        return new ArrayList<>();
     }
 }
