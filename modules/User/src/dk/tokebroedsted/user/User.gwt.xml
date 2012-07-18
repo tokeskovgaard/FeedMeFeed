@@ -12,6 +12,6 @@
     <!-- Specify the app servlets.                   -->
     <servlet path='/UserService' class='dk.tokebroedsted.user.server.UserServiceImpl'/>
 
-    <stylesheet src="User.css"/>
+    <stylesheet src="User.less"/>
     <set-property name="user.agent" value="safari" />
 </module>

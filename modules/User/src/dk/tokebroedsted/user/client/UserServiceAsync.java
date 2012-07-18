@@ -12,4 +12,10 @@ public interface UserServiceAsync {
     void getFeeds(AsyncCallback<List<Feed>> callback);
 
     void getUsers(AsyncCallback<List<User>> callback);
+
+    void getInt(AsyncCallback<List<Integer>> callback);
+
+    void getUser(String username, AsyncCallback<User> callback);
+
+    void createUser(int id, String loginname, String username, String password, String email, AsyncCallback<Boolean> callback);
 }
