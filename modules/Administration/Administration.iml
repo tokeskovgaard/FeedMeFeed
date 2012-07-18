@@ -8,6 +8,7 @@
         <setting name="gwtSdkUrl" value="file://$GWT_PATH$" />
         <packaging>
           <module name="dk.tokebroedsted.administration.Administration" path="/Administration" />
+          <module name="dk.tokebroedsted.feed.Feed" path="/Feed" />
         </packaging>
       </configuration>
     </facet>

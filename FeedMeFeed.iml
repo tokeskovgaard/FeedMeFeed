@@ -33,7 +33,6 @@
     <orderEntry type="library" name="log4j" level="project" />
     <orderEntry type="module" module-name="Administration" />
     <orderEntry type="module" module-name="User" />
-    <orderEntry type="module" module-name="Feed" />
   </component>
 </module>
 

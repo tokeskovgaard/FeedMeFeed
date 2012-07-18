@@ -16,7 +16,7 @@ public class FeedItem {
     @ManyToOne
     private User owner;
 
-    @OneToMany(mappedBy = "feedItem")
+    @OneToMany(mappedBy = "feedItem", cascade = CascadeType.ALL)
     private Set<FeedItemInput> feedItemInputs;
 
     public int getId() {

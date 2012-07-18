@@ -13,9 +13,9 @@ public class PreviewView extends AbsolutePanel {
     }
 
     public void updateView() {
-        setHeight(feedItemSetup.feed.getHeight() + "px");
-        setWidth(feedItemSetup.feed.getWidth() + "px");
-        getElement().getStyle().setBackgroundColor(feedItemSetup.feed.getColor());
+        setHeight(600 + "px");
+        setWidth(600 + "px");
+        getElement().getStyle().setBackgroundColor("#FFF");
 
     }
 
@@ -27,8 +27,6 @@ public class PreviewView extends AbsolutePanel {
     @Override
     public void setSize(String width, String height) {
         super.setSize(width, height);
-        feedItemSetup.feed.setWidth(Integer.parseInt(width));
-        feedItemSetup.feed.setHeight(Integer.parseInt(height));
         feedItemSetup.updateViews();
     }
 }

@@ -1,10 +1,7 @@
 package dk.tokebroedsted.hibernate.tables;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -14,10 +11,10 @@ public class User {
     @GeneratedValue
     private int id;
 
-    @OneToMany (mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<Feed> createdFeeds;
 
-    @OneToMany (mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<FeedItem> subscribedFeeds;
 
     private String loginname, username, password, email;

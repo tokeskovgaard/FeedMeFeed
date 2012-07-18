@@ -2,22 +2,25 @@ package dk.tokebroedsted.administration.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import dk.tokebroedsted.administration.client.calculation.CalculationItemView;
 import dk.tokebroedsted.administration.client.feedinput.InputItemView;
-import dk.tokebroedsted.administration.client.model.*;
 import dk.tokebroedsted.administration.client.pagesetup.HTMLSetup;
 import dk.tokebroedsted.administration.client.question.QuestionItemView;
 import dk.tokebroedsted.administration.client.view.*;
+import dk.tokebroedsted.commons.client.models.FeedGWT;
+import dk.tokebroedsted.commons.client.models.InputGWT;
+import dk.tokebroedsted.commons.client.models.QuestionGWT;
 
 public class FeedSetupView extends FlowPanel {
-    public Feed feed;
+    public FeedGWT feed;
 
     public PreviewView previewView;
     private HTMLSetup htmlSetup;
-    //    private SettingsPanel settingsPanel;
     private CalculationItemView calculationItemView;
     private InputItemView inputItemView;
     private QuestionItemView questionItemView;
@@ -25,7 +28,7 @@ public class FeedSetupView extends FlowPanel {
 
     public FeedSetupView(AdministrationServiceAsync administrationService) {
         this.administrationService = administrationService;
-        feed = new Feed();
+        feed = new FeedGWT();
         this.setStyleName("feed-item-setup-view");
 
         setupView();
@@ -38,6 +41,16 @@ public class FeedSetupView extends FlowPanel {
         FlowPanel leftPanel = new FlowPanel();
         leftPanel.setStyleName("left-panel");
         add(leftPanel);
+
+        add(new Label("Titel: "));
+        final TextBox titleInput = new TextBox();
+        titleInput.addKeyUpHandler(new KeyUpHandler() {
+            @Override
+            public void onKeyUp(KeyUpEvent event) {
+                feed.setTitle(titleInput.getValue());
+            }
+        });
+        leftPanel.add(titleInput);
 
         inputItemView = new InputItemView(this);
         leftPanel.add(inputItemView);
@@ -94,19 +107,19 @@ public class FeedSetupView extends FlowPanel {
         calculationItemView.updateView();
     }
 
-    public void addInputItem(FeedInput feedInput) {
-        feed.feedInputList.add(feedInput);
+    public void addInputItem(InputGWT feedInput) {
+        feed.getInputs().add(feedInput);
         inputItemView.updateView();
     }
 
 
-    public Feed getFeed() {
+    public FeedGWT getFeed() {
         return feed;
     }
 
 
-    public void addQuestion(Question question) {
-        feed.questions.add(question);
+    public void addQuestion(QuestionGWT question) {
+        feed.getQuestions().add(question);
         questionItemView.updateView();
     }
 }

@@ -5,9 +5,9 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
-import dk.tokebroedsted.administration.client.model.FeedInput;
 import dk.tokebroedsted.administration.client.FeedSetupView;
-import dk.tokebroedsted.administration.client.model.Question;
+import dk.tokebroedsted.commons.client.models.InputGWT;
+import dk.tokebroedsted.commons.client.models.QuestionGWT;
 
 public class HTMLSetup extends FlowPanel {
 
@@ -42,11 +42,13 @@ public class HTMLSetup extends FlowPanel {
         KeyUpHandler keyUpHandler = new KeyUpHandler() {
             @Override
             public void onKeyUp(KeyUpEvent event) {
+                feedItemSetup.getFeed().setCss(css.getValue());
+                feedItemSetup.getFeed().setHTML(html.getValue());
+
                 feedItemSetup.previewView.updatePreview(generatePreviewHTML());
             }
         };
         html.addKeyUpHandler(keyUpHandler);
-
         css.addKeyUpHandler(keyUpHandler);
     }
 
@@ -55,11 +57,11 @@ public class HTMLSetup extends FlowPanel {
 
         //TODO make sure it is safe html
         String htmlText = html.getText();
-        for (FeedInput feedInput : feedItemSetup.getFeed().feedInputList) {
-            htmlText = htmlText.replaceAll(feedInput.getVariableId(), feedInput.getName());
+        for (InputGWT feedInput : feedItemSetup.getFeed().getInputs()) {
+            htmlText = htmlText.replaceAll(feedInput.getVariabelId(), feedInput.getName());
         }
 
-        for (Question question : feedItemSetup.getFeed().questions) {
+        for (QuestionGWT question : feedItemSetup.getFeed().getQuestions()) {
             htmlText = htmlText.replaceAll(question.getVariableId(), question.getName());
         }
 

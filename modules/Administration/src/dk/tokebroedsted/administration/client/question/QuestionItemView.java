@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import dk.tokebroedsted.administration.client.FeedSetupView;
-import dk.tokebroedsted.administration.client.model.Question;
+import dk.tokebroedsted.commons.client.models.QuestionGWT;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,8 +31,8 @@ public class QuestionItemView extends FlowPanel {
         titel.setStyleName("titel");
         add(titel);
 
-        for (Question questionItem : feedItemSetup.getFeed().questions) {
-            Label listItem = new Label(questionItem.getDisplayName());
+        for (QuestionGWT question : feedItemSetup.getFeed().getQuestions()) {
+            Label listItem = new Label(question.getName() + " - " + question.getVariableId());
             listItem.setStyleName("list-item");
             add(listItem);
         }

@@ -4,15 +4,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import dk.tokebroedsted.administration.client.FeedSetupView;
-import dk.tokebroedsted.administration.client.model.Calculation;
+import dk.tokebroedsted.commons.client.models.CalculationGWT;
 
-/**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 16-07-12
- * Time: 19:34
- * To change this template use File | Settings | File Templates.
- */
 public class CalculationItemView extends FlowPanel {
     private FeedSetupView feedItemSetup;
 
@@ -25,8 +18,8 @@ public class CalculationItemView extends FlowPanel {
         clear();
 
         add(new Label("Udregninger"));
-        for (Calculation calculation : feedItemSetup.getFeed().calculations) {
-            add(new Label(calculation.getName()));
+        for (CalculationGWT calculation : feedItemSetup.getFeed().getCalculations()) {
+            add(new Label(calculation.getName() + " - " + calculation.getVariableId()));
         }
         Button userInput = new Button("Tilføj ny beregning");
         add(userInput);

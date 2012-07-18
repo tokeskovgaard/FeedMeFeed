@@ -1,6 +1,7 @@
 package dk.tokebroedsted.hibernate.tables;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,14 +16,20 @@ public class Feed {
 
     private String html, css;
 
-    @OneToMany (mappedBy = "feed")
-    private Set<FeedInput> feedInputs;
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL)
+    private List<FeedInput> feedInputs;
+
+    private String title;
+
+    public Feed(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    protected void setId(int id) {
         this.id = id;
     }
 
@@ -50,11 +57,19 @@ public class Feed {
         this.css = css;
     }
 
-    public Set<FeedInput> getFeedInputs() {
+    public List<FeedInput> getFeedInputs() {
         return feedInputs;
     }
 
-    public void setFeedInputs(Set<FeedInput> feedInputs) {
+    public void setFeedInputs(List<FeedInput> feedInputs) {
         this.feedInputs = feedInputs;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
     }
 }

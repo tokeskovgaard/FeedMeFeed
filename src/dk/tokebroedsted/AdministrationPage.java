@@ -19,8 +19,6 @@ public class AdministrationPage extends HttpServlet {
         out.println("<link rel=\"stylesheet/less\" type=\"text/css\" href=\"Administration/Administration.less\">\n" +
                 "<script src=\"Administration/less-1.3.0.min.js\" type=\"text/javascript\"></script>");
         out.println("</head><body>");
-        out.println("Du ramte lige Administrationsiden");
-
         out.println("<script type=\"text/javascript\" language=\"javascript\" src=\"Administration/administration.nocache.js\"></script>");
         out.println("<div id=\"gwt_administration\"></div>");
         out.println("</body></html>");

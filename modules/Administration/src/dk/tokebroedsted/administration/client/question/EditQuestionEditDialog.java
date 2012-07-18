@@ -6,8 +6,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import dk.tokebroedsted.administration.client.FeedSetupView;
-import dk.tokebroedsted.administration.client.model.Question;
 import dk.tokebroedsted.administration.client.view.AbstractItemEditDialog;
+import dk.tokebroedsted.commons.client.models.QuestionGWT;
 
 public class EditQuestionEditDialog extends AbstractItemEditDialog {
     private ListBox questionTypeSelect;
@@ -27,7 +27,7 @@ public class EditQuestionEditDialog extends AbstractItemEditDialog {
         content.add(questionInput);
 
         questionTypeSelect = new ListBox(false);
-        for (Question.Type type : Question.Type.values()) {
+        for (QuestionGWT.Type type : QuestionGWT.Type.values()) {
             questionTypeSelect.addItem(type.toString());
         }
         questionTypeSelect.addChangeHandler(new ChangeHandler() {
@@ -47,7 +47,7 @@ public class EditQuestionEditDialog extends AbstractItemEditDialog {
         return new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                Question question = new Question();
+                QuestionGWT question = new QuestionGWT();
                 question.setName(questionInput.getValue());
                 question.setType(getSelectedType());
                 feedItemSetup.addQuestion(question);
@@ -56,27 +56,20 @@ public class EditQuestionEditDialog extends AbstractItemEditDialog {
         };
     }
 
-    private Question.Type getSelectedType() {
+    private QuestionGWT.Type getSelectedType() {
         int selectedIndex = questionTypeSelect.getSelectedIndex();
         String itemText = questionTypeSelect.getItemText(selectedIndex);
-        return Question.Type.valueOf(itemText);
+        return QuestionGWT.Type.valueOf(itemText);
     }
 
     private void updateTypeSpecificPart() {
         typeSpecificPanel.clear();
 
-        Question.Type selectedType = getSelectedType();
-        if (Question.Type.open.equals(selectedType)) {
-            typeSpecificPanel.add(new Label("Brugeren vil blive bedt om at indtaste en tekst."));
-        } else if (Question.Type.numeric.equals(selectedType)) {
+        QuestionGWT.Type selectedType = getSelectedType();
+        if (QuestionGWT.Type.numeric.equals(selectedType)) {
             typeSpecificPanel.add(new Label("Brugeren vil blive bedt om at indtaste et tal."));
-            //TODO mulighed for grænser?
-        } else if (Question.Type.closed.equals(selectedType)) {
-            typeSpecificPanel.add(new Label("Tilføj svar muligheder der kan vælges mellem:"));
-
         } else {
             throw new RuntimeException("Found a type that isn't supported");
         }
     }
-
 }

@@ -4,7 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import dk.tokebroedsted.administration.client.FeedSetupView;
-import dk.tokebroedsted.administration.client.model.FeedInput;
+import dk.tokebroedsted.commons.client.models.InputGWT;
 
 public class InputItemView extends FlowPanel {
 
@@ -21,8 +21,8 @@ public class InputItemView extends FlowPanel {
         Label titel = new Label("Brugerinputs");
         titel.addStyleName("titel");
         add(titel);
-        for (FeedInput feedInput : feedSetupView.getFeed().feedInputList) {
-            Label listItem = new Label(feedInput.getDisplayName());
+        for (InputGWT feedInput : feedSetupView.getFeed().getInputs()) {
+            Label listItem = new Label(feedInput.getName() + " - " + feedInput.getVariabelId());
             listItem.addStyleName("list-item");
             add(listItem);
         }
