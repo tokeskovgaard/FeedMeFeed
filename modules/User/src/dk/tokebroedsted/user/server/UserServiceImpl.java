@@ -30,6 +30,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
     }
 
     public List<User> getUsers() {
+
         dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) HibernateUtil.getSomething(dk.tokebroedsted.hibernate.tables.User.class, 0);
 
         User userGWT = new User();

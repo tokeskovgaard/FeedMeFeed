@@ -12,6 +12,8 @@
       <root url="jar://$PROJECT_DIR$/lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

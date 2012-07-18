@@ -22,12 +22,14 @@ import java.net.URLEncoder;
  */
 public class Login extends HttpServlet {
 
+    static Logger logger = LoggerFactory.getLogger(Login.class);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Logger logger = LoggerFactory.getLogger(Login.class);
-        logger.debug("Hello World");
+
+        logger.info("Hello World");
 
 
         ServletOutputStream out = resp.getOutputStream();

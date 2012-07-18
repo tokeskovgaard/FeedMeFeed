@@ -15,7 +15,7 @@ public class Feed {
 
     private String html, css;
 
-    @OneToMany(mappedBy = "feed")
+    @OneToMany (mappedBy = "feed")
     private Set<FeedInput> feedInputs;
 
     public int getId() {

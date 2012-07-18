@@ -1,6 +1,7 @@
 package dk.tokebroedsted.user.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -31,7 +32,7 @@ public class UserEntryPoint implements EntryPoint {
         userService.getUsers(new AsyncCallback<List<User>>() {
             @Override
             public void onFailure(Throwable caught) {
-                //To change body of implemented methods use File | Settings | File Templates.
+                Window.alert(caught.getMessage());
             }
 
             @Override
