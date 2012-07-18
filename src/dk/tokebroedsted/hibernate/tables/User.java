@@ -11,13 +11,21 @@ public class User {
     @GeneratedValue
     private int id;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Feed> createdFeeds;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private Set<FeedItem> subscribedFeeds;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "FeedSubscription",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "feed_id")
+    )
+    private Set<Feed> feedSubscriptions;
 
-    private String loginname, username, password, email;
+    private String loginname, password, email;
+
+    @Column(unique = true)
+    private String username;
+
 
     public User(int id, String loginname, String username, String password, String email) {
         this.id = id;
@@ -69,5 +77,13 @@ public class User {
 
     public User() {
         id = -1;
+    }
+
+    public Set<Feed> getCreatedFeeds() {
+        return createdFeeds;
+    }
+
+    public Set<Feed> getFeedSubscriptions() {
+        return feedSubscriptions;
     }
 }

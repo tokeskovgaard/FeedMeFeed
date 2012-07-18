@@ -1,11 +1,12 @@
 package dk.tokebroedsted.hibernate;
 
 import dk.tokebroedsted.hibernate.tables.Feed;
+import dk.tokebroedsted.hibernate.tables.FeedItem;
 import dk.tokebroedsted.hibernate.tables.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,22 +19,43 @@ import java.util.List;
 public class ModelFactory {
 
     public static List<Feed> getFeeds(User user) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = getSession();
 
-        ArrayList<Feed> feeds = new ArrayList<Feed>();
-        session.beginTransaction();
+        Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("FROM Feed WHERE owner = :owner");
         query.setParameter("owner", user);
 
-        java.util.List allFeeds = query.list();
-        for (int i = 0; i < allFeeds.size(); i++) {
-//            dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) allUsers.get(i);
-//            logger.info("We found " + user.getUsername() + " users with our query.");
-//            User mUser = new User(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
-//            users.add(mUser);
-//        }
-//        session.getTransaction().commit();
-        }
-        return null;
+        List<Feed> allFeeds = query.list();
+        transaction.commit();
+        return allFeeds;
+    }
+
+    public static User getUser(String username) {
+        Session session = getSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("FROM User WHERE username = :username");
+        query.setParameter("username", username);
+        User user = (User) query.uniqueResult();
+        transaction.commit();
+        return user;
+    }
+
+    private static Session getSession() {
+        Session currentSession = HibernateUtil.getSessionFactory().getCurrentSession();
+        if (!currentSession.isOpen())
+            currentSession = HibernateUtil.getSessionFactory().openSession();
+        return currentSession;
+    }
+
+    public static List<FeedItem> getFeedItems(int feedId) {
+        Session session = getSession();
+
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("FROM FeedItem WHERE feed = :feed");
+        query.setParameter("feed", feedId);
+
+        List<FeedItem> allFeedItems = query.list();
+        transaction.commit();
+        return allFeedItems;
     }
 }

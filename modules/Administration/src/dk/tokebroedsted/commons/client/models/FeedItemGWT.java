@@ -14,6 +14,7 @@ public class FeedItemGWT implements IsSerializable, Serializable {
     private List<CalculationItemGWT> calculationItems;
 
     private FeedGWT feedGWT;
+    private int feedId;
 
     public FeedItemGWT() {
     }
@@ -21,6 +22,10 @@ public class FeedItemGWT implements IsSerializable, Serializable {
     public FeedItemGWT(FeedGWT feedGWT) {
 
         this.feedGWT = feedGWT;
+    }
+
+    public FeedItemGWT(int feedId) {
+        this.feedId = feedId;
     }
 
     public List<InputItemGWT> getInputItems() {

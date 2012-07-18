@@ -11,7 +11,7 @@ public class FeedGWT implements IsSerializable, Serializable {
     private String title;
     private String css;
     private String html;
-    private int id;
+    private int feedId;
 
     private List<InputGWT> inputs = new ArrayList<InputGWT>();
     private List<QuestionGWT> questions = new ArrayList<QuestionGWT>();
@@ -53,15 +53,15 @@ public class FeedGWT implements IsSerializable, Serializable {
         return calculations;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setFeedId(int feedId) {
+        this.feedId = feedId;
     }
 
     public void setInputs(ArrayList<InputGWT> inputs) {
         this.inputs = inputs;
     }
 
-    public int getId() {
-        return id;
+    public int getFeedId() {
+        return feedId;
     }
 }

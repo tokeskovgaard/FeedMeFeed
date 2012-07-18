@@ -9,30 +9,29 @@ public class Tab extends FlowPanel {
 
 
     private boolean selected;
-    private final TabPanel tabPanel;
     private final FeedGWT feedGWT;
 
-    public Tab(TabPanel tabPanel, FeedGWT feedGWT) {
-        this.tabPanel = tabPanel;
+    public Tab(final TabPanel tabPanel, FeedGWT feedGWT) {
         this.feedGWT = feedGWT;
 
         setStyleName("tab");
         getElement().setInnerHTML(feedGWT.getTitle());
+
+        addHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                if (!selected)
+                    tabPanel.updateSelectedTab(Tab.this);
+            }
+        }, ClickEvent.getType());
     }
 
     public void setSelected(boolean selected) {
         this.selected = selected;
-
         if (selected) {
             setStyleName("tab selected");
         } else {
             setStyleName("tab");
-            addHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent event) {
-                    tabPanel.updateSelectedTab(Tab.this);
-                }
-            }, ClickEvent.getType());
         }
     }
 

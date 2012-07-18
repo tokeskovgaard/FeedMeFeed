@@ -55,8 +55,7 @@ public class HibernateUtil {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Object load = session.load(clazz, id);
-        if(load != null)
-        {
+        if (load != null) {
             logger.info("Something was found for id " + id + ". It was " + load.toString());
         }
         transaction.commit();
@@ -70,7 +69,7 @@ public class HibernateUtil {
         ArrayList<User> users = new ArrayList<User>();
 
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
+        Transaction transaction = session.beginTransaction();
         Query queryResult = session.createQuery("from User");
         java.util.List allUsers;
         allUsers = queryResult.list();
@@ -80,7 +79,7 @@ public class HibernateUtil {
             User mUser = new User(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
             users.add(mUser);
         }
-        session.getTransaction().commit();
+        transaction.commit();
         return users;
 
     }
@@ -98,13 +97,16 @@ public class HibernateUtil {
     }
 
 
-
     public static void createUser(User user) {
         logger.info("createUser called for: " + user.getLoginname());
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         String password = "";
-        try { password = hashPassword(user.getPassword());} catch (Exception e ) { throw new RuntimeException(e); }
+        try {
+            password = hashPassword(user.getPassword());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         dk.tokebroedsted.hibernate.tables.User tUser = new dk.tokebroedsted.hibernate.tables.User(user.getId(), user.getLoginname(), user.getUsername(), password, user.getEmail());
         session.save(tUser);
         transaction.commit();
@@ -130,7 +132,7 @@ public class HibernateUtil {
             users.add(mUser);
         }
         session.getTransaction().commit();
-        if(users.size()>0) {
+        if (users.size() > 0) {
             return users.get(0);
         }
         return null;

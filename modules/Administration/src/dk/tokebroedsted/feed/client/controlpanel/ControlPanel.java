@@ -47,7 +47,10 @@ public class ControlPanel extends FlowPanel {
                 dialog.center();
                 dialog.setStyleName("new-feed-item-dialog");
 
-                dialog.add(new Label(selectedFeed.getTitle()));
+                FlowPanel dialogContent = new FlowPanel();
+                dialog.add(dialogContent);
+
+                dialogContent.add(new Label(selectedFeed.getTitle()));
 
                 final List<InputItemGWT> inputItems = new ArrayList<InputItemGWT>();
                 for (InputGWT inputGWT : selectedFeed.getInputs()) {
@@ -76,16 +79,15 @@ public class ControlPanel extends FlowPanel {
                             throw new RuntimeException("Type has not been implemented! - " + type.toString());
                     }
 
-                    dialog.add(inputPanel);
+                    dialogContent.add(inputPanel);
                 }
 
                 Label save = new Label("Gem");
-                dialog.add(save);
+                dialogContent.add(save);
                 save.setStyleName("link-label");
                 save.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {
-
                         FeedItemGWT feedItemGWT = new FeedItemGWT(selectedFeed);
                         feedItemGWT.setInputItems(inputItems);
 
@@ -99,14 +101,12 @@ public class ControlPanel extends FlowPanel {
                                 }
                             }
                         });
-
-
                         dialog.hide();
                     }
                 });
 
                 Label cancel = new Label("Annuller");
-                dialog.add(cancel);
+                dialogContent.add(cancel);
                 cancel.setStyleName("link-label");
                 cancel.addClickHandler(new ClickHandler() {
                     @Override

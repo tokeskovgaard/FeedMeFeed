@@ -14,12 +14,13 @@ public class Feed {
     @ManyToOne
     private User owner;
 
-    private String html, css;
+    private String html, css, title;
 
-    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FeedInput> feedInputs;
 
-    private String title;
+    public Feed() {
+    }
 
     public Feed(int id) {
         this.id = id;

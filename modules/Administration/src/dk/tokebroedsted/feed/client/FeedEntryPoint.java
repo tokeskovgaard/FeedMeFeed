@@ -40,11 +40,13 @@ public class FeedEntryPoint implements EntryPoint {
         feedService.getUsersFeeds(new DefaultCallback<List<FeedGWT>>() {
             @Override
             public void onSuccess(List<FeedGWT> result) {
+
                 for (FeedGWT feedGWT : result) {
                     tabPanel.addFeedAsTab(feedGWT);
+
                 }
 
-                fillFeedRelevantContent(feedService, tabPanel.getSelectedFeed());
+//                    fillFeedRelevantContent(feedService, tabPanel.getSelectedFeed());
             }
         });
     }

@@ -20,11 +20,23 @@ public class FeedItemInput {
 
     private String value;
 
+    public void setId(int id) {
+        id = id;
+    }
+
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        id = id;
+    public FeedItem getFeedItem() {
+        return feedItem;
+    }
+
+    public FeedInput getFeedInput() {
+        return feedInput;
+    }
+
+    public String getValue() {
+        return value;
     }
 }

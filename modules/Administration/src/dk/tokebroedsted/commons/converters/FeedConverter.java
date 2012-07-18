@@ -13,7 +13,7 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
 
     @Override
     public Feed toServerObject(FeedGWT feedGWT) {
-        Feed feed = new Feed(feedGWT.getId());
+        Feed feed = new Feed(feedGWT.getFeedId());
         User owner = (User) HibernateUtil.getSomething(User.class, 1);
 
         feed.setOwner(owner);
@@ -29,17 +29,12 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
         }
         feed.setFeedInputs(feedInputs);
 
-        return null;
+        return feed;
     }
 
 
     @Override
     public FeedGWT toGwtObject(Feed feed) {
-        FeedGWT feedGWT = new FeedGWT();
-        feedGWT.setTitle(feed.getTitle());
-        feedGWT.setCss(feed.getCss());
-        feedGWT.setHTML(feed.getHtml());
-        feedGWT.setId(feed.getId());
 
         InputConverter inputConverter = new InputConverter();
 
@@ -48,8 +43,13 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
             inputs.add(inputConverter.toGwtObject(input));
         }
 
+        FeedGWT feedGWT = new FeedGWT();
+        feedGWT.setTitle(feed.getTitle());
+        feedGWT.setCss(feed.getCss());
+        feedGWT.setHTML(feed.getHtml());
+        feedGWT.setFeedId(feed.getId());
         feedGWT.setInputs(inputs);
-        feedGWT.setId(feed.getId());
+
         return feedGWT;
     }
 }
