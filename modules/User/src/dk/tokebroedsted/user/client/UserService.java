@@ -17,6 +17,12 @@ public interface UserService extends RemoteService {
 
     List<User> getUsers();
 
+    List<Integer> getInt();
+
+    User getUser(String username);
+
+    Boolean createUser(int id, String loginname, String username, String password, String email);
+
     /**
      * Utility/Convenience class.
      * Use UserService.App.getInstance() to access static instance of UserServiceAsync
