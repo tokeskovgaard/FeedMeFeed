@@ -7,7 +7,7 @@ public class AdministrationEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        final RootPanel rootPanel = RootPanel.get("gwt");
+        final RootPanel rootPanel = RootPanel.get("gwt_administration");
 
         AdministrationServiceAsync administrationService = AdministrationService.App.getInstance();
         rootPanel.add(new FeedSetupView(administrationService));

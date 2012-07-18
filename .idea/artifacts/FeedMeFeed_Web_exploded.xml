@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="FeedMeFeed:Web exploded">
+  <artifact type="exploded-war" build-on-make="true" name="FeedMeFeed:Web exploded">
     <output-path>$WEBAPP_PATH$</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="FeedMeFeed/web/Web" />
@@ -8,6 +8,7 @@
           <element id="module-output" name="FeedMeFeed" />
           <element id="module-output" name="Administration" />
           <element id="module-output" name="User" />
+          <element id="module-output" name="Feed" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="mysql-connector-java-5.1.21-bin" />
@@ -16,8 +17,7 @@
           <element id="library" level="project" name="gwt-libs" />
         </element>
       </element>
-      <element id="gwt-compiler-output" facet="User/gwt/GWT" />
-      <element id="gwt-compiler-output" facet="Administration/gwt/GWT" />
+      <element id="gwt-compiler-output" facet="Feed/gwt/GWT" />
     </root>
   </artifact>
 </component>

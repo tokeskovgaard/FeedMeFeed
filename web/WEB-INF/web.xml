@@ -5,6 +5,9 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
+    <listener>
+        <listener-class>dk.tokebroedsted.listeners.ApplicationServletContextListener</listener-class>
+    </listener>
 
     <listener>
         <listener-class>dk.tokebroedsted.hibernate.HibernateListener</listener-class>
@@ -15,12 +18,28 @@
         <servlet-name>AdministrationService</servlet-name>
         <servlet-class>dk.tokebroedsted.administration.server.AdministrationServiceImpl</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>AdministrationService</servlet-name>
         <url-pattern>/Administration/AdministrationService</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Administration</servlet-name>
+        <servlet-class>dk.tokebroedsted.AdministrationPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Administration</servlet-name>
+        <url-pattern>/Administration</url-pattern>
+    </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>User</servlet-name>
+        <servlet-class>dk.tokebroedsted.UserPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>User</servlet-name>
+        <url-pattern>/User</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>UserService</servlet-name>
         <servlet-class>dk.tokebroedsted.user.server.UserServiceImpl</servlet-class>
@@ -30,31 +49,29 @@
         <url-pattern>/User/UserService</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>Administration</servlet-name>
-        <servlet-class>dk.tokebroedsted.AdministrationPage</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Administration</servlet-name>
-        <url-pattern>/Administration</url-pattern>
-    </servlet-mapping>
 
     <servlet>
-        <servlet-name>User</servlet-name>
-        <servlet-class>dk.tokebroedsted.UserPage</servlet-class>
+        <servlet-name>Feed</servlet-name>
+        <servlet-class>dk.tokebroedsted.pages.FeedPage</servlet-class>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>User</servlet-name>
-        <url-pattern>/User</url-pattern>
+        <servlet-name>Feed</servlet-name>
+        <url-pattern>/Feed</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>FeedService</servlet-name>
+        <servlet-class>dk.tokebroedsted.feed.server.FeedServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FeedService</servlet-name>
+        <url-pattern>/Feed/FeedService</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>dk.tokebroedsted.Login</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -64,11 +81,22 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>dk.tokebroedsted.Logout</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Error</servlet-name>
+        <servlet-class>dk.tokebroedsted.ErrorPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Error</servlet-name>
+        <url-pattern>/Error</url-pattern>
+    </servlet-mapping>
 
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/Error</location>
+    </error-page>
 </web-app>

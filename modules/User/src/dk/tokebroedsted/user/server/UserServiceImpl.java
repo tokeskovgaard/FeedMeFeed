@@ -43,6 +43,6 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         ArrayList<User> users = new ArrayList<User>();
         users.add(userGWT);*/
 
-        return new ArrayList<>();
+        return new ArrayList<User>();
     }
 }

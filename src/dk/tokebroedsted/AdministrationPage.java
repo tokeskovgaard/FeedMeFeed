@@ -1,9 +1,10 @@
 package dk.tokebroedsted;
 
 import dk.tokebroedsted.objects.UserCookie;
+import org.apache.log4j.Logger;
 
 import javax.servlet.*;
-import  javax.servlet.http.*;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 public class AdministrationPage extends HttpServlet {
@@ -21,7 +22,7 @@ public class AdministrationPage extends HttpServlet {
         out.println("Du ramte lige Administrationsiden");
 
         out.println("<script type=\"text/javascript\" language=\"javascript\" src=\"Administration/administration.nocache.js\"></script>");
-        out.println("<div id=\"gwt\"></div>");
+        out.println("<div id=\"gwt_administration\"></div>");
         out.println("</body></html>");
     }
 }
