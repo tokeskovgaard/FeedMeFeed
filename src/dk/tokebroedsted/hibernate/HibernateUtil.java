@@ -110,6 +110,32 @@ public class HibernateUtil {
         transaction.commit();
     }
 
+    public static User getUser(String username) {
+        logger.info("Initiating getUsers()");
+        Configuration config = new Configuration();
+        config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.User.class);
+        ArrayList<User> users = new ArrayList<User>();
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from User where username = :username");
+
+        query.setParameter("username", username);
+        java.util.List allUsers;
+        allUsers = query.list();
+        for (int i = 0; i < allUsers.size(); i++) {
+            dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) allUsers.get(i);
+            logger.info("We found " + user.getUsername() + " users with our query.");
+            User mUser = new User(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
+            users.add(mUser);
+        }
+        session.getTransaction().commit();
+        if(users.size()>0) {
+            return users.get(0);
+        }
+        return null;
+    }
+
     private static String hashPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
