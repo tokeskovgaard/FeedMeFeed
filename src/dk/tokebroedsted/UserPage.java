@@ -19,9 +19,6 @@ public class UserPage extends HttpServlet {
                 "<script src=\"User/less-1.3.0.min.js\" type=\"text/javascript\"></script>");
         out.println("</head><body>");
         out.println("Du ramte lige Brugersiden");
-        HttpSession session = req.getSession(true);
-
-        out.println((String)session.getAttribute("user"));
 
         out.println("<script type=\"text/javascript\" language=\"javascript\" src=\"User/user.nocache.js\"></script>");
         out.println("<div id=\"gwt\"></div>");
