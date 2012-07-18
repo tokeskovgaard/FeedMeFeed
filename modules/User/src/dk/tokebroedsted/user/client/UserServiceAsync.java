@@ -17,5 +17,9 @@ public interface UserServiceAsync {
 
     void getUser(String username, AsyncCallback<User> callback);
 
+    void deleteUser(int id, AsyncCallback<String> callback);
+
     void createUser(int id, String loginname, String username, String password, String email, AsyncCallback<Boolean> callback);
+
+    void createUser(User user, AsyncCallback<String> callback);
 }

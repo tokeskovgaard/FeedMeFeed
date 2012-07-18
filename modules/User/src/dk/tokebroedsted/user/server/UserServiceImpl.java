@@ -27,7 +27,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         users.add(user);
 
         user = new User();
-        user.setUsername("Toke Brødsted");
+        user.setUsername("Toke R. Brødsted");
         user.setEmail("tokebroedsted@gmail.com");
         user.setLoginname("tokeb");
         user.setPassword("d304e7f1a2161179f0aacefbe70b6f868196180ebb3e10ce62c1c93e9eef5155");
@@ -54,7 +54,17 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
 
     public List<User> getUsers() {
 
-        //dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) HibernateUtil.getSomething(dk.tokebroedsted.hibernate.tables.User.class, 0);
+        /*dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) HibernateUtil.getSomething(dk.tokebroedsted.hibernate.tables.User.class, 1);
+        log(user.toString());
+        User userGWT = new User();
+        userGWT.setId(user.getId());
+        userGWT.setEmail(user.getEmail());
+        userGWT.setLoginname(user.getLoginname());
+        userGWT.setPassword(user.getPassword());
+        userGWT.setUsername(user.getUsername());
+        users.add(userGWT);
+        */
+        users = (ArrayList<User>)HibernateUtil.getUsers();
 
         return users;
     }
@@ -80,5 +90,20 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         users.add(user);
 
         return true;
+    }
+
+
+    public String deleteUser(int id) {
+
+        HibernateUtil.deleteUser(id);
+
+        return "success";
+    }
+
+    public String createUser(User user) {
+
+        HibernateUtil.createUser(user);
+
+        return "success";
     }
 }

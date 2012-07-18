@@ -12,7 +12,7 @@ public class FeedServiceImpl extends RemoteServiceServlet implements FeedService
     @Override
     public List<FeedGWT> getUsersFeeds() {
 
-        ArrayList<FeedGWT> feeds = new ArrayList<>();
+        ArrayList<FeedGWT> feeds = new ArrayList<FeedGWT>();
 
 
         StringBuilder html = new StringBuilder();
@@ -46,7 +46,7 @@ public class FeedServiceImpl extends RemoteServiceServlet implements FeedService
 
     @Override
     public List<FeedItemGWT> getFeedItems(FeedGWT feedGWT) {
-        ArrayList<FeedItemGWT> feedItems = new ArrayList<>();
+        ArrayList<FeedItemGWT> feedItems = new ArrayList<FeedItemGWT>();
 
         ArrayList<InputItemGWT> inputItemGWTs = new ArrayList<InputItemGWT>();
         InputItemGWT inputItem1 = new InputItemGWT();

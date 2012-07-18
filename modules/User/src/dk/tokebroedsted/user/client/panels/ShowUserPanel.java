@@ -77,6 +77,20 @@ public class ShowUserPanel extends FlowPanel {
                                     @Override
                                     public void onClick(ClickEvent event) {
                                         Window.alert("Slet id = " + pairs.getValue());
+                                        int id = (Integer)pairs.getValue();
+                                        userService.deleteUser(id, new AsyncCallback<String>() {
+                                            @Override
+                                            public void onFailure(Throwable caught) {
+                                                Window.alert("Error:" + caught.getMessage());
+                                            }
+
+                                            @Override
+                                            public void onSuccess(String result) {
+                                                update();
+
+                                            }
+                                        });
+
                                     }
                                 });
 
