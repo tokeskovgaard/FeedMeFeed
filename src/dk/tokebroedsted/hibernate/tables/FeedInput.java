@@ -7,13 +7,8 @@ import javax.persistence.*;
 @Entity
 public class FeedInput {
 
-
-    public Type getType() {
-        return type;
-    }
-
-    public String getName() {
-        return name;
+    public Feed getFeed() {
+        return feed;
     }
 
     public enum Type {string}
@@ -47,5 +42,13 @@ public class FeedInput {
 
     public void setFeed(Feed feed) {
         this.feed = feed;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
     }
 }

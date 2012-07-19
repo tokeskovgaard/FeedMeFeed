@@ -13,8 +13,8 @@ public class PreviewView extends AbsolutePanel {
     }
 
     public void updateView() {
-        setHeight(600 + "px");
-        setWidth(600 + "px");
+        setHeight(200 + "px");
+        setWidth(300 + "px");
         getElement().getStyle().setBackgroundColor("#FFF");
 
     }

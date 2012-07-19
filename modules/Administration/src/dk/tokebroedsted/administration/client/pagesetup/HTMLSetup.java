@@ -24,6 +24,7 @@ public class HTMLSetup extends FlowPanel {
 
 //        add(new Label("<div class=\"feedItem\">"));
         html = new TextArea();
+        html.setValue(feedItemSetup.getFeed().getHtml());
         html.setStyleName("html-setup");
         add(html);
 //        add(new Label("</div>"));
@@ -34,6 +35,7 @@ public class HTMLSetup extends FlowPanel {
 
 //        add(new Label("<style type=\"text/css\">"));
         css = new TextArea();
+        css.setValue(feedItemSetup.getFeed().getCss());
         css.setStyleName("css-setup");
         add(css);
 //        add(new Label("</style>"));

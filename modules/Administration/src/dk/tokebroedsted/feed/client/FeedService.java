@@ -16,7 +16,7 @@ public interface FeedService extends RemoteService {
 
     List<FeedItemGWT> getFeedItems(FeedGWT feedGWT);
 
-    Boolean addFeedItem(FeedItemGWT feedItemGWT);
+    Boolean saveFeedItem(FeedItemGWT feedItemGWT);
 
     public static class App {
         private static FeedServiceAsync ourInstance = GWT.create(FeedService.class);

@@ -21,7 +21,7 @@ public class FeedItemInput {
     private String value;
 
     public void setId(int id) {
-        id = id;
+        this.id = id;
     }
 
     public int getId() {
@@ -38,5 +38,17 @@ public class FeedItemInput {
 
     public String getValue() {
         return value;
+    }
+
+    public void setFeedItem(FeedItem feedItem) {
+        this.feedItem = feedItem;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public void setFeedInput(FeedInput feedInput) {
+        this.feedInput = feedInput;
     }
 }

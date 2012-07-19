@@ -11,11 +11,13 @@ public class FeedGWT implements IsSerializable, Serializable {
     private String title;
     private String css;
     private String html;
-    private int feedId;
+    private Integer feedId;
 
     private List<InputGWT> inputs = new ArrayList<InputGWT>();
     private List<QuestionGWT> questions = new ArrayList<QuestionGWT>();
     private List<CalculationGWT> calculations = new ArrayList<CalculationGWT>();
+    private List<FeedItemGWT> feedItems;
+    private boolean hasBeenInstantiated;
 
     public String getTitle() {
         return title;
@@ -53,15 +55,31 @@ public class FeedGWT implements IsSerializable, Serializable {
         return calculations;
     }
 
-    public void setFeedId(int feedId) {
-        this.feedId = feedId;
-    }
-
     public void setInputs(ArrayList<InputGWT> inputs) {
         this.inputs = inputs;
     }
 
-    public int getFeedId() {
+    public void setFeedId(Integer feedId) {
+        this.feedId = feedId;
+    }
+
+    public Integer getFeedId() {
         return feedId;
+    }
+
+    public void setFeedItems(List<FeedItemGWT> feedItems) {
+        this.feedItems = feedItems;
+    }
+
+    public void setHasBeenInstantiated(boolean hasBeenInstantiated) {
+        this.hasBeenInstantiated = hasBeenInstantiated;
+    }
+
+    public boolean getHasBeenInstantiated() {
+        return hasBeenInstantiated;
+    }
+
+    public List<FeedItemGWT> getFeedItems() {
+        return feedItems;
     }
 }

@@ -5,10 +5,14 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RemoteServiceRelativePath("AdministrationService")
 public interface AdministrationService extends RemoteService {
     // Sample interface method of remote interface
-    String getMessage();
+
+    List<FeedGWT> getOwnedFeeds();
 
     String saveFeed(FeedGWT feed);
 

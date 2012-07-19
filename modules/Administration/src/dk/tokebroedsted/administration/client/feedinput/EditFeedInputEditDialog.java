@@ -39,7 +39,6 @@ public class EditFeedInputEditDialog extends AbstractItemEditDialog {
             public void onClick(ClickEvent event) {
                 InputGWT feedInput = new InputGWT();
                 feedInput.setName(nameInput.getValue());
-
                 int selectedIndex = typeListBox.getSelectedIndex();
                 feedInput.setType(InputGWT.Type.valueOf(typeListBox.getValue(selectedIndex)));
 

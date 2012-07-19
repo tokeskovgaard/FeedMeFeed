@@ -12,6 +12,7 @@ import dk.tokebroedsted.administration.client.feedinput.InputItemView;
 import dk.tokebroedsted.administration.client.pagesetup.HTMLSetup;
 import dk.tokebroedsted.administration.client.question.QuestionItemView;
 import dk.tokebroedsted.administration.client.view.*;
+import dk.tokebroedsted.commons.client.DefaultCallback;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.InputGWT;
 import dk.tokebroedsted.commons.client.models.QuestionGWT;
@@ -28,15 +29,14 @@ public class FeedSetupView extends FlowPanel {
 
     public FeedSetupView(AdministrationServiceAsync administrationService) {
         this.administrationService = administrationService;
-        feed = new FeedGWT();
         this.setStyleName("feed-item-setup-view");
 
-        setupView();
     }
 
-    private void setupView() {
+    public void displayFeed(final FeedGWT feed) {
         this.clear();
 
+        this.feed = feed;
 
         FlowPanel leftPanel = new FlowPanel();
         leftPanel.setStyleName("left-panel");
@@ -44,6 +44,7 @@ public class FeedSetupView extends FlowPanel {
 
         add(new Label("Titel: "));
         final TextBox titleInput = new TextBox();
+        titleInput.setValue(feed.getTitle());
         titleInput.addKeyUpHandler(new KeyUpHandler() {
             @Override
             public void onKeyUp(KeyUpEvent event) {
@@ -80,15 +81,10 @@ public class FeedSetupView extends FlowPanel {
         saveButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                administrationService.saveFeed(feed, new AsyncCallback<String>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        Window.alert(caught.getMessage());
-                    }
-
+                administrationService.saveFeed(feed, new DefaultCallback<String>() {
                     @Override
                     public void onSuccess(String result) {
-                        Window.alert("WEEE");
+                        Window.alert("Saved feed");
                     }
                 });
             }
@@ -101,7 +97,6 @@ public class FeedSetupView extends FlowPanel {
 
     public void updateViews() {
         previewView.updateView();
-//        settingsPanel.updateView();
         inputItemView.updateView();
         questionItemView.updateView();
         calculationItemView.updateView();

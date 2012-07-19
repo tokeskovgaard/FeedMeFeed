@@ -32,6 +32,8 @@ public class TabPanel extends FlowPanel {
         selectedTab.setSelected(true);
 
         this.selectedTab = selectedTab;
+
+        feedEntryPoint.renderFeed(selectedTab.getFeed());
     }
 
     public FeedGWT getSelectedFeed() {

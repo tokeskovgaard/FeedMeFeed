@@ -7,13 +7,6 @@ import dk.tokebroedsted.commons.client.models.FeedItemGWT;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 18-07-12
- * Time: 15:05
- * To change this template use File | Settings | File Templates.
- */
 public class FeedContentPanel extends FlowPanel {
     private FeedGWT currentFeed;
     private FeedServiceAsync feedService;
@@ -23,17 +16,18 @@ public class FeedContentPanel extends FlowPanel {
         setStyleName("feed-content-panel");
     }
 
-    public void renderFeed(FeedGWT feedGWT, List<FeedItemGWT> feedItemGWTs) {
-        if (this.currentFeed != null && this.currentFeed.equals(feedGWT)) {
+    public void renderFeed(FeedGWT feedGWT) {
+        if (currentFeed != null && currentFeed.equals(feedGWT)) {
             //Dont render feed again since it is already rendered.
             return;
         }
+        currentFeed = feedGWT;
 
         clear();
+        getElement().setInnerHTML("<style type=\"text/css\">" + currentFeed.getCss() + "</style>");
 
-        this.currentFeed = feedGWT;
 
-        for (FeedItemGWT feedItemGWT : feedItemGWTs) {
+        for (FeedItemGWT feedItemGWT : currentFeed.getFeedItems()) {
             FeedContentItem feedContentItem = new FeedContentItem(feedService, feedGWT, feedItemGWT);
             add(feedContentItem);
         }

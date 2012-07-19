@@ -41,6 +41,15 @@
         <url-pattern>/Administration</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ServerStatus</servlet-name>
+        <servlet-class>dk.tokebroedsted.pages.ServerStatus</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServerStatus</servlet-name>
+        <url-pattern>/ServerStatus</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>User</servlet-name>

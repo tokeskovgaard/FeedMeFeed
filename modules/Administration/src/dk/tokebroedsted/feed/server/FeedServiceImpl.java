@@ -6,9 +6,7 @@ import dk.tokebroedsted.commons.converters.FeedConverter;
 import dk.tokebroedsted.commons.converters.FeedItemConverter;
 import dk.tokebroedsted.feed.client.FeedService;
 import dk.tokebroedsted.hibernate.ModelFactory;
-import dk.tokebroedsted.hibernate.tables.Feed;
-import dk.tokebroedsted.hibernate.tables.FeedItem;
-import dk.tokebroedsted.hibernate.tables.User;
+import dk.tokebroedsted.hibernate.tables.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,6 @@ public class FeedServiceImpl extends RemoteServiceServlet implements FeedService
         User user = ModelFactory.getUser("toke");
 
         ArrayList<FeedGWT> feedGWTs = new ArrayList<FeedGWT>();
-
         FeedConverter feedConverter = new FeedConverter();
         for (Feed feed : user.getCreatedFeeds()) {
             FeedGWT feedGWT = feedConverter.toGwtObject(feed);
@@ -31,10 +28,34 @@ public class FeedServiceImpl extends RemoteServiceServlet implements FeedService
     }
 
     @Override
+    public Boolean saveFeedItem(FeedItemGWT feedItemGWT) {
+        Feed feed = ModelFactory.getFeed(feedItemGWT.getFeedId());
+        User user = ModelFactory.getUser("toke");
+
+        FeedItem feedItem = new FeedItem();
+        feedItem.setFeed(feed);
+        feedItem.setOwner(user);
+        ModelFactory.save(feedItem);
+
+        for (InputItemGWT inputItemGWT : feedItemGWT.getInputItems()) {
+            FeedInput input = ModelFactory.getInput(inputItemGWT.getInputGWT().getId());
+
+            FeedItemInput feedItemInput = new FeedItemInput();
+            feedItemInput.setValue(inputItemGWT.getValue());
+            feedItemInput.setFeedItem(feedItem);
+            feedItemInput.setFeedInput(input);
+
+            ModelFactory.save(feedItemInput);
+        }
+
+        return Boolean.TRUE;
+    }
+
+    @Override
     public List<FeedItemGWT> getFeedItems(FeedGWT feedGWT) {
         ArrayList<FeedItemGWT> feedItemGWTs = new ArrayList<FeedItemGWT>();
 
-        FeedItemConverter feedItemConverter = new FeedItemConverter();
+        FeedItemConverter feedItemConverter = FeedItemConverter.toGWT();
         List<FeedItem> feedItems = ModelFactory.getFeedItems(feedGWT.getFeedId());
         for (FeedItem feedItem : feedItems) {
             FeedItemGWT feedItemGWT = feedItemConverter.toGwtObject(feedItem);
@@ -42,10 +63,5 @@ public class FeedServiceImpl extends RemoteServiceServlet implements FeedService
         }
 
         return feedItemGWTs;
-    }
-
-    @Override
-    public Boolean addFeedItem(FeedItemGWT feedItemGWT) {
-        return Boolean.TRUE;
     }
 }

@@ -1,7 +1,6 @@
 package dk.tokebroedsted.pages;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
+import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +21,6 @@ public class FeedPage extends HttpServlet {
         out.println("<html><head>");
         out.println("<script src=\"Feed/less-1.3.0.min.js\" type=\"text/javascript\"></script>");
         out.println("</head><body>");
-
         out.println("<script type=\"text/javascript\" language=\"javascript\" src=\"Feed/feed.nocache.js\"></script>");
         out.println("<div id=\"gwt_feed\"></div>");
         out.println("</body></html>");

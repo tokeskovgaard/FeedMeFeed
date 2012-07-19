@@ -19,10 +19,7 @@ import dk.tokebroedsted.feed.client.FeedServiceAsync;
  */
 public class FeedContentItem extends FlowPanel {
 
-    private FeedServiceAsync feedService;
-
     public FeedContentItem(FeedServiceAsync feedService, FeedGWT feedGWT, FeedItemGWT feedItemGWT) {
-        this.feedService = feedService;
         setStyleName("feed-content-item");
 
         renderFeedItem(feedGWT, feedItemGWT);
@@ -31,12 +28,10 @@ public class FeedContentItem extends FlowPanel {
     private void renderFeedItem(FeedGWT feedGWT, FeedItemGWT feedItemGWT) {
         clear();
 
-        add(new HTML(feedGWT.getCss()));
-
         String html = feedGWT.getHtml();
 
         for (InputItemGWT inputItem : feedItemGWT.getInputItems()) {
-            html = html.replaceAll(inputItem.getName(), inputItem.getValue());
+            html = html.replaceAll(inputItem.getVariabelId(), inputItem.getValue());
         }
 
         for (CalculationItemGWT calculationItem : feedItemGWT.getCalculationItems()) {
@@ -54,7 +49,9 @@ public class FeedContentItem extends FlowPanel {
             //TODO render questionItems
         }
 
-        add(new HTML(html));
+        HTML feedItemHTML = new HTML(html);
+        feedItemHTML.setStyleName("feed-item");
+        add(feedItemHTML);
     }
 
     private Widget createNumericQuestionWidget(final QuestionItemGWT questionItem) {

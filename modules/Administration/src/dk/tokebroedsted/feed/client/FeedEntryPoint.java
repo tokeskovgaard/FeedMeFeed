@@ -19,6 +19,7 @@ public class FeedEntryPoint implements EntryPoint {
     private TabPanel tabPanel;
     private FeedContentPanel feedContentPanel;
     private ControlPanel controlPanel;
+    private FeedServiceAsync feedService;
 
     @Override
     public void onModuleLoad() {
@@ -26,7 +27,7 @@ public class FeedEntryPoint implements EntryPoint {
 
         rootPanel = RootPanel.get("gwt_feed");
 
-        final FeedServiceAsync feedService = FeedService.App.getInstance();
+        feedService = FeedService.App.getInstance();
 
         tabPanel = new TabPanel(this);
         rootPanel.add(tabPanel);
@@ -44,23 +45,28 @@ public class FeedEntryPoint implements EntryPoint {
         feedService.getUsersFeeds(new DefaultCallback<List<FeedGWT>>() {
             @Override
             public void onSuccess(List<FeedGWT> result) {
-
                 for (FeedGWT feedGWT : result) {
                     tabPanel.addFeedAsTab(feedGWT);
 
                 }
 
-                fillFeedRelevantContent(feedService, tabPanel.getSelectedFeed());
+                renderFeed(tabPanel.getSelectedFeed());
             }
         });
     }
 
-    private void fillFeedRelevantContent(FeedServiceAsync feedService, final FeedGWT selectedFeed) {
-        feedService.getFeedItems(selectedFeed, new DefaultCallback<List<FeedItemGWT>>() {
-            @Override
-            public void onSuccess(List<FeedItemGWT> result) {
-                feedContentPanel.renderFeed(tabPanel.getSelectedFeed(), result);
-            }
-        });
+    public void renderFeed(final FeedGWT selectedFeed) {
+        if (!selectedFeed.getHasBeenInstantiated()) {
+            feedService.getFeedItems(selectedFeed, new DefaultCallback<List<FeedItemGWT>>() {
+                @Override
+                public void onSuccess(List<FeedItemGWT> result) {
+                    selectedFeed.setFeedItems(result);
+                    selectedFeed.setHasBeenInstantiated(true);
+                    feedContentPanel.renderFeed(tabPanel.getSelectedFeed());
+                }
+            });
+        } else {
+            feedContentPanel.renderFeed(selectedFeed);
+        }
     }
 }

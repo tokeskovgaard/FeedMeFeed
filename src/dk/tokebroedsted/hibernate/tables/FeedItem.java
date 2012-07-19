@@ -1,6 +1,8 @@
 package dk.tokebroedsted.hibernate.tables;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,10 +13,10 @@ public class FeedItem {
     private int id;
 
     @ManyToOne
-    private Feed feed;
+    private User owner;
 
     @ManyToOne
-    private User owner;
+    private Feed feed;
 
     @OneToMany(mappedBy = "feedItem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<FeedItemInput> feedItemInputs;
@@ -37,5 +39,17 @@ public class FeedItem {
 
     public Set<FeedItemInput> getFeedItemInputs() {
         return feedItemInputs;
+    }
+
+    public void setFeed(Feed feed) {
+        this.feed = feed;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public void setItemInputs(Set<FeedItemInput> feedItemInputs) {
+        this.feedItemInputs = feedItemInputs;
     }
 }

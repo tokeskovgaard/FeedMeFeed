@@ -13,5 +13,5 @@ public interface FeedServiceAsync {
 
     void getFeedItems(FeedGWT feedGWT, AsyncCallback<List<FeedItemGWT>> callback);
 
-    void addFeedItem(FeedItemGWT feedItemGWT, AsyncCallback<Boolean> callback);
+    void saveFeedItem(FeedItemGWT feedItemGWT, AsyncCallback<Boolean> callback);
 }

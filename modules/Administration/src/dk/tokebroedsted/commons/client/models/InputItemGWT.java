@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 public class InputItemGWT implements IsSerializable, Serializable {
 
+    private int id;
     private String value;
     private InputGWT inputGWT;
 
@@ -23,8 +24,8 @@ public class InputItemGWT implements IsSerializable, Serializable {
         this.inputGWT = inputGWT;
     }
 
-    public String getName() {
-        return inputGWT.getName();
+    public String getVariabelId() {
+        return inputGWT.getVariabelId();
     }
 
     public String getValue() {
@@ -34,4 +35,13 @@ public class InputItemGWT implements IsSerializable, Serializable {
     public void setValue(String value) {
         this.value = value;
     }
+
+    public InputGWT getInputGWT() {
+        return inputGWT;
+    }
+
+    public int getId() {
+        return id;
+    }
+
 }

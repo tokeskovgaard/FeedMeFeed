@@ -3,6 +3,7 @@ package dk.tokebroedsted.commons.converters;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.InputGWT;
 import dk.tokebroedsted.hibernate.HibernateUtil;
+import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.hibernate.tables.Feed;
 import dk.tokebroedsted.hibernate.tables.FeedInput;
 import dk.tokebroedsted.hibernate.tables.User;
@@ -13,15 +14,21 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
 
     @Override
     public Feed toServerObject(FeedGWT feedGWT) {
-        Feed feed = new Feed(feedGWT.getFeedId());
-        User owner = (User) HibernateUtil.getSomething(User.class, 1);
+        Feed feed;
+
+        if (feedGWT.getFeedId() != null) {
+            feed = new Feed(feedGWT.getFeedId());
+        } else {
+            feed = new Feed();
+        }
+        User owner = ModelFactory.getUser("toke");
 
         feed.setOwner(owner);
         feed.setTitle(feedGWT.getTitle());
         feed.setCss(feedGWT.getCss());
         feed.setHtml(feedGWT.getHtml());
 
-        InputConverter inputConverter = new InputConverter(feed);
+        InputConverter inputConverter = InputConverter.toServer(feed);
 
         ArrayList<FeedInput> feedInputs = new ArrayList<FeedInput>();
         for (InputGWT inputGWT : feedGWT.getInputs()) {
@@ -36,7 +43,7 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
     @Override
     public FeedGWT toGwtObject(Feed feed) {
 
-        InputConverter inputConverter = new InputConverter();
+        InputConverter inputConverter = InputConverter.toGwt();
 
         ArrayList<InputGWT> inputs = new ArrayList<InputGWT>();
         for (FeedInput input : feed.getFeedInputs()) {
@@ -45,8 +52,8 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
 
         FeedGWT feedGWT = new FeedGWT();
         feedGWT.setTitle(feed.getTitle());
-        feedGWT.setCss(feed.getCss());
-        feedGWT.setHTML(feed.getHtml());
+        feedGWT.setCss(feed.getCss() == null ? "" : feed.getCss());
+        feedGWT.setHTML(feed.getHtml() == null ? "" : feed.getHtml());
         feedGWT.setFeedId(feed.getId());
         feedGWT.setInputs(inputs);
 

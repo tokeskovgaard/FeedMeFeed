@@ -6,12 +6,16 @@ import java.io.Serializable;
 
 public class InputGWT implements IsSerializable, Serializable {
 
+    private Integer id;
+
+
     //TODO Implement more types
     public enum Type {
         string
     }
 
     private String name;
+
     private Type type;
 
     public void setName(String name) {
@@ -32,5 +36,13 @@ public class InputGWT implements IsSerializable, Serializable {
 
     public String getVariabelId() {
         return "<%input " + name + "%>";
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

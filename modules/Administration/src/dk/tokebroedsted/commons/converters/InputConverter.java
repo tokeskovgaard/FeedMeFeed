@@ -7,11 +7,19 @@ import dk.tokebroedsted.hibernate.tables.FeedInput;
 public class InputConverter implements Converter<InputGWT, FeedInput> {
     private Feed feed;
 
-    public InputConverter(Feed feed) {
+    public static InputConverter toServer(Feed feed) {
+        return new InputConverter(feed);
+    }
+
+    public static InputConverter toGwt() {
+        return new InputConverter();
+    }
+
+    private InputConverter(Feed feed) {
         this.feed = feed;
     }
 
-    public InputConverter() {
+    private InputConverter() {
     }
 
     @Override
@@ -46,6 +54,7 @@ public class InputConverter implements Converter<InputGWT, FeedInput> {
         InputGWT inputGWT = new InputGWT();
         inputGWT.setName(feedInput.getName());
         inputGWT.setType(type);
+        inputGWT.setId(feedInput.getId());
 
         return inputGWT;
     }

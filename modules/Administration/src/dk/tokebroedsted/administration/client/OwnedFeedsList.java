@@ -1,17 +1,32 @@
 package dk.tokebroedsted.administration.client;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
+import dk.tokebroedsted.commons.client.models.FeedGWT;
 
-/**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 18-07-12
- * Time: 22:26
- * To change this template use File | Settings | File Templates.
- */
+import java.util.List;
+
 public class OwnedFeedsList extends FlowPanel {
 
     public OwnedFeedsList() {
+        setStyleName("owned-feeds-list");
+    }
 
+    public void buildList(List<FeedGWT> feedGWTs) {
+        clear();
+
+        for (final FeedGWT feedGWT : feedGWTs) {
+            Label listLabel = new Label(feedGWT.getTitle());
+            listLabel.setStyleName("owned-feeds-row");
+            listLabel.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    AdministrationEntryPoint.setupView.displayFeed(feedGWT);
+                }
+            });
+            add(listLabel);
+        }
     }
 }
