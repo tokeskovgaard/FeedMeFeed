@@ -1,6 +1,10 @@
 package dk.tokebroedsted.objects;
 
-import dk.tokebroedsted.hibernate.tables.User;
+
+import dk.tokebroedsted.commons.client.models.UserGWT;
+import dk.tokebroedsted.hibernate.HibernateUtil;
+import dk.tokebroedsted.user.client.model.User;
+import org.hibernate.Hibernate;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +27,10 @@ public class UserCookie {
         this.resp = resp;
         this.req = req;
     }
-
+    //TODO: FIX!
     public void updateSession() {
         Cookie[] cookies = req.getCookies();
-        String username = "";
+        String loginname = "";
         String passwordHash = "";
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
@@ -34,17 +38,18 @@ public class UserCookie {
                     passwordHash = cookies[i].getValue();
                 }
                 if (cookies[i].getName().equals("user")) {
-                    username = cookies[i].getValue();
+                    loginname = cookies[i].getValue();
                 }
             }
         }
-        if(!username.equals("") && !passwordHash.equals("")) {
-            DatabaseHandler dbHandler = new DatabaseHandler();
-            User user = dbHandler.getUser(username);
+        if(!loginname.equals("") && !passwordHash.equals("")) {
+            //DatabaseHandler dbHandler = new DatabaseHandler();
+            //User user = dbHandler.getUser(username);
+            User user = HibernateUtil.getUser(loginname);
             try {
                 if(passwordHash.equals(hash(user.getUsername() + user.getPassword()))) {
                     HttpSession session = req.getSession(true);
-                    session.setAttribute("user",username);
+                    session.setAttribute("user",loginname);
                 }
 
             } catch (Exception e) {
@@ -55,7 +60,7 @@ public class UserCookie {
         }
     }
 
-    public void setCookie(User user) {
+    public void setCookie(UserGWT user) {
         try {
             Cookie username = new Cookie("user", user.getLoginname());
             Cookie password = new Cookie("password", hash(user.getUsername() + user.getPassword()));
@@ -114,8 +119,10 @@ public class UserCookie {
             Cookie referrer = new Cookie("referrer", referrerPage);
             resp.addCookie(referrer);
             resp.sendRedirect("Login");
-
         }
 
     }
+
+
+
 }

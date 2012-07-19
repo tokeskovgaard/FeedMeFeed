@@ -4,10 +4,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.*;
+import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.user.client.UserService;
 import dk.tokebroedsted.user.client.UserServiceAsync;
 import dk.tokebroedsted.user.client.model.User;
@@ -30,7 +28,7 @@ public class AddUserPanel extends FlowPanel {
         FlowPanel createUserPanel = new FlowPanel();
         final TextBox usernameTextBox = new TextBox();
         final TextBox loginTextBox = new TextBox();
-        final TextBox passwordTextBox = new TextBox();
+        final PasswordTextBox passwordTextBox = new PasswordTextBox();
         final TextBox emailTextBox = new TextBox();
         Label usernameLabel = new Label("username: ");
         Label loginLabel = new Label("login: ");
@@ -42,32 +40,33 @@ public class AddUserPanel extends FlowPanel {
             @Override
             public void onClick(ClickEvent event) {
 
-                User user = new User(loginTextBox.getText(),usernameTextBox.getText(),passwordTextBox.getText(), emailTextBox.getText());
-                userService.createUser(user,new AsyncCallback<String>()  {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        Window.alert("Error:" + caught.getMessage());
-                    }
-
-                    @Override
-                    public void onSuccess(String result) {
-                        Window.alert("Bruger " + usernameTextBox.getText() + " tilføjet.");
-                        if(showUserPanel != null) {
-                            showUserPanel.update();
+                if(validateUserInput(usernameTextBox, loginTextBox, passwordTextBox, emailTextBox)) {
+                    UserGWT user = new UserGWT(loginTextBox.getText(),usernameTextBox.getText(), emailTextBox.getText(),passwordTextBox.getText());
+                    userService.createUser(user,new AsyncCallback<String>()  {
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            Window.alert("Error:" + caught.getMessage());
                         }
-                        usernameTextBox.setText("");
-                        loginTextBox.setText("");
-                        passwordTextBox.setText("");
-                        emailTextBox.setText("");
+
+                        @Override
+                        public void onSuccess(String result) {
+                            //Window.alert("Bruger " + usernameTextBox.getText() + " tilføjet.");
+                            if(showUserPanel != null) {
+                                showUserPanel.update();
+                            }
+                            usernameTextBox.setText("");
+                            loginTextBox.setText("");
+                            passwordTextBox.setText("");
+                            emailTextBox.setText("");
 
 
 
-                    }
-                });
+                        }
+                    });
 
 
-            }
-        });
+                }
+            }});
 
         createUserPanel.add(usernameLabel);
         createUserPanel.add(usernameTextBox);
@@ -82,6 +81,36 @@ public class AddUserPanel extends FlowPanel {
         createUserPanel.add(createUserButton);
         add(createUserPanel);
 
+    }
+
+    private boolean validateUserInput(TextBox usernameT, TextBox loginnameT, TextBox passwordT, TextBox emailT) {
+        boolean validated = true;
+        String username = usernameT.getText();
+        String loginname = loginnameT.getText();
+        String password = passwordT.getText();
+        String email = emailT.getText();
+
+        if(!username.matches("(\\D|\\d| )*")) {
+            usernameT.setText("Indtast ordentligt navn");
+            validated = false;
+
+        }
+        if(!loginname.matches(("(\\D|\\d)*"))) {
+            loginnameT.setText("Indtast ordentligt brugernavn");
+            validated = false;
+        }
+        //TODO: Create rules for password
+        if(!password.matches("(.){4,100}")) {
+            passwordT.setText("Indtast ordentligt password");
+            validated = false;
+        }
+        //TODO: Find regexp for password
+        if(email.matches("")) {
+            emailT.setText("Indtast ordentlig email");
+            validated = false;
+        }
+
+        return validated;
     }
 
 }

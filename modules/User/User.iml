@@ -21,6 +21,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="gwt-libs" level="project" />
     <orderEntry type="module" module-name="FeedMeFeed" />
+    <orderEntry type="module" module-name="Administration" />
   </component>
 </module>
 

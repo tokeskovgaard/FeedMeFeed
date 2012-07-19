@@ -44,7 +44,7 @@ public class DatabaseHandler {
 
         try{
             password = hashPassword(password);
-            String sql = "SELECT * FROM Users WHERE loginname = ? AND password = ?";
+            String sql = "SELECT * FROM User WHERE loginname = ? AND password = ?";
             PreparedStatement prest = con.prepareStatement(sql);
             prest.setString(1, loginname);
             prest.setString(2, password);
