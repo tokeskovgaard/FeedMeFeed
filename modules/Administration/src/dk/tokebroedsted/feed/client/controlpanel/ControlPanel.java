@@ -12,6 +12,8 @@ import dk.tokebroedsted.commons.client.models.InputItemGWT;
 import dk.tokebroedsted.feed.client.FeedServiceAsync;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.InputGWT;
+import dk.tokebroedsted.feed.client.tabs.*;
+import dk.tokebroedsted.feed.client.tabs.TabPanel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +28,12 @@ import java.util.List;
 public class ControlPanel extends FlowPanel {
 
 
-    private FeedGWT selectedFeed;
     private FeedServiceAsync feedService;
+    private TabPanel tabPanel;
 
-    public ControlPanel(FeedServiceAsync feedService) {
+    public ControlPanel(FeedServiceAsync feedService, TabPanel tabPanel) {
         this.feedService = feedService;
+        this.tabPanel = tabPanel;
         setStyleName("control-panel");
 
         add(createAddNewLink());
@@ -43,86 +46,11 @@ public class ControlPanel extends FlowPanel {
         addNew.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                final DialogBox dialog = new DialogBox();
-                dialog.center();
-                dialog.setStyleName("new-feed-item-dialog");
-
-                FlowPanel dialogContent = new FlowPanel();
-                dialog.add(dialogContent);
-
-                dialogContent.add(new Label(selectedFeed.getTitle()));
-
-                final List<InputItemGWT> inputItems = new ArrayList<InputItemGWT>();
-                for (InputGWT inputGWT : selectedFeed.getInputs()) {
-                    FlowPanel inputPanel = new FlowPanel();
-                    InlineLabel label = new InlineLabel(inputGWT.getName());
-                    label.setStyleName("name");
-                    inputPanel.add(label);
-
-                    InputGWT.Type type = inputGWT.getType();
-                    switch (type) {
-                        case string:
-                            final TextBox input = new TextBox();
-                            input.setStyleName("input");
-                            final InputItemGWT inputItemGWT = new InputItemGWT(inputGWT);
-                            inputItems.add(inputItemGWT);
-
-                            input.addKeyUpHandler(new KeyUpHandler() {
-                                @Override
-                                public void onKeyUp(KeyUpEvent event) {
-                                    inputItemGWT.setValue(input.getValue());
-                                }
-                            });
-                            inputPanel.add(input);
-                            break;
-                        default:
-                            throw new RuntimeException("Type has not been implemented! - " + type.toString());
-                    }
-
-                    dialogContent.add(inputPanel);
-                }
-
-                Label save = new Label("Gem");
-                dialogContent.add(save);
-                save.setStyleName("link-label");
-                save.addClickHandler(new ClickHandler() {
-                    @Override
-                    public void onClick(ClickEvent event) {
-                        FeedItemGWT feedItemGWT = new FeedItemGWT(selectedFeed);
-                        feedItemGWT.setInputItems(inputItems);
-
-                        feedService.addFeedItem(feedItemGWT, new DefaultCallback<Boolean>() {
-                            @Override
-                            public void onSuccess(Boolean result) {
-                                if (Boolean.TRUE.equals(result)) {
-                                    dialog.hide();
-                                } else {
-                                    Window.alert("Kunne ikke gemme dit feed.");
-                                }
-                            }
-                        });
-                        dialog.hide();
-                    }
-                });
-
-                Label cancel = new Label("Annuller");
-                dialogContent.add(cancel);
-                cancel.setStyleName("link-label");
-                cancel.addClickHandler(new ClickHandler() {
-                    @Override
-                    public void onClick(ClickEvent event) {
-                        dialog.hide();
-                    }
-                });
-
+                EditFeedItemDialog dialog = new EditFeedItemDialog(feedService, tabPanel.getSelectedFeed());
                 dialog.show();
             }
         });
 
         return addNew;
-    }
-
-    public void setSelectedFeed(FeedGWT selectedFeed) {
-        this.selectedFeed = selectedFeed;
     }
 }

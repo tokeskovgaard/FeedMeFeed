@@ -2,13 +2,16 @@ package dk.tokebroedsted.feed.client.tabs;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
+import dk.tokebroedsted.feed.client.FeedEntryPoint;
 
 
 public class TabPanel extends FlowPanel {
 
     private Tab selectedTab = null;
+    private FeedEntryPoint feedEntryPoint;
 
-    public TabPanel() {
+    public TabPanel(FeedEntryPoint feedEntryPoint) {
+        this.feedEntryPoint = feedEntryPoint;
         setStyleName("tab-panel");
     }
 

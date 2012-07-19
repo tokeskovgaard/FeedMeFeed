@@ -45,20 +45,31 @@ public class HibernateUtil {
     public static void saveSomething(Object object) {
         logger.info("Save called for: " + object.toString());
         Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(object);
-        transaction.commit();
+        try {
+            Transaction transaction = session.beginTransaction();
+            session.save(object);
+            transaction.commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
     }
 
     public static Object getSomething(Class clazz, Serializable id) {
         logger.info("Get called for: " + id);
         Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        Object load = session.load(clazz, id);
-        if (load != null) {
-            logger.info("Something was found for id " + id + ". It was " + load.toString());
+
+
+        Object load;
+        try {
+            Transaction transaction = session.beginTransaction();
+            load = session.load(clazz, id);
+            transaction.commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
         }
-        transaction.commit();
+
         return load;
     }
 
@@ -69,17 +80,23 @@ public class HibernateUtil {
         ArrayList<User> users = new ArrayList<User>();
 
         Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        Query queryResult = session.createQuery("from User");
-        java.util.List allUsers;
-        allUsers = queryResult.list();
-        for (int i = 0; i < allUsers.size(); i++) {
-            dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) allUsers.get(i);
-            logger.info("We found " + user.getUsername() + " users with our query.");
-            User mUser = new User(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
-            users.add(mUser);
+        try {
+
+            Transaction transaction = session.beginTransaction();
+            Query queryResult = session.createQuery("from User");
+            java.util.List allUsers;
+            allUsers = queryResult.list();
+            for (int i = 0; i < allUsers.size(); i++) {
+                dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) allUsers.get(i);
+                logger.info("We found " + user.getUsername() + " users with our query.");
+                User mUser = new User(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
+                users.add(mUser);
+            }
+            transaction.commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
         }
-        transaction.commit();
         return users;
 
     }
@@ -88,12 +105,17 @@ public class HibernateUtil {
 
         logger.info("deleteUser called with: " + id);
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-        dk.tokebroedsted.hibernate.tables.User user = new dk.tokebroedsted.hibernate.tables.User();
-        user.setId(id);
-        session.delete(user);
-        session.getTransaction().commit();
 
+        try {
+            session.beginTransaction();
+            dk.tokebroedsted.hibernate.tables.User user = new dk.tokebroedsted.hibernate.tables.User();
+            user.setId(id);
+            session.delete(user);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
     }
 
 

@@ -21,6 +21,7 @@ public class FeedInput {
     @Id
     @GeneratedValue
     private int id;
+
     @ManyToOne
     private Feed feed;
 

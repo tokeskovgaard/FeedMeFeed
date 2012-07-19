@@ -15,6 +15,16 @@
 
 
     <servlet>
+        <servlet-name>gwtServlet</servlet-name>
+        <servlet-class>dk.tokebroedsted.pages.CustomRequestFactoryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>gwtServlet</servlet-name>
+        <url-pattern>/gwtRequest</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>AdministrationService</servlet-name>
         <servlet-class>dk.tokebroedsted.administration.server.AdministrationServiceImpl</servlet-class>
     </servlet>

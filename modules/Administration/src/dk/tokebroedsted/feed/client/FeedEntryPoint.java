@@ -1,7 +1,9 @@
 package dk.tokebroedsted.feed.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
+import dk.tokebroedsted.commons.client.CustomUncaughtExceptionHandler;
 import dk.tokebroedsted.commons.client.DefaultCallback;
 import dk.tokebroedsted.feed.client.content.FeedContentPanel;
 import dk.tokebroedsted.feed.client.controlpanel.ControlPanel;
@@ -20,14 +22,16 @@ public class FeedEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+        GWT.setUncaughtExceptionHandler(new CustomUncaughtExceptionHandler());
+
         rootPanel = RootPanel.get("gwt_feed");
 
         final FeedServiceAsync feedService = FeedService.App.getInstance();
 
-        tabPanel = new TabPanel();
+        tabPanel = new TabPanel(this);
         rootPanel.add(tabPanel);
 
-        controlPanel = new ControlPanel(feedService);
+        controlPanel = new ControlPanel(feedService, tabPanel);
         rootPanel.add(controlPanel);
 
         feedContentPanel = new FeedContentPanel(feedService);
@@ -46,14 +50,12 @@ public class FeedEntryPoint implements EntryPoint {
 
                 }
 
-//                    fillFeedRelevantContent(feedService, tabPanel.getSelectedFeed());
+                fillFeedRelevantContent(feedService, tabPanel.getSelectedFeed());
             }
         });
     }
 
     private void fillFeedRelevantContent(FeedServiceAsync feedService, final FeedGWT selectedFeed) {
-        controlPanel.setSelectedFeed(selectedFeed);
-
         feedService.getFeedItems(selectedFeed, new DefaultCallback<List<FeedItemGWT>>() {
             @Override
             public void onSuccess(List<FeedItemGWT> result) {
