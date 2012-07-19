@@ -1,17 +1,15 @@
-package dk.tokebroedsted.commons.converters;
+package dk.tokebroedsted.commons.server.converters;
 
 import dk.tokebroedsted.commons.client.models.UserGWT;
-import dk.tokebroedsted.hibernate.tables.Feed;
 import dk.tokebroedsted.hibernate.tables.User;
-
-import java.security.PublicKey;
 
 /**
  * Created with IntelliJ IDEA.
  * User: mads
  * Date: 7/19/12
  * Time: 2:06 PM
- * To change this template use File | Settings | File Templates. */
+ * To change this template use File | Settings | File Templates.
+ */
 
 public class UserConverter implements Converter<UserGWT, User> {
 

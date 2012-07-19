@@ -4,7 +4,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import dk.tokebroedsted.administration.client.AdministrationService;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.InputGWT;
-import dk.tokebroedsted.commons.converters.FeedConverter;
+import dk.tokebroedsted.commons.server.converters.FeedConverter;
 import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.hibernate.tables.Feed;
 import dk.tokebroedsted.hibernate.tables.FeedInput;

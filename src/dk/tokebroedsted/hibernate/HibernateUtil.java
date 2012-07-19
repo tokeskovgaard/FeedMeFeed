@@ -1,7 +1,7 @@
 package dk.tokebroedsted.hibernate;
 
 import dk.tokebroedsted.commons.client.models.UserGWT;
-import dk.tokebroedsted.commons.converters.UserConverter;
+import dk.tokebroedsted.commons.server.converters.UserConverter;
 import dk.tokebroedsted.user.client.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -12,14 +12,12 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.rmi.runtime.Log;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class HibernateUtil {
 

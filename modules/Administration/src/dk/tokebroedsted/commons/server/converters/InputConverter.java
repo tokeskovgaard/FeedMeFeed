@@ -1,4 +1,4 @@
-package dk.tokebroedsted.commons.converters;
+package dk.tokebroedsted.commons.server.converters;
 
 import dk.tokebroedsted.commons.client.models.InputGWT;
 import dk.tokebroedsted.hibernate.tables.Feed;

@@ -2,8 +2,8 @@ package dk.tokebroedsted.feed.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import dk.tokebroedsted.commons.client.models.*;
-import dk.tokebroedsted.commons.converters.FeedConverter;
-import dk.tokebroedsted.commons.converters.FeedItemConverter;
+import dk.tokebroedsted.commons.server.converters.FeedConverter;
+import dk.tokebroedsted.commons.server.converters.FeedItemConverter;
 import dk.tokebroedsted.feed.client.FeedService;
 import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.hibernate.tables.*;

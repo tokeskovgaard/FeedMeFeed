@@ -1,4 +1,4 @@
-package dk.tokebroedsted.commons.converters;
+package dk.tokebroedsted.commons.server.converters;
 
 /**
  * Created with IntelliJ IDEA.

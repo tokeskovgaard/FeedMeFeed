@@ -19,7 +19,7 @@ import dk.tokebroedsted.feed.client.FeedServiceAsync;
  */
 public class FeedContentItem extends FlowPanel {
 
-    public FeedContentItem(FeedServiceAsync feedService, FeedGWT feedGWT, FeedItemGWT feedItemGWT) {
+    public FeedContentItem(FeedGWT feedGWT, FeedItemGWT feedItemGWT) {
         setStyleName("feed-content-item");
 
         renderFeedItem(feedGWT, feedItemGWT);

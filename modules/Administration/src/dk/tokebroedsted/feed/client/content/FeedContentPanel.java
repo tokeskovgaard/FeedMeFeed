@@ -5,8 +5,6 @@ import dk.tokebroedsted.feed.client.FeedServiceAsync;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.FeedItemGWT;
 
-import java.util.List;
-
 public class FeedContentPanel extends FlowPanel {
     private FeedGWT currentFeed;
     private FeedServiceAsync feedService;
@@ -28,7 +26,7 @@ public class FeedContentPanel extends FlowPanel {
 
 
         for (FeedItemGWT feedItemGWT : currentFeed.getFeedItems()) {
-            FeedContentItem feedContentItem = new FeedContentItem(feedService, feedGWT, feedItemGWT);
+            FeedContentItem feedContentItem = new FeedContentItem(feedGWT, feedItemGWT);
             add(feedContentItem);
         }
     }

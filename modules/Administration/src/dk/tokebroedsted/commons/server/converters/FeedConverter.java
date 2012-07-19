@@ -1,8 +1,7 @@
-package dk.tokebroedsted.commons.converters;
+package dk.tokebroedsted.commons.server.converters;
 
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.InputGWT;
-import dk.tokebroedsted.hibernate.HibernateUtil;
 import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.hibernate.tables.Feed;
 import dk.tokebroedsted.hibernate.tables.FeedInput;
