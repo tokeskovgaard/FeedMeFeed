@@ -15,14 +15,12 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.rmi.runtime.Log;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class HibernateUtil {
@@ -46,19 +44,6 @@ public class HibernateUtil {
 
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
-    }
-
-    public static void saveSomething(Object object) {
-        logger.info("Save called for: " + object.toString());
-        Session session = sessionFactory.getCurrentSession();
-        try {
-            Transaction transaction = session.beginTransaction();
-            session.save(object);
-            transaction.commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
     }
 
     public static Object getSomething(Class clazz, Serializable id) {
@@ -211,17 +196,16 @@ public class HibernateUtil {
 
 
         // Vi finder en
-        dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User)query.list().get(0);
+        dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) query.list().get(0);
         Set<Feed> allFeeds = user.getFeedSubscriptions();
         session.getTransaction().commit();
         FeedConverter feedConverter = new FeedConverter();
-        for(Feed feed : allFeeds) {
+        for (Feed feed : allFeeds) {
             feeds.add(feedConverter.toGwtObject(feed));
         }
 
         return feeds;
     }
-
 
 
     private static String hashPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {

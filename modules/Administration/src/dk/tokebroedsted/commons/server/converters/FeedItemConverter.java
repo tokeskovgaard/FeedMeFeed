@@ -2,11 +2,9 @@ package dk.tokebroedsted.commons.server.converters;
 
 import dk.tokebroedsted.commons.client.models.FeedItemGWT;
 import dk.tokebroedsted.commons.client.models.InputItemGWT;
+import dk.tokebroedsted.commons.client.models.QuestionItemGWT;
 import dk.tokebroedsted.hibernate.ModelFactory;
-import dk.tokebroedsted.hibernate.tables.Feed;
-import dk.tokebroedsted.hibernate.tables.FeedItem;
-import dk.tokebroedsted.hibernate.tables.FeedItemInput;
-import dk.tokebroedsted.hibernate.tables.User;
+import dk.tokebroedsted.hibernate.tables.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -59,8 +57,15 @@ public class FeedItemConverter implements Converter<FeedItemGWT, FeedItem> {
             inputItemGWTs.add(inputItemConverter.toGwtObject(feedItemInput));
         }
 
+        ArrayList<QuestionItemGWT> questionItemGWTs = new ArrayList<QuestionItemGWT>();
+        QuestionItemConverter questionItemConverter = new QuestionItemConverter();
+        for (QuestionItem questionItem : feedItem.getQuestionItems()) {
+            questionItemGWTs.add(questionItemConverter.toGwtObject(questionItem));
+        }
+
         FeedItemGWT feedItemGWT = new FeedItemGWT(feedItem.getFeed().getId());
         feedItemGWT.setInputItems(inputItemGWTs);
+        feedItemGWT.setQuestionItems(questionItemGWTs);
 
         return feedItemGWT;
     }

@@ -19,6 +19,9 @@ public class Feed {
     @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FeedInput> feedInputs;
 
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Question> questions;
+
     public Feed() {
     }
 

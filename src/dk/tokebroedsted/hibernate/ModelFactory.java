@@ -170,4 +170,50 @@ public class ModelFactory {
             throw e;
         }
     }
+
+    public static Question getQuestion(int questionId) {
+        Session session = getSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Question WHERE id = :questionId");
+            query.setParameter("questionId", questionId);
+            Question question = (Question) query.uniqueResult();
+            transaction.commit();
+            return question;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    public static QuestionItem getQuestionItem(Integer questionItemId) {
+        Session session = getSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM QuestionItem WHERE id = :questionItemId");
+            query.setParameter("questionItemId", questionItemId);
+            QuestionItem questionItem = (QuestionItem) query.uniqueResult();
+            transaction.commit();
+            return questionItem;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+
+    }
+
+    public static FeedItem getFeedItem(Integer feedItemId) {
+        Session session = getSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM FeedItem WHERE id = :feedItemId");
+            query.setParameter("feedItemId", feedItemId);
+            FeedItem feedItem = (FeedItem) query.uniqueResult();
+            transaction.commit();
+            return feedItem;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 }

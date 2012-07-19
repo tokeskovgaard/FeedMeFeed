@@ -64,4 +64,8 @@ public class FeedServiceImpl extends RemoteServiceServlet implements FeedService
 
         return feedItemGWTs;
     }
+
+    @Override
+    public void saveQuestionReply(QuestionItemGWT questionItem) {
+    }
 }

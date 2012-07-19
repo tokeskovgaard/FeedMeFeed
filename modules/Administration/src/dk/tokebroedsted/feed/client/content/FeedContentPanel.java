@@ -26,7 +26,7 @@ public class FeedContentPanel extends FlowPanel {
 
 
         for (FeedItemGWT feedItemGWT : currentFeed.getFeedItems()) {
-            FeedContentItem feedContentItem = new FeedContentItem(feedGWT, feedItemGWT);
+            FeedContentItem feedContentItem = new FeedContentItem(feedGWT, feedItemGWT, feedService);
             add(feedContentItem);
         }
     }

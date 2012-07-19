@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import dk.tokebroedsted.commons.client.DefaultCallback;
 import dk.tokebroedsted.commons.client.models.*;
 import dk.tokebroedsted.feed.client.FeedServiceAsync;
 
@@ -19,7 +20,10 @@ import dk.tokebroedsted.feed.client.FeedServiceAsync;
  */
 public class FeedContentItem extends FlowPanel {
 
-    public FeedContentItem(FeedGWT feedGWT, FeedItemGWT feedItemGWT) {
+    private FeedServiceAsync feedService;
+
+    public FeedContentItem(FeedGWT feedGWT, FeedItemGWT feedItemGWT, FeedServiceAsync feedService) {
+        this.feedService = feedService;
         setStyleName("feed-content-item");
 
         renderFeedItem(feedGWT, feedItemGWT);
@@ -39,10 +43,11 @@ public class FeedContentItem extends FlowPanel {
         }
 
         for (QuestionItemGWT questionItem : feedItemGWT.getQuestionItems()) {
-            QuestionItemGWT.Type type = questionItem.getType();
-            if (QuestionItemGWT.Type.numeric.equals(type)) {
-                createNumericQuestionWidget(questionItem);
+            QuestionGWT.Type type = questionItem.getQuestionGWT().getType();
+            if (QuestionGWT.Type.numeric.equals(type)) {
+                Widget numericQuestionWidget = createNumericQuestionWidget(questionItem);
 
+                html = html.replaceAll(questionItem.getQuestionGWT().getVariableId(), numericQuestionWidget.toString());
             } else {
                 throw new RuntimeException("Found a type not supported");
             }
@@ -56,7 +61,7 @@ public class FeedContentItem extends FlowPanel {
 
     private Widget createNumericQuestionWidget(final QuestionItemGWT questionItem) {
         final TextBox answerBox = new TextBox();
-        answerBox.setStyleName(questionItem.getName());
+        answerBox.setStyleName(questionItem.getQuestionGWT().getName());
 
         Integer numericAnswer = questionItem.getNumericAnswer();
         if (numericAnswer != null)
@@ -68,12 +73,13 @@ public class FeedContentItem extends FlowPanel {
                 if (KeyCodes.KEY_ENTER == event.getNativeKeyCode()) {
                     questionItem.setNumericAnswer(Integer.valueOf(answerBox.getValue()));
                     //TODO Save changes
-//                    feedService.saveReply(questionItem, new DefaultCallback<Boolean>(){
+                    feedService.saveQuestionReply(questionItem, new DefaultCallback<Void>() {
 
-//                        @Override
-//                        public void onSuccess(Boolean result) {
-//                        }
-//                    });
+                        @Override
+                        public void onSuccess(Void result) {
+
+                        }
+                    });
                 }
             }
         });

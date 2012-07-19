@@ -6,13 +6,11 @@ import java.io.Serializable;
 
 public class InputGWT implements IsSerializable, Serializable {
 
-    private Integer id;
-
-
-    //TODO Implement more types
     public enum Type {
         string
     }
+
+    private Integer id;
 
     private String name;
 

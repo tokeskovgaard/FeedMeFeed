@@ -21,6 +21,10 @@ public class FeedItem {
     @OneToMany(mappedBy = "feedItem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<FeedItemInput> feedItemInputs;
 
+
+    @OneToMany(mappedBy = "feedItem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<QuestionItem> questionItems;
+
     public int getId() {
         return id;
     }
@@ -51,5 +55,9 @@ public class FeedItem {
 
     public void setItemInputs(Set<FeedItemInput> feedItemInputs) {
         this.feedItemInputs = feedItemInputs;
+    }
+
+    public Set<QuestionItem> getQuestionItems() {
+        return questionItems;
     }
 }

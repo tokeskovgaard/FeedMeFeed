@@ -5,6 +5,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import dk.tokebroedsted.commons.client.DefaultCallback;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.FeedItemGWT;
+import dk.tokebroedsted.commons.client.models.QuestionItemGWT;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface FeedServiceAsync {
     void getFeedItems(FeedGWT feedGWT, AsyncCallback<List<FeedItemGWT>> callback);
 
     void saveFeedItem(FeedItemGWT feedItemGWT, AsyncCallback<Boolean> callback);
+
+    void saveQuestionReply(QuestionItemGWT questionItem, AsyncCallback<Void> callback);
 }

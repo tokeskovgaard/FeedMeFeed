@@ -7,11 +7,8 @@ import javax.persistence.*;
 @Entity
 public class FeedInput {
 
-    public Feed getFeed() {
-        return feed;
-    }
 
-    public enum Type {string}
+    public enum Type {string;}
 
     @Id
     @GeneratedValue
@@ -26,6 +23,10 @@ public class FeedInput {
 
     public int getId() {
         return id;
+    }
+
+    public Feed getFeed() {
+        return feed;
     }
 
     public void setType(Type type) {

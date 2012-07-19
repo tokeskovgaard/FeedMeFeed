@@ -12,9 +12,18 @@ import java.io.Serializable;
  * To change this template use File | Settings | File Templates.
  */
 public class QuestionGWT implements IsSerializable, Serializable {
-    public enum Type {numeric}
+
+
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public enum Type {numeric;}
 
     private Type type;
+
     private String name;
 
     public String getVariableId() {
@@ -31,5 +40,9 @@ public class QuestionGWT implements IsSerializable, Serializable {
 
     public void setType(QuestionGWT.Type type) {
         this.type = type;
+    }
+
+    public Type getType() {
+        return type;
     }
 }
