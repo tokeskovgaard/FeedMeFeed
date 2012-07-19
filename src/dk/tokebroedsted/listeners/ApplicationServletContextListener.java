@@ -1,10 +1,4 @@
-package dk.tokebroedsted.listeners; /**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 18-07-12
- * Time: 13:32
- * To change this template use File | Settings | File Templates.
- */
+package dk.tokebroedsted.listeners;
 
 import org.apache.log4j.PropertyConfigurator;
 

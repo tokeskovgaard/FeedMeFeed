@@ -1,6 +1,9 @@
 package dk.tokebroedsted.hibernate.tables;
 
+import com.sun.istack.internal.Nullable;
+
 import javax.persistence.*;
+import javax.xml.ws.RequestWrapper;
 import java.util.List;
 import java.util.Set;
 
@@ -16,11 +19,11 @@ public class Feed {
 
     private String html, css, title;
 
-    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FeedInput> feedInputs;
 
-    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Question> questions;
+//    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Question> questions;
 
     public Feed() {
     }
@@ -77,11 +80,11 @@ public class Feed {
         return title;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
+//    public List<Question> getQuestions() {
+//        return questions;
+//    }
+//
+//    public void setQuestions(List<Question> questions) {
+//        this.questions = questions;
+//    }
 }

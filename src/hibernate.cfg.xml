@@ -15,6 +15,8 @@
         <property name="c3p0.max_size">5</property>
         <property name="c3p0.timeout">1800</property>
 
+        <property name="transaction.auto_close_session">false</property>
+
         <!-- Disable second-level cache. -->
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
         <property name="cache.use_query_cache">false</property>

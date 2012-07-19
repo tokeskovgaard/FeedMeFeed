@@ -1,7 +1,9 @@
 package dk.tokebroedsted.pages;
 
+import dk.tokebroedsted.hibernate.HibernateUtil;
 import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.hibernate.tables.*;
+import org.hibernate.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -23,7 +25,6 @@ public class ServerStatus extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletOutputStream out = resp.getOutputStream();
-
 
         {
             List<User> users = ModelFactory.getAllUsers();

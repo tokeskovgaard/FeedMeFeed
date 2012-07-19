@@ -14,7 +14,21 @@ import java.util.List;
  * Time: 22:53
  * To change this template use File | Settings | File Templates.
  */
+
 public class ModelFactory {
+
+    private static ModelFactory instance;
+
+    private static Session getSession() {
+        if (instance == null) {
+            instance = new ModelFactory();
+        }
+
+        Session currentSession = HibernateUtil.getSessionFactory().getCurrentSession();
+        if (!currentSession.isOpen())
+            currentSession = HibernateUtil.getSessionFactory().openSession();
+        return currentSession;
+    }
 
     public static List<Feed> getFeeds(User user) {
         Session session = getSession();
@@ -49,12 +63,6 @@ public class ModelFactory {
         return user;
     }
 
-    private static Session getSession() {
-        Session currentSession = HibernateUtil.getSessionFactory().getCurrentSession();
-        if (!currentSession.isOpen())
-            currentSession = HibernateUtil.getSessionFactory().openSession();
-        return currentSession;
-    }
 
     public static List<FeedItem> getFeedItems(int feedId) {
         Session session = getSession();
