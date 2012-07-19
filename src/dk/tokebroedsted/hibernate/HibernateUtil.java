@@ -167,7 +167,7 @@ public class HibernateUtil {
     }
 
     public static UserGWT getUser(String loginname, String password) {
-        logger.info("Initiating getUsers()");
+        logger.info("Initiating getUser with " + loginname + " and " + password);
         Configuration config = new Configuration();
         config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.User.class);
         ArrayList<UserGWT> users = new ArrayList<UserGWT>();

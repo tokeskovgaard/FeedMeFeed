@@ -1,12 +1,18 @@
 package dk.tokebroedsted.user.client.panels;
 
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.hibernate.HibernateUtil;
+import dk.tokebroedsted.user.client.UserService;
+import dk.tokebroedsted.user.client.UserServiceAsync;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,7 +30,19 @@ public class SubscriberFeedPanel extends FlowPanel {
     // Constructor for a panel with all users subscribed feeds
     public SubscriberFeedPanel() {
         users = new ArrayList<UserGWT>();
-        users.addAll(HibernateUtil.getUsers());
+        //users.addAll(HibernateUtil.getUsers());
+        final UserServiceAsync userService = UserService.App.getInstance();
+        userService.getUsers(new AsyncCallback<List<UserGWT>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(List<UserGWT> result) {
+                users.addAll(result);
+            }
+        });
         showPanel();
 
 
@@ -38,11 +56,29 @@ public class SubscriberFeedPanel extends FlowPanel {
 
     //TODO: Iterate through all the users and get the feeds they each are subscribed to.
     private void showPanel() {
+        final UserServiceAsync userService = UserService.App.getInstance();
         for(UserGWT user : users) {
-            FlowPanel userFeed = new FlowPanel();
+            final FlowPanel userFeed = new FlowPanel();
             Label userLabel = new Label(user.getLoginname());
             userLabel.setStyleName("feed-user-label");
+            userFeed.add(userLabel);
+            userService.getSubscribedFeeds(user, new AsyncCallback<List<FeedGWT>>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    Window.alert(caught.getMessage());
+                }
 
+                @Override
+                public void onSuccess(List<FeedGWT> result) {
+                    for(FeedGWT feed : result) {
+                        Label feedLabel = new Label(feed.getTitle());
+                        feedLabel.setStyleName("feed-feed-label");
+                        userFeed.add(feedLabel);
+
+                    }
+                }
+            });
+            add(userFeed);
 
         }
 

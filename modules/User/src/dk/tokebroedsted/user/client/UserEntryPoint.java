@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.*;
 import dk.tokebroedsted.user.client.model.User;
 import dk.tokebroedsted.user.client.panels.AddUserPanel;
 import dk.tokebroedsted.user.client.panels.ShowUserPanel;
+import dk.tokebroedsted.user.client.panels.SubscriberFeedPanel;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -93,6 +94,9 @@ public class UserEntryPoint implements EntryPoint {
 
         AddUserPanel AddUserPanel = new AddUserPanel(showUserPanel);
         rootPanel.add(AddUserPanel);
+
+        SubscriberFeedPanel subscriberFeedPanel = new SubscriberFeedPanel();
+        rootPanel.add(subscriberFeedPanel);
 
 
 
