@@ -1,7 +1,10 @@
 package dk.tokebroedsted.hibernate;
 
+import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.UserGWT;
+import dk.tokebroedsted.commons.server.converters.FeedConverter;
 import dk.tokebroedsted.commons.server.converters.UserConverter;
+import dk.tokebroedsted.hibernate.tables.Feed;
 import dk.tokebroedsted.user.client.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -12,12 +15,15 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.rmi.runtime.Log;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class HibernateUtil {
 
@@ -190,6 +196,34 @@ public class HibernateUtil {
         return null;
     }
 
+    public static ArrayList<FeedGWT> getSubscribtions(UserGWT userGWT) {
+        logger.info("Initiating getSubscribtions(" + userGWT.getLoginname() + ")");
+        ArrayList<FeedGWT> feeds = new ArrayList<FeedGWT>();
+
+        Configuration config = new Configuration();
+        config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.Feed.class);
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from User where id = :user_id");
+
+        query.setParameter("user_id", userGWT.getId());
+
+
+        // Vi finder en
+        dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User)query.list().get(0);
+        Set<Feed> allFeeds = user.getFeedSubscriptions();
+        session.getTransaction().commit();
+        FeedConverter feedConverter = new FeedConverter();
+        for(Feed feed : allFeeds) {
+            feeds.add(feedConverter.toGwtObject(feed));
+        }
+
+        return feeds;
+    }
+
+
+
     private static String hashPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -206,4 +240,6 @@ public class HibernateUtil {
         return sb.toString();
 
     }
+
+
 }
