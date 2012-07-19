@@ -75,11 +75,11 @@ public class HibernateUtil {
         return load;
     }
 
-    public static Object getUsers() {
+    public static ArrayList<UserGWT> getUsers() {
         logger.info("Initiating getUsers()");
         Configuration config = new Configuration();
         config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.User.class);
-        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<UserGWT> users = new ArrayList<UserGWT>();
 
         Session session = sessionFactory.getCurrentSession();
         try {
@@ -91,7 +91,7 @@ public class HibernateUtil {
             for (int i = 0; i < allUsers.size(); i++) {
                 dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) allUsers.get(i);
                 logger.info("We found " + user.getUsername() + " users with our query.");
-                User mUser = new User(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
+                UserGWT mUser = new UserGWT(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
                 users.add(mUser);
             }
             transaction.commit();

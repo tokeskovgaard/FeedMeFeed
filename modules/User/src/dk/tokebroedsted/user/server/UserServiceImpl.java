@@ -2,6 +2,7 @@ package dk.tokebroedsted.user.server;
 
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.hibernate.HibernateUtil;
 import dk.tokebroedsted.objects.SessionHandler;
@@ -18,13 +19,13 @@ import java.util.List;
 public class UserServiceImpl extends RemoteServiceServlet implements UserService {
     // Implementation of sample interface method
 
-    private ArrayList<User> users;
+    private ArrayList<UserGWT> users;
 
     public UserServiceImpl() {
 
-        users = new ArrayList<User>();
+        users = new ArrayList<UserGWT>();
 
-        User user = new User();
+        UserGWT user = new UserGWT();
         user.setUsername("Mads Ravn");
         user.setEmail("madsravn@gmail.com");
         user.setLoginname("madsravn");
@@ -32,7 +33,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         user.setId(1);
         users.add(user);
 
-        user = new User();
+        user = new UserGWT();
         user.setUsername("Toke R. Brødsted");
         user.setEmail("tokebroedsted@gmail.com");
         user.setLoginname("tokeb");
@@ -58,7 +59,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         return feeds;
     }
 
-    public List<User> getUsers() {
+    public List<UserGWT> getUsers() {
 
         /*dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) HibernateUtil.getSomething(dk.tokebroedsted.hibernate.tables.User.class, 1);
         log(user.toString());
@@ -70,7 +71,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         userGWT.setUsername(user.getUsername());
         users.add(userGWT);
         */
-        users = (ArrayList<User>)HibernateUtil.getUsers();
+        users = (ArrayList<UserGWT>)HibernateUtil.getUsers();
 
         return users;
     }
@@ -92,7 +93,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
     }
 
     public Boolean createUser(int id, String loginname, String username, String password, String email)   {
-        User user = new User(id, loginname, username, password, email);
+        UserGWT user = new UserGWT(id, loginname, username, password, email);
         users.add(user);
 
         return true;
@@ -130,6 +131,16 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         }
         return user;*/
         return SessionHandler.getCurrentUser(this.getThreadLocalRequest());
+    }
+
+
+    //TODO: Implement this method to get the feeds for a given user
+    public ArrayList<FeedGWT> getSubscribedFeeds(UserGWT user) {
+
+        ArrayList<FeedGWT> feeds = new ArrayList<FeedGWT>();
+
+
+        return feeds;
     }
 
 

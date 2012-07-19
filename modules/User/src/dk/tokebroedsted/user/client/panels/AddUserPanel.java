@@ -4,10 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.*;
 import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.user.client.UserService;
 import dk.tokebroedsted.user.client.UserServiceAsync;
@@ -31,7 +28,7 @@ public class AddUserPanel extends FlowPanel {
         FlowPanel createUserPanel = new FlowPanel();
         final TextBox usernameTextBox = new TextBox();
         final TextBox loginTextBox = new TextBox();
-        final TextBox passwordTextBox = new TextBox();
+        final PasswordTextBox passwordTextBox = new PasswordTextBox();
         final TextBox emailTextBox = new TextBox();
         Label usernameLabel = new Label("username: ");
         Label loginLabel = new Label("login: ");
@@ -44,7 +41,7 @@ public class AddUserPanel extends FlowPanel {
             public void onClick(ClickEvent event) {
 
                 if(validateUserInput(usernameTextBox, loginTextBox, passwordTextBox, emailTextBox)) {
-                    UserGWT user = new UserGWT(loginTextBox.getText(),usernameTextBox.getText(),passwordTextBox.getText(), emailTextBox.getText());
+                    UserGWT user = new UserGWT(loginTextBox.getText(),usernameTextBox.getText(), emailTextBox.getText(),passwordTextBox.getText());
                     userService.createUser(user,new AsyncCallback<String>()  {
                         @Override
                         public void onFailure(Throwable caught) {
@@ -53,7 +50,7 @@ public class AddUserPanel extends FlowPanel {
 
                         @Override
                         public void onSuccess(String result) {
-                            Window.alert("Bruger " + usernameTextBox.getText() + " tilføjet.");
+                            //Window.alert("Bruger " + usernameTextBox.getText() + " tilføjet.");
                             if(showUserPanel != null) {
                                 showUserPanel.update();
                             }
@@ -103,11 +100,12 @@ public class AddUserPanel extends FlowPanel {
             validated = false;
         }
         //TODO: Create rules for password
-        if(!password.matches("(.)*")) {
+        if(!password.matches("(.){4,100}")) {
             passwordT.setText("Indtast ordentligt password");
             validated = false;
         }
-        if(!email.matches("(.)*")) {
+        //TODO: Find regexp for password
+        if(email.matches("")) {
             emailT.setText("Indtast ordentlig email");
             validated = false;
         }
