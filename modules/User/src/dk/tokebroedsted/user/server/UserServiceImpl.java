@@ -138,6 +138,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
     public ArrayList<FeedGWT> getSubscribedFeeds(UserGWT user) {
 
         ArrayList<FeedGWT> feeds = new ArrayList<FeedGWT>();
+        feeds = HibernateUtil.getSubscribtions(user);
 
 
         return feeds;

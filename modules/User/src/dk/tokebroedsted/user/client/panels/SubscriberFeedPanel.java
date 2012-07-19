@@ -2,6 +2,7 @@ package dk.tokebroedsted.user.client.panels;
 
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
 import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.hibernate.HibernateUtil;
 
@@ -38,6 +39,10 @@ public class SubscriberFeedPanel extends FlowPanel {
     //TODO: Iterate through all the users and get the feeds they each are subscribed to.
     private void showPanel() {
         for(UserGWT user : users) {
+            FlowPanel userFeed = new FlowPanel();
+            Label userLabel = new Label(user.getLoginname());
+            userLabel.setStyleName("feed-user-label");
+
 
         }
 

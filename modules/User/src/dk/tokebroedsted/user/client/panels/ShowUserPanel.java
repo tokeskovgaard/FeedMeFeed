@@ -9,6 +9,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.user.client.UserService;
 import dk.tokebroedsted.user.client.UserServiceAsync;
 import dk.tokebroedsted.user.client.model.User;
@@ -38,14 +39,14 @@ public class ShowUserPanel extends FlowPanel {
             @Override
             public void onClick(ClickEvent event) {
 
-                userService.getUsers(new AsyncCallback<List<User>>() {
+                userService.getUsers(new AsyncCallback<List<UserGWT>>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         Window.alert("Error:" + caught.getMessage());
                     }
 
                     @Override
-                    public void onSuccess(List<User> result) {
+                    public void onSuccess(List<UserGWT> result) {
 
                         Element e = DOM.getElementById("user-table");
                         if (e == null) {
@@ -53,7 +54,7 @@ public class ShowUserPanel extends FlowPanel {
                             FlowPanel flowPanel = new FlowPanel();
                             flowPanel.getElement().setId("user-table");
 
-                            for (User user : result) {
+                            for (UserGWT user : result) {
                                 FlowPanel flow = new FlowPanel();
                                 Label label = new Label(user.getUsername());
                                 label.setStyleName("user-table-label");
@@ -114,14 +115,14 @@ public class ShowUserPanel extends FlowPanel {
 
 
 
-        userService.getUsers(new AsyncCallback<List<User>>() {
+        userService.getUsers(new AsyncCallback<List<UserGWT>>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("Error:" + caught.getMessage());
             }
 
             @Override
-            public void onSuccess(List<User> result) {
+            public void onSuccess(List<UserGWT> result) {
 
                 Element e = DOM.getElementById("user-table");
                 clear(); // Clear vores ShowUserPanel
@@ -132,7 +133,7 @@ public class ShowUserPanel extends FlowPanel {
                     FlowPanel flowPanel = new FlowPanel();
                     flowPanel.getElement().setId("user-table");
 
-                    for (User user : result) {
+                    for (UserGWT user : result) {
                         FlowPanel flow = new FlowPanel();
                         Label label = new Label(user.getUsername());
                         label.setStyleName("user-table-label");
