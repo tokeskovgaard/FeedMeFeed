@@ -1,8 +1,9 @@
 package dk.tokebroedsted;
 
-import dk.tokebroedsted.objects.DatabaseHandler;
-import dk.tokebroedsted.hibernate.tables.User;
+import dk.tokebroedsted.commons.client.models.UserGWT;
+import dk.tokebroedsted.hibernate.HibernateUtil;
 import dk.tokebroedsted.objects.UserCookie;
+import dk.tokebroedsted.user.client.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -118,9 +119,10 @@ public class Login extends HttpServlet {
                 }
             }
         }
-        DatabaseHandler dbHandler = new DatabaseHandler();
-        User user = dbHandler.getUser(loginname, password);
-        if (user.getId() > 0) {
+        UserGWT user = HibernateUtil.getUser(loginname, password);
+        //DatabaseHandler dbHandler = new DatabaseHandler();
+        //User user = dbHandler.getUser(loginname, password);
+        if (user != null) {
             // User with password exists
             UserCookie cookie = new UserCookie(req, resp);
             cookie.setCookie(user);

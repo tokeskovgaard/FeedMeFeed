@@ -1,5 +1,7 @@
 package dk.tokebroedsted.hibernate;
 
+import dk.tokebroedsted.commons.client.models.UserGWT;
+import dk.tokebroedsted.commons.converters.UserConverter;
 import dk.tokebroedsted.user.client.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -119,7 +121,7 @@ public class HibernateUtil {
     }
 
 
-    public static void createUser(User user) {
+    public static void createUser(UserGWT user) {
         logger.info("createUser called for: " + user.getLoginname());
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
@@ -129,28 +131,58 @@ public class HibernateUtil {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        dk.tokebroedsted.hibernate.tables.User tUser = new dk.tokebroedsted.hibernate.tables.User(user.getId(), user.getLoginname(), user.getUsername(), password, user.getEmail());
+        dk.tokebroedsted.hibernate.tables.User tUser = new dk.tokebroedsted.hibernate.tables.User(0, user.getLoginname(), user.getUsername(), password, user.getEmail());
         session.save(tUser);
         transaction.commit();
     }
 
-    public static User getUser(String username) {
-        logger.info("Initiating getUsers()");
+    public static User getUser(String loginname) {
+        logger.info("Initiating getUser(" + loginname + ")");
         Configuration config = new Configuration();
         config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.User.class);
         ArrayList<User> users = new ArrayList<User>();
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Query query = session.createQuery("from User where username = :username");
+        Query query = session.createQuery("from User where loginname = :loginname");
 
-        query.setParameter("username", username);
+        query.setParameter("loginname", loginname);
         java.util.List allUsers;
         allUsers = query.list();
         for (int i = 0; i < allUsers.size(); i++) {
             dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) allUsers.get(i);
             logger.info("We found " + user.getUsername() + " users with our query.");
             User mUser = new User(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
+            users.add(mUser);
+        }
+        session.getTransaction().commit();
+        if (users.size() > 0) {
+            return users.get(0);
+        }
+        return null;
+    }
+
+    public static UserGWT getUser(String loginname, String password) {
+        logger.info("Initiating getUsers()");
+        Configuration config = new Configuration();
+        config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.User.class);
+        ArrayList<UserGWT> users = new ArrayList<UserGWT>();
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from User where loginname = :loginname and password = :password");
+
+        query.setParameter("loginname", loginname);
+        query.setParameter("password", password);
+
+        java.util.List allUsers;
+        allUsers = query.list();
+        for (int i = 0; i < allUsers.size(); i++) {
+            dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) allUsers.get(i);
+            logger.info("We found " + user.getUsername() + " users with our query.");
+            UserConverter userConverter = new UserConverter();
+            UserGWT mUser = userConverter.toGwtObject(user);
+            //User mUser = new User(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
             users.add(mUser);
         }
         session.getTransaction().commit();

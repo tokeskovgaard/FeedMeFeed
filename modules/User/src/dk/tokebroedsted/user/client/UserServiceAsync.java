@@ -1,6 +1,7 @@
 package dk.tokebroedsted.user.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.user.client.model.User;
 import dk.tokebroedsted.user.client.model.Feed;
 
@@ -21,5 +22,5 @@ public interface UserServiceAsync {
 
     void createUser(int id, String loginname, String username, String password, String email, AsyncCallback<Boolean> callback);
 
-    void createUser(User user, AsyncCallback<String> callback);
+    void createUser(UserGWT user, AsyncCallback<String> callback);
 }

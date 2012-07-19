@@ -4,6 +4,7 @@
 
     <!-- Inherit the core Web Toolkit stuff.                  -->
     <inherits name='com.google.gwt.user.User'/>
+    <inherits name='dk.tokebroedsted.commons.Commons'/>
 
     <!-- Specify the app entry point class.                   -->
     <entry-point class='dk.tokebroedsted.user.client.UserEntryPoint'/>

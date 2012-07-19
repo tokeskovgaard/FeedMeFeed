@@ -1,11 +1,17 @@
 package dk.tokebroedsted.user.server;
 
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.hibernate.HibernateUtil;
+import dk.tokebroedsted.objects.SessionHandler;
 import dk.tokebroedsted.user.client.model.User;
 import dk.tokebroedsted.user.client.UserService;
 import dk.tokebroedsted.user.client.model.Feed;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,10 +106,33 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         return "success";
     }
 
-    public String createUser(User user) {
+    public String createUser(UserGWT user) {
 
         HibernateUtil.createUser(user);
 
         return "success";
     }
+
+    public String getCurrentUser() {
+        /*HttpServletRequest request = this.getThreadLocalRequest();
+        HttpSession session = request.getSession();
+        Cookie[] cookies = request.getCookies();
+        //TODO: Make a decent check
+        String user = (String)session.getAttribute("user");
+        if(user == null){
+            for(Cookie c : cookies) {
+                if(c.getName().equals("user")) {
+                    user = c.getValue();
+                    session.setAttribute("user", c.getValue());
+                    break;
+                }
+            }
+        }
+        return user;*/
+        return SessionHandler.getCurrentUser(this.getThreadLocalRequest());
+    }
+
+
+
+
 }

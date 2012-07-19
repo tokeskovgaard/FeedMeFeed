@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.user.client.model.Feed;
 import dk.tokebroedsted.user.client.model.User;
 
@@ -26,7 +27,7 @@ public interface UserService extends RemoteService {
 
     Boolean createUser(int id, String loginname, String username, String password, String email);
 
-    String createUser(User user);
+    String createUser(UserGWT user);
 
 
 
