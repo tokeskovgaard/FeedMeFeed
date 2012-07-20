@@ -54,7 +54,7 @@ public class SubscriberFeedPanel extends FlowPanel {
         showPanel();
     }
 
-    //TODO: Iterate through all the users and get the feeds they each are subscribed to.
+
     private void showPanel() {
         final UserServiceAsync userService = UserService.App.getInstance();
         for(UserGWT user : users) {
@@ -70,11 +70,13 @@ public class SubscriberFeedPanel extends FlowPanel {
 
                 @Override
                 public void onSuccess(List<FeedGWT> result) {
-                    for(FeedGWT feed : result) {
-                        Label feedLabel = new Label(feed.getTitle());
-                        feedLabel.setStyleName("feed-feed-label");
-                        userFeed.add(feedLabel);
+                    if(result != null) {
+                        for(FeedGWT feed : result) {
+                            Label feedLabel = new Label(feed.getTitle());
+                            feedLabel.setStyleName("feed-feed-label");
+                            userFeed.add(feedLabel);
 
+                        }
                     }
                 }
             });

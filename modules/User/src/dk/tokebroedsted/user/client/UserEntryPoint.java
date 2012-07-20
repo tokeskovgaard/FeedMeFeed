@@ -84,8 +84,8 @@ public class UserEntryPoint implements EntryPoint {
         AddUserPanel AddUserPanel = new AddUserPanel(showUserPanel);
         rootPanel.add(AddUserPanel);
 
-        SubscriberFeedPanel subscriberFeedPanel = new SubscriberFeedPanel();
-        rootPanel.add(subscriberFeedPanel);
+        //SubscriberFeedPanel subscriberFeedPanel = new SubscriberFeedPanel();
+        //rootPanel.add(subscriberFeedPanel);
 
 
         /*userService.getFeeds(new AsyncCallback<List<Feed>>() {
