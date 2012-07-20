@@ -47,7 +47,6 @@ public class FeedEntryPoint implements EntryPoint {
             public void onSuccess(List<FeedGWT> result) {
                 for (FeedGWT feedGWT : result) {
                     tabPanel.addFeedAsTab(feedGWT);
-
                 }
 
                 renderFeed(tabPanel.getSelectedFeed());

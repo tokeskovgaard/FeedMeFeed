@@ -8,11 +8,7 @@ import dk.tokebroedsted.hibernate.tables.Feed;
 import dk.tokebroedsted.user.client.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,37 +21,19 @@ import java.util.Set;
 
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory;
     private static Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
 
-    static {
-        try {
-            // Create the SessionFactory from hibernate.cfg.xml
-            Configuration configuration = new Configuration();
-            configuration.configure("hibernate.cfg.xml");
-            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            sessionFactory = configuration.configure().buildSessionFactory(serviceRegistry);
-        } catch (Throwable ex) {
-            // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
 
     public static Object getSomething(Class clazz, Serializable id) {
         logger.info("Get called for: " + id);
-        Session session = sessionFactory.getCurrentSession();
+        Session session = HibernateHelper.getCurrentSession();
 
 
         Object load;
         try {
-            Transaction transaction = session.beginTransaction();
+            HibernateHelper.beginTransaction();
             load = session.load(clazz, id);
-            transaction.commit();
+            HibernateHelper.commitTransaction();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
@@ -70,10 +48,10 @@ public class HibernateUtil {
         config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.User.class);
         ArrayList<UserGWT> users = new ArrayList<UserGWT>();
 
-        Session session = sessionFactory.getCurrentSession();
+        Session session = HibernateHelper.getCurrentSession();
         try {
 
-            Transaction transaction = session.beginTransaction();
+            HibernateHelper.beginTransaction();
             Query queryResult = session.createQuery("from User");
             java.util.List allUsers;
             allUsers = queryResult.list();
@@ -83,7 +61,7 @@ public class HibernateUtil {
                 UserGWT mUser = new UserGWT(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
                 users.add(mUser);
             }
-            transaction.commit();
+            HibernateHelper.commitTransaction();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
@@ -95,7 +73,7 @@ public class HibernateUtil {
     public static void deleteUser(int id) {
 
         logger.info("deleteUser called with: " + id);
-        Session session = sessionFactory.getCurrentSession();
+        Session session = HibernateHelper.getCurrentSession();
 
         try {
             session.beginTransaction();
@@ -112,8 +90,8 @@ public class HibernateUtil {
 
     public static void createUser(UserGWT user) {
         logger.info("createUser called for: " + user.getLoginname());
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = HibernateHelper.getCurrentSession();
+        HibernateHelper.beginTransaction();
         String password = "";
         try {
             password = hashPassword(user.getPassword());
@@ -122,7 +100,7 @@ public class HibernateUtil {
         }
         dk.tokebroedsted.hibernate.tables.User tUser = new dk.tokebroedsted.hibernate.tables.User(0, user.getLoginname(), user.getUsername(), password, user.getEmail());
         session.save(tUser);
-        transaction.commit();
+        HibernateHelper.commitTransaction();
     }
 
     public static User getUser(String loginname) {
@@ -131,7 +109,7 @@ public class HibernateUtil {
         config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.User.class);
         ArrayList<User> users = new ArrayList<User>();
 
-        Session session = sessionFactory.getCurrentSession();
+        Session session = HibernateHelper.getCurrentSession();
         session.beginTransaction();
         Query query = session.createQuery("from User where loginname = :loginname");
 
@@ -157,7 +135,7 @@ public class HibernateUtil {
         config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.User.class);
         ArrayList<UserGWT> users = new ArrayList<UserGWT>();
 
-        Session session = sessionFactory.getCurrentSession();
+        Session session = HibernateHelper.getCurrentSession();
         session.beginTransaction();
         Query query = session.createQuery("from User where loginname = :loginname and password = :password");
 
@@ -188,7 +166,7 @@ public class HibernateUtil {
         Configuration config = new Configuration();
         config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.Feed.class);
 
-        Session session = sessionFactory.getCurrentSession();
+        Session session = HibernateHelper.getCurrentSession();
         session.beginTransaction();
         Query query = session.createQuery("from User where id = :user_id");
 

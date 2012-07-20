@@ -1,18 +1,15 @@
 package dk.tokebroedsted.user.server;
 
-import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.hibernate.HibernateUtil;
+import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.objects.SessionHandler;
 import dk.tokebroedsted.user.client.model.User;
 import dk.tokebroedsted.user.client.UserService;
 import dk.tokebroedsted.user.client.model.Feed;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,8 +68,12 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         userGWT.setUsername(user.getUsername());
         users.add(userGWT);
         */
-        users = (ArrayList<UserGWT>)HibernateUtil.getUsers();
 
+        users = new ArrayList<UserGWT>();
+        for (dk.tokebroedsted.hibernate.tables.User user : ModelFactory.getAllUsers()) {
+            UserGWT userGWT = new UserGWT(user.getId(), user.getLoginname(), user.getUsername(), user.getEmail(), user.getPassword());
+            users.add(userGWT);
+        }
         return users;
     }
 
@@ -85,14 +86,14 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
     public List<Integer> getInt() {
         ArrayList<Integer> ints = new ArrayList<Integer>();
 
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             ints.add(i);
         }
 
         return ints;
     }
 
-    public Boolean createUser(int id, String loginname, String username, String password, String email)   {
+    public Boolean createUser(int id, String loginname, String username, String password, String email) {
         UserGWT user = new UserGWT(id, loginname, username, password, email);
         users.add(user);
 
@@ -107,9 +108,14 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         return "success";
     }
 
-    public String createUser(UserGWT user) {
+    public String createUser(UserGWT userGWT) {
 
-        HibernateUtil.createUser(user);
+        dk.tokebroedsted.hibernate.tables.User user = new dk.tokebroedsted.hibernate.tables.User(userGWT.getLoginname(),
+                userGWT.getUsername(),
+                userGWT.getPassword(),
+                userGWT.getEmail());
+
+        ModelFactory.save(user);
 
         return "success";
     }
@@ -143,8 +149,6 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
 
         return feeds;
     }
-
-
 
 
 }

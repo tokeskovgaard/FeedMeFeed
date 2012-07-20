@@ -4,7 +4,6 @@ package dk.tokebroedsted.objects;
 import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.hibernate.HibernateUtil;
 import dk.tokebroedsted.user.client.model.User;
-import org.hibernate.Hibernate;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class UserCookie {
 
-    public static final int SECONDS_PER_YEAR = 60*60*24*365;
+    public static final int SECONDS_PER_YEAR = 60 * 60 * 24 * 365;
     private HttpServletResponse resp;
     private HttpServletRequest req;
 
@@ -27,6 +26,7 @@ public class UserCookie {
         this.resp = resp;
         this.req = req;
     }
+
     //TODO: FIX!
     public void updateSession() {
         Cookie[] cookies = req.getCookies();
@@ -42,14 +42,14 @@ public class UserCookie {
                 }
             }
         }
-        if(!loginname.equals("") && !passwordHash.equals("")) {
+        if (!loginname.equals("") && !passwordHash.equals("")) {
             //DatabaseHandler dbHandler = new DatabaseHandler();
             //User user = dbHandler.getUser(username);
             User user = HibernateUtil.getUser(loginname);
             try {
-                if(passwordHash.equals(hash(user.getUsername() + user.getPassword()))) {
+                if (passwordHash.equals(hash(user.getUsername() + user.getPassword()))) {
                     HttpSession session = req.getSession(true);
-                    session.setAttribute("user",loginname);
+                    session.setAttribute("user", loginname);
                 }
 
             } catch (Exception e) {
@@ -111,18 +111,18 @@ public class UserCookie {
         return sb.toString();
 
     }
+
     //TODO: Upgrade for security for session hoaxing
     public void updateAndCheckSession(String referrerPage) throws IOException {
         updateSession();
         HttpSession session = req.getSession(true);
-        if(session.getAttribute("user") == null) {
+        if (session.getAttribute("user") == null) {
             Cookie referrer = new Cookie("referrer", referrerPage);
             resp.addCookie(referrer);
             resp.sendRedirect("Login");
         }
 
     }
-
 
 
 }

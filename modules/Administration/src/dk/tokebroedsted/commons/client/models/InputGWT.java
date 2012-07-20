@@ -2,9 +2,7 @@ package dk.tokebroedsted.commons.client.models;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-import java.io.Serializable;
-
-public class InputGWT implements IsSerializable, Serializable {
+public class InputGWT implements IsSerializable {
 
     public enum Type {
         string

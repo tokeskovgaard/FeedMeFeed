@@ -2,6 +2,7 @@ package dk.tokebroedsted.hibernate.tables;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,7 +13,7 @@ public class User {
     private int id;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Feed> createdFeeds;
+    private Set<Feed> createdFeeds = new HashSet<Feed>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "FeedSubscription",
@@ -21,6 +22,7 @@ public class User {
     )
     private Set<Feed> feedSubscriptions;
 
+    @Column(nullable = false)
     private String loginname, password, email;
 
     @Column(unique = true)
@@ -29,6 +31,13 @@ public class User {
 
     public User(int id, String loginname, String username, String password, String email) {
         this.id = id;
+        this.loginname = loginname;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public User(String loginname, String username, String password, String email) {
         this.loginname = loginname;
         this.username = username;
         this.password = password;

@@ -1,5 +1,6 @@
 package dk.tokebroedsted.hibernate.tables;
 
+import com.sun.istack.internal.NotNull;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 public class FeedInput {
 
 
-    public enum Type {string;}
+    public enum Type {string}
 
     @Id
     @GeneratedValue
@@ -17,12 +18,22 @@ public class FeedInput {
     @ManyToOne
     private Feed feed;
 
+    @Column(nullable = false)
     private Type type;
 
     private String name;
 
     public int getId() {
         return id;
+    }
+
+    public FeedInput() {
+    }
+
+    public FeedInput(Feed feed, Type type, String name) {
+        this.feed = feed;
+        this.type = type;
+        this.name = name;
     }
 
     public Feed getFeed() {

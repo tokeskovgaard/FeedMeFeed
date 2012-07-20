@@ -4,17 +4,28 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 import java.io.Serializable;
 
-/**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 18-07-12
- * Time: 20:29
- * To change this template use File | Settings | File Templates.
- */
-public class QuestionGWT implements IsSerializable, Serializable {
+public class QuestionGWT implements IsSerializable {
 
 
-    private int id;
+    private Integer id;
+    private Integer feedId;
+
+
+    public QuestionGWT() {
+    }
+
+    public QuestionGWT(int id, int feedId, String name, Type type) {
+        this.id = id;
+        this.feedId = feedId;
+        this.name = name;
+        this.type = type;
+    }
+
+    public QuestionGWT(Integer feedId, String name, Type type) {
+        this.feedId = feedId;
+        this.name = name;
+        this.type = type;
+    }
 
     public int getId() {
         return id;

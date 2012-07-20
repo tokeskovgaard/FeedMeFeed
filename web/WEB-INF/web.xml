@@ -13,6 +13,15 @@
         <listener-class>dk.tokebroedsted.hibernate.HibernateListener</listener-class>
     </listener>
 
+    <filter>
+        <filter-name>SessionFilter</filter-name>
+        <filter-class>dk.tokebroedsted.hibernate.SessionFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SessionFilter</filter-name>
+        <servlet-name>*</servlet-name>
+    </filter-mapping>
 
     <servlet>
         <servlet-name>gwtServlet</servlet-name>

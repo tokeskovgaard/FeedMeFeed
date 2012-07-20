@@ -14,6 +14,6 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T> {
     @Override
     public void onFailure(Throwable caught) {
         Window.alert(caught.getMessage());
-//        throw new RuntimeException(caught);
+        throw new RuntimeException(caught);
     }
 }

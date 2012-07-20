@@ -56,7 +56,7 @@ public class FeedServiceImpl extends RemoteServiceServlet implements FeedService
         ArrayList<FeedItemGWT> feedItemGWTs = new ArrayList<FeedItemGWT>();
 
         FeedItemConverter feedItemConverter = FeedItemConverter.toGWT();
-        List<FeedItem> feedItems = ModelFactory.getFeedItems(feedGWT.getFeedId());
+        List<FeedItem> feedItems = ModelFactory.getFeedItems(feedGWT.getId());
         for (FeedItem feedItem : feedItems) {
             FeedItemGWT feedItemGWT = feedItemConverter.toGwtObject(feedItem);
             feedItemGWTs.add(feedItemGWT);
@@ -66,6 +66,24 @@ public class FeedServiceImpl extends RemoteServiceServlet implements FeedService
     }
 
     @Override
-    public void saveQuestionReply(QuestionItemGWT questionItem) {
+    public void saveQuestionReply(QuestionItemGWT questionItemGWT) {
+        QuestionItem questionItem;
+        if (questionItemGWT.getId() == null) {
+            User user = ModelFactory.getUser("toke");
+            Question question = ModelFactory.getQuestion(questionItemGWT.getQuestionGWT().getId());
+            FeedItem feedItem = ModelFactory.getFeedItem(questionItemGWT.getFeedItemId());
+
+            questionItem = new QuestionItem();
+            questionItem.setOwner(user);
+            questionItem.setQuestion(question);
+            questionItem.setFeedItem(feedItem);
+
+        } else {
+            questionItem = ModelFactory.getModelObject(QuestionItem.class, questionItemGWT.getId());
+        }
+
+        questionItem.setNumericAnswer(questionItemGWT.getNumericAnswer());
+
+        ModelFactory.save(questionItem);
     }
 }

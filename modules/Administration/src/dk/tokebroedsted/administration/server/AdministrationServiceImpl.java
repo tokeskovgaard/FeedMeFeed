@@ -4,10 +4,12 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import dk.tokebroedsted.administration.client.AdministrationService;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.InputGWT;
+import dk.tokebroedsted.commons.client.models.QuestionGWT;
 import dk.tokebroedsted.commons.server.converters.FeedConverter;
 import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.hibernate.tables.Feed;
 import dk.tokebroedsted.hibernate.tables.FeedInput;
+import dk.tokebroedsted.hibernate.tables.Question;
 import dk.tokebroedsted.hibernate.tables.User;
 
 import java.util.ArrayList;
@@ -35,12 +37,7 @@ public class AdministrationServiceImpl extends RemoteServiceServlet implements A
     public String saveFeed(FeedGWT feedGWT) {
         User owner = ModelFactory.getUser("toke");
 
-        Feed feed;
-        if (feedGWT.getFeedId() != null) {
-            feed = ModelFactory.getFeed(feedGWT.getFeedId());
-        } else
-            feed = new Feed();
-
+        Feed feed = new Feed();
 
         feed.setOwner(owner);
         feed.setTitle(feedGWT.getTitle());
@@ -52,23 +49,30 @@ public class AdministrationServiceImpl extends RemoteServiceServlet implements A
             createFeedInput(feed, inputGWT);
         }
 
+        for (QuestionGWT questionGWT : feedGWT.getQuestions()) {
+            createQuestion(feed, questionGWT);
+        }
+
         return "Yee";
     }
 
-    private void createFeedInput(Feed feed, InputGWT inputGWT) {
-        FeedInput.Type type;
-        switch (inputGWT.getType()) {
-            case string:
-                type = FeedInput.Type.string;
-                break;
-            default:
-                throw new RuntimeException("Found unexpected type");
+    private void createQuestion(Feed feed, QuestionGWT questionGWT) {
+        Question.Type questionType = Question.Type.valueOf(questionGWT.getType().name());
+        if (questionType == null) {
+            throw new RuntimeException("Encountered an unexpected Type");
         }
 
-        FeedInput feedInput = new FeedInput();
-        feedInput.setName(inputGWT.getName());
-        feedInput.setType(type);
-        feedInput.setFeed(feed);
+        Question question = new Question(feed, questionType, questionGWT.getName());
+        ModelFactory.save(question);
+    }
+
+    private void createFeedInput(Feed feed, InputGWT inputGWT) {
+        FeedInput.Type inputType = FeedInput.Type.valueOf(inputGWT.getType().name());
+        if (inputType == null) {
+            throw new RuntimeException("Encountered an unexpected Type");
+        }
+
+        FeedInput feedInput = new FeedInput(feed, inputType, inputGWT.getName());
 
         ModelFactory.save(feedInput);
     }

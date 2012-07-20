@@ -1,5 +1,6 @@
 package dk.tokebroedsted.hibernate.tables;
 
+import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 
 import javax.persistence.*;
@@ -17,13 +18,16 @@ public class Feed {
     @ManyToOne
     private User owner;
 
-    private String html, css, title;
+    @Column(nullable = false)
+    private String title;
 
-    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private String html, css;
+
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<FeedInput> feedInputs;
 
-//    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Question> questions;
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Question> questions;
 
     public Feed() {
     }
@@ -80,11 +84,11 @@ public class Feed {
         return title;
     }
 
-//    public List<Question> getQuestions() {
-//        return questions;
-//    }
-//
-//    public void setQuestions(List<Question> questions) {
-//        this.questions = questions;
-//    }
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 }

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeedGWT implements IsSerializable, Serializable {
+public class FeedGWT implements IsSerializable {
 
     private String title;
     private String css;
@@ -16,7 +16,8 @@ public class FeedGWT implements IsSerializable, Serializable {
     private List<InputGWT> inputs = new ArrayList<InputGWT>();
     private List<QuestionGWT> questions = new ArrayList<QuestionGWT>();
     private List<CalculationGWT> calculations = new ArrayList<CalculationGWT>();
-    private List<FeedItemGWT> feedItems;
+
+    private List<FeedItemGWT> feedItems = new ArrayList<FeedItemGWT>();
     private boolean hasBeenInstantiated;
 
     public String getTitle() {
@@ -47,10 +48,6 @@ public class FeedGWT implements IsSerializable, Serializable {
         return inputs;
     }
 
-    public List<QuestionGWT> getQuestions() {
-        return questions;
-    }
-
     public List<CalculationGWT> getCalculations() {
         return calculations;
     }
@@ -63,7 +60,7 @@ public class FeedGWT implements IsSerializable, Serializable {
         this.feedId = feedId;
     }
 
-    public Integer getFeedId() {
+    public Integer getId() {
         return feedId;
     }
 
@@ -81,5 +78,13 @@ public class FeedGWT implements IsSerializable, Serializable {
 
     public List<FeedItemGWT> getFeedItems() {
         return feedItems;
+    }
+
+    public void setQuestions(ArrayList<QuestionGWT> questions) {
+        this.questions = questions;
+    }
+
+    public List<QuestionGWT> getQuestions() {
+        return questions;
     }
 }

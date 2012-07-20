@@ -27,12 +27,10 @@ public class QuestionItemConverter implements Converter<QuestionItemGWT, Questio
         }
 
         User owner = ModelFactory.getUser("toke");
-        FeedItem feedItem = ModelFactory.getFeedItem(questionItemGWT.getFeedItemId());
         QuestionGWT questionGWT = questionItemGWT.getQuestionGWT();
         Question question = ModelFactory.getQuestion(questionGWT.getId());
 
         questionItem.setQuestion(question);
-        questionItem.setFeedItem(feedItem);
         questionItem.setOwner(owner);
 
         QuestionGWT.Type type = questionGWT.getType();
@@ -49,7 +47,15 @@ public class QuestionItemConverter implements Converter<QuestionItemGWT, Questio
     }
 
     @Override
-    public QuestionItemGWT toGwtObject(QuestionItem serverObject) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public QuestionItemGWT toGwtObject(QuestionItem questionItem) {
+        Question question = questionItem.getQuestion();
+        QuestionGWT.Type type = QuestionGWT.Type.valueOf(question.getType().name());
+        if (type == null) {
+            throw new RuntimeException("Encountered unexpected Type");
+        }
+
+        QuestionGWT questionGWT = new QuestionGWT(question.getId(), question.getFeed().getId(), question.getName(), type);
+
+        return new QuestionItemGWT(questionItem.getId(), questionItem.getFeedItem().getId(), questionGWT, questionItem.getNumericAnswer());
     }
 }

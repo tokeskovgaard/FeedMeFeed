@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Time: 15:38
  * To change this template use File | Settings | File Templates.
  */
-public class CalculationItemGWT implements IsSerializable, Serializable {
+public class CalculationItemGWT implements IsSerializable {
 
     public enum Type {sum}
 

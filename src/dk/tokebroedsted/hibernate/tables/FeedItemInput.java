@@ -1,9 +1,8 @@
 package dk.tokebroedsted.hibernate.tables;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import com.sun.istack.internal.NotNull;
+
+import javax.persistence.*;
 
 @Entity
 public class FeedItemInput {

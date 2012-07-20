@@ -60,6 +60,17 @@ public class ServerStatus extends HttpServlet {
         }
 
         {
+            List<Question> questions = ModelFactory.getAllQuestions();
+            out.println("<h1>Questions</h1>");
+            out.println("<table>");
+            printAsTableRow(out, true, "Id", "Name", "Type", "Feed");
+            for (Question question : questions) {
+                printAsTableRow(out, false, question.getId(), question.getName(), question.getType().name(), question.getFeed().getTitle());
+            }
+            out.println("</table>");
+        }
+
+        {
             List<FeedItem> feedItems = ModelFactory.getAllFeedItems();
             out.println("<h1>FeedItems</h1>");
             out.println("<table>");
@@ -77,6 +88,17 @@ public class ServerStatus extends HttpServlet {
             printAsTableRow(out, true, "Id", "Value", "FeedItemId", "FeedInputId");
             for (FeedItemInput feedItemInput : feedItemInputs) {
                 printAsTableRow(out, false, feedItemInput.getId(), feedItemInput.getValue(), feedItemInput.getFeedItem().getId(), feedItemInput.getFeedInput().getId());
+            }
+            out.println("</table>");
+        }
+
+        {
+            List<QuestionItem> questionItems = ModelFactory.getAllFeedQuestionItems();
+            out.println("<h1>QuestionItems</h1>");
+            out.println("<table>");
+            printAsTableRow(out, true, "Id", "NumericValue", "QuestionId", "Owner");
+            for (QuestionItem questionItem : questionItems) {
+                printAsTableRow(out, false, questionItem.getId(), questionItem.getNumericAnswer(), questionItem.getQuestion().getId(), questionItem.getOwner());
             }
             out.println("</table>");
         }

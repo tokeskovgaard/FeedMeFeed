@@ -15,7 +15,7 @@ public class CustomRequestFactoryServlet extends RequestFactoryServlet {
         @Override
         public ServerFailure createServerFailure(Throwable throwable) {
             LOG.error("Server error", throwable);
-            return new ServerFailure(throwable.getMessage(), throwable.getClass().getName(), null, true);
+            return new ServerFailure(throwable.getMessage(), throwable.getClass().getName(), throwable.toString(), true);
         }
     }
 

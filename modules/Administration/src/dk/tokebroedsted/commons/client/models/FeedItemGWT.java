@@ -6,56 +6,45 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeedItemGWT implements IsSerializable, Serializable {
+public class FeedItemGWT implements IsSerializable {
 
     private List<InputItemGWT> inputItems = new ArrayList<InputItemGWT>();
     private List<QuestionItemGWT> questionItems = new ArrayList<QuestionItemGWT>();
     private List<CalculationItemGWT> calculationItems = new ArrayList<CalculationItemGWT>();
 
-    private FeedGWT feedGWT;
+    private int id;
     private int feedId;
 
-    public FeedItemGWT() {
+    private FeedItemGWT() {
     }
 
-    public FeedItemGWT(FeedGWT feedGWT) {
-
-        this.feedGWT = feedGWT;
-    }
-
-    public FeedItemGWT(int feedId) {
+    public FeedItemGWT(int feedId, List<InputItemGWT> inputItems) {
         this.feedId = feedId;
+        this.inputItems = inputItems;
+    }
+
+    public FeedItemGWT(int id, int feedId, List<InputItemGWT> inputItems, List<QuestionItemGWT> questionItems, List<CalculationItemGWT> calculationItems) {
+        this.id = id;
+        this.feedId = feedId;
+        this.inputItems = inputItems;
+        this.questionItems = questionItems;
+        this.calculationItems = calculationItems;
     }
 
     public List<InputItemGWT> getInputItems() {
         return inputItems;
     }
 
-    public List<QuestionItemGWT> getQuestionItems() {
-        return questionItems;
-    }
-
-    public List<CalculationItemGWT> getCalculationItems() {
-        return calculationItems;
-    }
-
-    public void setInputItems(List<InputItemGWT> inputItems) {
-        this.inputItems = inputItems;
-    }
-
-    public void setQuestionItems(List<QuestionItemGWT> questionItems) {
-        this.questionItems = questionItems;
-    }
-
-    public void setCalculationItems(List<CalculationItemGWT> calculationItems) {
-        this.calculationItems = calculationItems;
-    }
-
     public int getFeedId() {
         return feedId;
     }
 
-    public void setFeedId(Integer feedId) {
-        this.feedId = feedId;
+    public QuestionItemGWT getQuestionItem(QuestionGWT question) {
+        for (QuestionItemGWT questionItem : questionItems) {
+            if (questionItem.getQuestionGWT().equals(question)) {
+                return questionItem;
+            }
+        }
+        return new QuestionItemGWT(question, id);
     }
 }

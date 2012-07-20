@@ -3,6 +3,7 @@ package dk.tokebroedsted.feed.client.content;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.i18n.shared.SafeHtmlBidiFormatter;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TextBox;
@@ -10,6 +11,8 @@ import com.google.gwt.user.client.ui.Widget;
 import dk.tokebroedsted.commons.client.DefaultCallback;
 import dk.tokebroedsted.commons.client.models.*;
 import dk.tokebroedsted.feed.client.FeedServiceAsync;
+
+import java.awt.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,20 +41,24 @@ public class FeedContentItem extends FlowPanel {
             html = html.replaceAll(inputItem.getVariabelId(), inputItem.getValue());
         }
 
-        for (CalculationItemGWT calculationItem : feedItemGWT.getCalculationItems()) {
-            html = html.replaceAll(calculationItem.getName(), calculationItem.getValue());
-        }
+//        for (CalculationItemGWT calculationItem : feedItemGWT.getCalculationItems()) {
+//            html = html.replaceAll(calculationItem.getName(), calculationItem.getValue());
+//        }
 
-        for (QuestionItemGWT questionItem : feedItemGWT.getQuestionItems()) {
-            QuestionGWT.Type type = questionItem.getQuestionGWT().getType();
+        for (QuestionGWT question : feedGWT.getQuestions()) {
+            QuestionItemGWT questionItem = feedItemGWT.getQuestionItem(question);
+
+            Widget typeWidget;
+
+            QuestionGWT.Type type = question.getType();
             if (QuestionGWT.Type.numeric.equals(type)) {
-                Widget numericQuestionWidget = createNumericQuestionWidget(questionItem);
 
-                html = html.replaceAll(questionItem.getQuestionGWT().getVariableId(), numericQuestionWidget.toString());
+                typeWidget = createNumericQuestionWidget(questionItem);
             } else {
                 throw new RuntimeException("Found a type not supported");
             }
-            //TODO render questionItems
+
+            html = html.replaceAll(question.getVariableId(), typeWidget.toString());
         }
 
         HTML feedItemHTML = new HTML(html);

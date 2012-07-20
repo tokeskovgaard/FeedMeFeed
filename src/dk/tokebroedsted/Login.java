@@ -3,7 +3,6 @@ package dk.tokebroedsted;
 import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.hibernate.HibernateUtil;
 import dk.tokebroedsted.objects.UserCookie;
-import dk.tokebroedsted.user.client.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

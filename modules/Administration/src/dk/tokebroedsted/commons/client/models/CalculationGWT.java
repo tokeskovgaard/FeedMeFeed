@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Time: 20:28
  * To change this template use File | Settings | File Templates.
  */
-public class CalculationGWT implements IsSerializable, Serializable {
+public class CalculationGWT implements IsSerializable {
 
     private String name;
 

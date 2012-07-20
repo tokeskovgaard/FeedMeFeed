@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Time: 2:06 PM
  * To change this template use File | Settings | File Templates.
  */
-public class UserGWT implements IsSerializable, Serializable {
+public class UserGWT implements IsSerializable {
 
     private int id;
     private String loginname, username, email, password;

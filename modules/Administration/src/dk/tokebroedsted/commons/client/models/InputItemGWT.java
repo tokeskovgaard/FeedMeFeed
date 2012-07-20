@@ -11,13 +11,13 @@ import java.io.Serializable;
  * Time: 15:32
  * To change this template use File | Settings | File Templates.
  */
-public class InputItemGWT implements IsSerializable, Serializable {
+public class InputItemGWT implements IsSerializable {
 
     private int id;
     private String value;
     private InputGWT inputGWT;
 
-    public InputItemGWT() {
+    private InputItemGWT() {
     }
 
     public InputItemGWT(InputGWT inputGWT) {

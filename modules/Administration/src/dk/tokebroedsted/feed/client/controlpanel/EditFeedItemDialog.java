@@ -103,9 +103,7 @@ public class EditFeedItemDialog extends DialogBox {
     }
 
     protected void onSave() {
-        FeedItemGWT feedItemGWT = new FeedItemGWT(selectedFeed);
-        feedItemGWT.setInputItems(inputItems);
-        feedItemGWT.setFeedId(selectedFeed.getFeedId());
+        FeedItemGWT feedItemGWT = new FeedItemGWT(selectedFeed.getId(), inputItems);
 
         feedService.saveFeedItem(feedItemGWT, new DefaultCallback<Boolean>() {
             @Override

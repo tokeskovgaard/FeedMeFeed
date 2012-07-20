@@ -1,22 +1,11 @@
 package dk.tokebroedsted.user.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
-import dk.tokebroedsted.user.client.model.User;
 import dk.tokebroedsted.user.client.panels.AddUserPanel;
 import dk.tokebroedsted.user.client.panels.ShowUserPanel;
 import dk.tokebroedsted.user.client.panels.SubscriberFeedPanel;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 public class UserEntryPoint implements EntryPoint {
 
@@ -97,9 +86,6 @@ public class UserEntryPoint implements EntryPoint {
 
         SubscriberFeedPanel subscriberFeedPanel = new SubscriberFeedPanel();
         rootPanel.add(subscriberFeedPanel);
-
-
-
 
 
         /*userService.getFeeds(new AsyncCallback<List<Feed>>() {

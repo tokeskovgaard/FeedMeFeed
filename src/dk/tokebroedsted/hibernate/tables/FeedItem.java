@@ -1,5 +1,7 @@
 package dk.tokebroedsted.hibernate.tables;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +20,11 @@ public class FeedItem {
     @ManyToOne
     private Feed feed;
 
-    @OneToMany(mappedBy = "feedItem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "feedItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<FeedItemInput> feedItemInputs;
 
 
-    @OneToMany(mappedBy = "feedItem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "feedItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<QuestionItem> questionItems;
 
     public int getId() {

@@ -1,9 +1,8 @@
 package dk.tokebroedsted.hibernate.tables;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import com.sun.istack.internal.NotNull;
+
+import javax.persistence.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +26,16 @@ public class Question {
     private Type type;
 
     private String name;
+
+
+    public Question() {
+    }
+
+    public Question(Feed feed, Type type, String name) {
+        this.feed = feed;
+        this.type = type;
+        this.name = name;
+    }
 
     public int getId() {
         return id;

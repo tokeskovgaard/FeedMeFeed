@@ -47,9 +47,7 @@ public class EditQuestionEditDialog extends AbstractItemEditDialog {
         return new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                QuestionGWT question = new QuestionGWT();
-                question.setName(questionInput.getValue());
-                question.setType(getSelectedType());
+                QuestionGWT question = new QuestionGWT(feedItemSetup.getFeed().getId(), questionInput.getValue(), getSelectedType());
                 feedItemSetup.addQuestion(question);
                 hide();
             }

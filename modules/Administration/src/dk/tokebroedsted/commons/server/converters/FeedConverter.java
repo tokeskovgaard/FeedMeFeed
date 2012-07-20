@@ -2,9 +2,11 @@ package dk.tokebroedsted.commons.server.converters;
 
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.InputGWT;
+import dk.tokebroedsted.commons.client.models.QuestionGWT;
 import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.hibernate.tables.Feed;
 import dk.tokebroedsted.hibernate.tables.FeedInput;
+import dk.tokebroedsted.hibernate.tables.Question;
 import dk.tokebroedsted.hibernate.tables.User;
 
 import java.util.ArrayList;
@@ -15,8 +17,8 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
     public Feed toServerObject(FeedGWT feedGWT) {
         Feed feed;
 
-        if (feedGWT.getFeedId() != null) {
-            feed = new Feed(feedGWT.getFeedId());
+        if (feedGWT.getId() != null) {
+            feed = new Feed(feedGWT.getId());
         } else {
             feed = new Feed();
         }
@@ -49,12 +51,24 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
             inputs.add(inputConverter.toGwtObject(input));
         }
 
+        ArrayList<QuestionGWT> questionGWTs = new ArrayList<QuestionGWT>();
+        for (Question question : feed.getQuestions()) {
+
+            QuestionGWT.Type type = QuestionGWT.Type.valueOf(question.getType().name());
+            if (type == null) {
+                throw new RuntimeException("Encountered unexpected Type");
+            }
+            QuestionGWT questionGWT = new QuestionGWT(question.getId(), question.getFeed().getId(), question.getName(), type);
+            questionGWTs.add(questionGWT);
+        }
+
         FeedGWT feedGWT = new FeedGWT();
         feedGWT.setTitle(feed.getTitle());
         feedGWT.setCss(feed.getCss() == null ? "" : feed.getCss());
         feedGWT.setHTML(feed.getHtml() == null ? "" : feed.getHtml());
         feedGWT.setFeedId(feed.getId());
         feedGWT.setInputs(inputs);
+        feedGWT.setQuestions(questionGWTs);
 
         return feedGWT;
     }

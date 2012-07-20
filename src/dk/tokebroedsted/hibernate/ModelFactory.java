@@ -1,9 +1,11 @@
 package dk.tokebroedsted.hibernate;
 
 import dk.tokebroedsted.hibernate.tables.*;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
+import org.hibernate.criterion.CriteriaQuery;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.engine.spi.TypedValue;
 
 import java.util.List;
 
@@ -17,21 +19,9 @@ import java.util.List;
 
 public class ModelFactory {
 
-    private static ModelFactory instance;
-
-    private static Session getSession() {
-        if (instance == null) {
-            instance = new ModelFactory();
-        }
-
-        Session currentSession = HibernateUtil.getSessionFactory().getCurrentSession();
-        if (!currentSession.isOpen())
-            currentSession = HibernateUtil.getSessionFactory().openSession();
-        return currentSession;
-    }
 
     public static List<Feed> getFeeds(User user) {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
 
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("FROM Feed WHERE owner = :owner");
@@ -43,7 +33,7 @@ public class ModelFactory {
     }
 
     public static List<Feed> getAllFeeds() {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
 
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("FROM Feed");
@@ -54,7 +44,7 @@ public class ModelFactory {
     }
 
     public static User getUser(String username) {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("FROM User WHERE username = :username");
         query.setParameter("username", username);
@@ -65,7 +55,7 @@ public class ModelFactory {
 
 
     public static List<FeedItem> getFeedItems(int feedId) {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
 
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("FROM FeedItem WHERE feed_id = :feed");
@@ -77,11 +67,11 @@ public class ModelFactory {
     }
 
     public static void save(Object objectToSave) {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
 
         try {
             Transaction transaction = session.beginTransaction();
-            session.saveOrUpdate(objectToSave);
+            session.save(objectToSave);
             transaction.commit();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
@@ -90,7 +80,7 @@ public class ModelFactory {
     }
 
     public static List<FeedItem> getAllFeedItems() {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
         try {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM FeedItem");
@@ -105,7 +95,7 @@ public class ModelFactory {
     }
 
     public static List<User> getAllUsers() {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
         try {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM User");
@@ -120,7 +110,7 @@ public class ModelFactory {
     }
 
     public static Feed getFeed(int feedId) {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
         try {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM Feed WHERE id = :feedId");
@@ -135,7 +125,7 @@ public class ModelFactory {
     }
 
     public static FeedInput getInput(Integer inputId) {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
         try {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM FeedInput WHERE id = :inputId");
@@ -150,7 +140,7 @@ public class ModelFactory {
     }
 
     public static List<FeedInput> getAllFeedInputs() {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
         try {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM FeedInput");
@@ -165,7 +155,7 @@ public class ModelFactory {
     }
 
     public static List<FeedItemInput> getAllFeedInputItems() {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
         try {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM FeedItemInput");
@@ -180,7 +170,7 @@ public class ModelFactory {
     }
 
     public static Question getQuestion(int questionId) {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
         try {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM Question WHERE id = :questionId");
@@ -195,7 +185,7 @@ public class ModelFactory {
     }
 
     public static QuestionItem getQuestionItem(Integer questionItemId) {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
         try {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM QuestionItem WHERE id = :questionItemId");
@@ -211,7 +201,7 @@ public class ModelFactory {
     }
 
     public static FeedItem getFeedItem(Integer feedItemId) {
-        Session session = getSession();
+        Session session = HibernateHelper.getCurrentSession();
         try {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM FeedItem WHERE id = :feedItemId");
@@ -223,5 +213,51 @@ public class ModelFactory {
             session.getTransaction().rollback();
             throw e;
         }
+    }
+
+    public static List<Question> getAllQuestions() {
+        Session session = HibernateHelper.getCurrentSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Question");
+            List<Question> questions = query.list();
+            transaction.commit();
+            return questions;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+
+    }
+
+    public static List<QuestionItem> getAllFeedQuestionItems() {
+        Session session = HibernateHelper.getCurrentSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM QuestionItem");
+            List<QuestionItem> questionItems = query.list();
+            transaction.commit();
+            return questionItems;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+
+    public static <T> T getModelObject(Class<T> clazz, Integer id) {
+        Session session = HibernateHelper.getCurrentSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            Criteria criteria = session.createCriteria(clazz);
+            criteria.add(Restrictions.eq("id", id));
+            T result = (T) criteria.uniqueResult();
+            transaction.commit();
+            return result;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+
     }
 }
