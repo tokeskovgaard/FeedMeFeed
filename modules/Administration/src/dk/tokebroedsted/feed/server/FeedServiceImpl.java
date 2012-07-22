@@ -62,6 +62,7 @@ public class FeedServiceImpl extends RemoteServiceServlet implements FeedService
             feedItemGWTs.add(feedItemGWT);
         }
 
+
         return feedItemGWTs;
     }
 

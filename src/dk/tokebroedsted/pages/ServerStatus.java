@@ -71,6 +71,17 @@ public class ServerStatus extends HttpServlet {
         }
 
         {
+            List<Calculation> calculations = ModelFactory.getAllCalculations();
+            out.println("<h1>Calculations</h1>");
+            out.println("<table>");
+            printAsTableRow(out, true, "Id", "Name", "Feed", "Calculation");
+            for (Calculation calculation : calculations) {
+                printAsTableRow(out, false, calculation.getId(), calculation.getName(), calculation.getFeed().getTitle(), calculation.getCalculation());
+            }
+            out.println("</table>");
+        }
+
+        {
             List<FeedItem> feedItems = ModelFactory.getAllFeedItems();
             out.println("<h1>FeedItems</h1>");
             out.println("<table>");

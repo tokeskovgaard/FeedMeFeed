@@ -2,15 +2,13 @@ package dk.tokebroedsted.administration.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import dk.tokebroedsted.administration.client.AdministrationService;
+import dk.tokebroedsted.commons.client.models.CalculationGWT;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.InputGWT;
 import dk.tokebroedsted.commons.client.models.QuestionGWT;
 import dk.tokebroedsted.commons.server.converters.FeedConverter;
 import dk.tokebroedsted.hibernate.ModelFactory;
-import dk.tokebroedsted.hibernate.tables.Feed;
-import dk.tokebroedsted.hibernate.tables.FeedInput;
-import dk.tokebroedsted.hibernate.tables.Question;
-import dk.tokebroedsted.hibernate.tables.User;
+import dk.tokebroedsted.hibernate.tables.*;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -53,7 +51,17 @@ public class AdministrationServiceImpl extends RemoteServiceServlet implements A
             createQuestion(feed, questionGWT);
         }
 
+        for (CalculationGWT calculationGWT : feedGWT.getCalculations()) {
+            createCalculation(feed, calculationGWT);
+        }
+
         return "Yee";
+    }
+
+    private void createCalculation(Feed feed, CalculationGWT calculationGWT) {
+        Calculation calculation = new Calculation(feed, calculationGWT.getName(), calculationGWT.getCalculation());
+        ModelFactory.save(calculation);
+
     }
 
     private void createQuestion(Feed feed, QuestionGWT questionGWT) {

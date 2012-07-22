@@ -14,7 +14,7 @@ public class QuestionGWT implements IsSerializable {
     public QuestionGWT() {
     }
 
-    public QuestionGWT(int id, int feedId, String name, Type type) {
+    public QuestionGWT(Integer id, Integer feedId, String name, Type type) {
         this.id = id;
         this.feedId = feedId;
         this.name = name;
@@ -27,7 +27,7 @@ public class QuestionGWT implements IsSerializable {
         this.type = type;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -55,5 +55,13 @@ public class QuestionGWT implements IsSerializable {
 
     public Type getType() {
         return type;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof QuestionGWT && ((QuestionGWT) obj).getId() != null) {
+            return ((QuestionGWT) obj).getId().equals(getId());
+        }
+        return super.equals(obj);
     }
 }

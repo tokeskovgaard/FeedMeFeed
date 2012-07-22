@@ -29,6 +29,9 @@ public class Feed {
     @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions;
 
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Calculation> calculations;
+
     public Feed() {
     }
 
@@ -88,7 +91,7 @@ public class Feed {
         return questions;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public List<Calculation> getCalculations() {
+        return calculations;
     }
 }

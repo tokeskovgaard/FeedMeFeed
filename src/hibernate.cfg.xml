@@ -41,5 +41,6 @@
         <mapping class="dk.tokebroedsted.hibernate.tables.User"/>
         <mapping class="dk.tokebroedsted.hibernate.tables.Question"/>
         <mapping class="dk.tokebroedsted.hibernate.tables.QuestionItem"/>
+        <mapping class="dk.tokebroedsted.hibernate.tables.Calculation"/>
     </session-factory>
 </hibernate-configuration>

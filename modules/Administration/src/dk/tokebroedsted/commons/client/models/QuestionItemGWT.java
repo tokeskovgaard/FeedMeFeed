@@ -46,4 +46,12 @@ public class QuestionItemGWT implements IsSerializable {
     public Integer getFeedItemId() {
         return feedItemId;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof QuestionItemGWT) {
+            return ((QuestionItemGWT) obj).getId().equals(getId());
+        }
+        return super.equals(obj);
+    }
 }

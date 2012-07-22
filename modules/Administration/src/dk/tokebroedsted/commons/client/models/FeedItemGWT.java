@@ -2,7 +2,6 @@ package dk.tokebroedsted.commons.client.models;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,7 @@ public class FeedItemGWT implements IsSerializable {
 
     private List<InputItemGWT> inputItems = new ArrayList<InputItemGWT>();
     private List<QuestionItemGWT> questionItems = new ArrayList<QuestionItemGWT>();
-    private List<CalculationItemGWT> calculationItems = new ArrayList<CalculationItemGWT>();
+    private List<CalculationValueGWT> calculationValues = new ArrayList<CalculationValueGWT>();
 
     private int id;
     private int feedId;
@@ -23,12 +22,12 @@ public class FeedItemGWT implements IsSerializable {
         this.inputItems = inputItems;
     }
 
-    public FeedItemGWT(int id, int feedId, List<InputItemGWT> inputItems, List<QuestionItemGWT> questionItems, List<CalculationItemGWT> calculationItems) {
+    public FeedItemGWT(int id, int feedId, List<InputItemGWT> inputItems, List<QuestionItemGWT> questionItems, List<CalculationValueGWT> calculationValues) {
         this.id = id;
         this.feedId = feedId;
         this.inputItems = inputItems;
         this.questionItems = questionItems;
-        this.calculationItems = calculationItems;
+        this.calculationValues = calculationValues;
     }
 
     public List<InputItemGWT> getInputItems() {

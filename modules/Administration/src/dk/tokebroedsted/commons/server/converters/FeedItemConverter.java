@@ -1,6 +1,6 @@
 package dk.tokebroedsted.commons.server.converters;
 
-import dk.tokebroedsted.commons.client.models.CalculationItemGWT;
+import dk.tokebroedsted.commons.client.models.CalculationValueGWT;
 import dk.tokebroedsted.commons.client.models.FeedItemGWT;
 import dk.tokebroedsted.commons.client.models.InputItemGWT;
 import dk.tokebroedsted.commons.client.models.QuestionItemGWT;
@@ -64,9 +64,16 @@ public class FeedItemConverter implements Converter<FeedItemGWT, FeedItem> {
             questionItemGWTs.add(questionItemConverter.toGwtObject(questionItem));
         }
 
+        Feed feed = feedItem.getFeed();
+        for (Calculation calculation : feed.getCalculations()) {
+            new CalculationExpressionToValue(calculation).calculateValue(feedItem);
+
+        }
+
+
         int id = feedItem.getId();
-        int feedId = feedItem.getFeed().getId();
-        FeedItemGWT feedItemGWT = new FeedItemGWT(id, feedId, inputItemGWTs, questionItemGWTs, new ArrayList<CalculationItemGWT>());
+        int feedId = feed.getId();
+        FeedItemGWT feedItemGWT = new FeedItemGWT(id, feedId, inputItemGWTs, questionItemGWTs, new ArrayList<CalculationValueGWT>());
 
         return feedItemGWT;
     }

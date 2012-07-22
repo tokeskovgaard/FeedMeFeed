@@ -13,14 +13,32 @@ import java.io.Serializable;
  */
 public class CalculationGWT implements IsSerializable {
 
+    private Integer id;
+
     private String name;
 
-    public void setName(String name) {
+    private String calculation;
+
+
+    private CalculationGWT() {
+    }
+
+    public CalculationGWT(Integer id, String name, String calculation) {
+        this.id = id;
         this.name = name;
+        this.calculation = calculation;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getCalculation() {
+        return calculation;
     }
 
     public String getVariableId() {

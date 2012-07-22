@@ -260,4 +260,18 @@ public class ModelFactory {
         }
 
     }
+
+    public static List<Calculation> getAllCalculations() {
+        Session session = HibernateHelper.getCurrentSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Calculation ");
+            List<Calculation> calculations = query.list();
+            transaction.commit();
+            return calculations;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 }

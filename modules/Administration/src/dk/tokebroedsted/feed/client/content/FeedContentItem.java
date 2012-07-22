@@ -1,33 +1,19 @@
 package dk.tokebroedsted.feed.client.content;
 
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.i18n.shared.SafeHtmlBidiFormatter;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.dom.client.*;
+import com.google.gwt.user.client.ui.*;
+
 import dk.tokebroedsted.commons.client.DefaultCallback;
 import dk.tokebroedsted.commons.client.models.*;
 import dk.tokebroedsted.feed.client.FeedServiceAsync;
 
-import java.awt.*;
-
-/**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 18-07-12
- * Time: 15:16
- * To change this template use File | Settings | File Templates.
- */
 public class FeedContentItem extends FlowPanel {
 
     private FeedServiceAsync feedService;
 
     public FeedContentItem(FeedGWT feedGWT, FeedItemGWT feedItemGWT, FeedServiceAsync feedService) {
         this.feedService = feedService;
-        setStyleName("feed-content-item");
+        setStyleName("feed-item");
 
         renderFeedItem(feedGWT, feedItemGWT);
     }
@@ -45,25 +31,51 @@ public class FeedContentItem extends FlowPanel {
 //            html = html.replaceAll(calculationItem.getName(), calculationItem.getValue());
 //        }
 
-        for (QuestionGWT question : feedGWT.getQuestions()) {
-            QuestionItemGWT questionItem = feedItemGWT.getQuestionItem(question);
+        int index = 0;
+        int newIndex;
+        while ((newIndex = html.indexOf("<%question ", index)) != -1) {
+            String pureHtml = html.substring(index, newIndex);
+            add(new InlineHTML(pureHtml));
+            String remainingHTML = html.substring(newIndex);
+            index = newIndex;
 
-            Widget typeWidget;
-
-            QuestionGWT.Type type = question.getType();
-            if (QuestionGWT.Type.numeric.equals(type)) {
-
-                typeWidget = createNumericQuestionWidget(questionItem);
-            } else {
-                throw new RuntimeException("Found a type not supported");
+            for (QuestionGWT questionGWT : feedGWT.getQuestions()) {
+                String variableId = questionGWT.getVariableId();
+                if (remainingHTML.startsWith(variableId)) {
+                    index += variableId.length();
+                    Widget questionWidget = createQuestionWidget(feedItemGWT, questionGWT);
+                    add(questionWidget);
+                }
             }
+        }
+
+        if (index < html.length() - 1) {
+            add(new InlineHTML(html.substring(index, html.length() - 1)));
+        }
+
+
+/*
+        for (QuestionGWT question : feedGWT.getQuestions()) {
+            Widget typeWidget = createQuestionWidget(feedItemGWT, question);
 
             html = html.replaceAll(question.getVariableId(), typeWidget.toString());
         }
+*/
+    }
 
-        HTML feedItemHTML = new HTML(html);
-        feedItemHTML.setStyleName("feed-item");
-        add(feedItemHTML);
+    private Widget createQuestionWidget(FeedItemGWT feedItemGWT, QuestionGWT question) {
+        QuestionItemGWT questionItem = feedItemGWT.getQuestionItem(question);
+
+        Widget typeWidget;
+
+        QuestionGWT.Type type = question.getType();
+        if (QuestionGWT.Type.numeric.equals(type)) {
+
+            typeWidget = createNumericQuestionWidget(questionItem);
+        } else {
+            throw new RuntimeException("Found a type not supported");
+        }
+        return typeWidget;
     }
 
     private Widget createNumericQuestionWidget(final QuestionItemGWT questionItem) {
