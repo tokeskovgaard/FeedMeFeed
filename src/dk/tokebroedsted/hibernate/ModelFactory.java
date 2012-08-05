@@ -274,4 +274,18 @@ public class ModelFactory {
             throw e;
         }
     }
+
+    public static void delete(Class clazz, int id) {
+        Session session = HibernateHelper.getCurrentSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("DELETE FROM " + clazz.getSimpleName() + " WHERE id = :id ");
+            query.setParameter("id", id);
+            int row = query.executeUpdate();
+            transaction.commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 }

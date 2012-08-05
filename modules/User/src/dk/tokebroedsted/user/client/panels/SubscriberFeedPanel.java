@@ -2,12 +2,10 @@ package dk.tokebroedsted.user.client.panels;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.UserGWT;
-import dk.tokebroedsted.hibernate.HibernateUtil;
 import dk.tokebroedsted.user.client.UserService;
 import dk.tokebroedsted.user.client.UserServiceAsync;
 
@@ -57,7 +55,7 @@ public class SubscriberFeedPanel extends FlowPanel {
 
     private void showPanel() {
         final UserServiceAsync userService = UserService.App.getInstance();
-        for(UserGWT user : users) {
+        for (UserGWT user : users) {
             final FlowPanel userFeed = new FlowPanel();
             Label userLabel = new Label(user.getLoginname());
             userLabel.setStyleName("feed-user-label");
@@ -70,8 +68,8 @@ public class SubscriberFeedPanel extends FlowPanel {
 
                 @Override
                 public void onSuccess(List<FeedGWT> result) {
-                    if(result != null) {
-                        for(FeedGWT feed : result) {
+                    if (result != null) {
+                        for (FeedGWT feed : result) {
                             Label feedLabel = new Label(feed.getTitle());
                             feedLabel.setStyleName("feed-feed-label");
                             userFeed.add(feedLabel);

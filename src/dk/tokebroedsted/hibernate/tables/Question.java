@@ -1,8 +1,9 @@
 package dk.tokebroedsted.hibernate.tables;
 
-import com.sun.istack.internal.NotNull;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,7 +19,7 @@ public class Question {
     @GeneratedValue
     private int id;
 
-    public enum Type {numeric}
+    public enum Type {bool, numeric}
 
     @ManyToOne
     private Feed feed;

@@ -1,0 +1,27 @@
+BODY {
+    background-color: #add8e6;
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.top-panel {
+    height: 100px;
+    width: 100%;
+    background-color: #B7FF66;
+}
+
+.tabs {
+    float: right;
+    position: relative;
+    display: inline;
+}
+
+.tab {
+    display: inline;
+}
+
+.content {
+    background-color: white;
+    padding: 10px;
+}

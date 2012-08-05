@@ -12,7 +12,6 @@ import com.google.gwt.user.client.ui.Label;
 import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.user.client.UserService;
 import dk.tokebroedsted.user.client.UserServiceAsync;
-import dk.tokebroedsted.user.client.model.User;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -78,7 +77,7 @@ public class ShowUserPanel extends FlowPanel {
                                     @Override
                                     public void onClick(ClickEvent event) {
                                         Window.alert("Slet id = " + pairs.getValue());
-                                        int id = (Integer)pairs.getValue();
+                                        int id = (Integer) pairs.getValue();
                                         userService.deleteUser(id, new AsyncCallback<String>() {
                                             @Override
                                             public void onFailure(Throwable caught) {
@@ -114,7 +113,6 @@ public class ShowUserPanel extends FlowPanel {
         final UserServiceAsync userService = UserService.App.getInstance();
 
 
-
         userService.getUsers(new AsyncCallback<List<UserGWT>>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -128,7 +126,7 @@ public class ShowUserPanel extends FlowPanel {
                 clear(); // Clear vores ShowUserPanel
                 add(showUsersButton);
                 // Hvis den fandtes i forvejen, tilføj den igen.
-                if(e != null) {
+                if (e != null) {
                     HashMap<Button, Integer> hash = new HashMap<Button, Integer>();
                     FlowPanel flowPanel = new FlowPanel();
                     flowPanel.getElement().setId("user-table");

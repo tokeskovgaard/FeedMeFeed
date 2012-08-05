@@ -1,7 +1,8 @@
 package dk.tokebroedsted.pages;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServlet;
+import dk.tokebroedsted.URLImp;
+
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,16 +14,18 @@ import java.io.IOException;
  * Time: 16:31
  * To change this template use File | Settings | File Templates.
  */
-public class FeedPage extends HttpServlet {
+public class FeedPage extends ServletImpl {
+
+    public static URLImp url() {
+        return new URLImp("Feed");
+    }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void renderBody(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ServletOutputStream out = resp.getOutputStream();
-        out.println("<html><head>");
-        out.println("<script src=\"Feed/less-1.3.0.min.js\" type=\"text/javascript\"></script>");
-        out.println("</head><body>");
+        out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\" />");
+
         out.println("<script type=\"text/javascript\" language=\"javascript\" src=\"Feed/feed.nocache.js\"></script>");
         out.println("<div id=\"gwt_feed\"></div>");
-        out.println("</body></html>");
     }
 }

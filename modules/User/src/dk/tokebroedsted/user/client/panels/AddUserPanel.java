@@ -8,9 +8,6 @@ import com.google.gwt.user.client.ui.*;
 import dk.tokebroedsted.commons.client.models.UserGWT;
 import dk.tokebroedsted.user.client.UserService;
 import dk.tokebroedsted.user.client.UserServiceAsync;
-import dk.tokebroedsted.user.client.model.User;
-
-import java.util.List;
 
 //TODO Add a wrapper for the ShowUserPanel and a method to update its reference
 public class AddUserPanel extends FlowPanel {
@@ -40,9 +37,9 @@ public class AddUserPanel extends FlowPanel {
             @Override
             public void onClick(ClickEvent event) {
 
-                if(validateUserInput(usernameTextBox, loginTextBox, passwordTextBox, emailTextBox)) {
-                    UserGWT user = new UserGWT(loginTextBox.getText(),usernameTextBox.getText(), emailTextBox.getText(),passwordTextBox.getText());
-                    userService.createUser(user,new AsyncCallback<String>()  {
+                if (validateUserInput(usernameTextBox, loginTextBox, passwordTextBox, emailTextBox)) {
+                    UserGWT user = new UserGWT(loginTextBox.getText(), usernameTextBox.getText(), emailTextBox.getText(), passwordTextBox.getText());
+                    userService.createUser(user, new AsyncCallback<String>() {
                         @Override
                         public void onFailure(Throwable caught) {
                             Window.alert("Error:" + caught.getMessage());
@@ -51,7 +48,7 @@ public class AddUserPanel extends FlowPanel {
                         @Override
                         public void onSuccess(String result) {
                             //Window.alert("Bruger " + usernameTextBox.getText() + " tilføjet.");
-                            if(showUserPanel != null) {
+                            if (showUserPanel != null) {
                                 showUserPanel.update();
                             }
                             usernameTextBox.setText("");
@@ -60,13 +57,13 @@ public class AddUserPanel extends FlowPanel {
                             emailTextBox.setText("");
 
 
-
                         }
                     });
 
 
                 }
-            }});
+            }
+        });
 
         createUserPanel.add(usernameLabel);
         createUserPanel.add(usernameTextBox);
@@ -90,22 +87,22 @@ public class AddUserPanel extends FlowPanel {
         String password = passwordT.getText();
         String email = emailT.getText();
 
-        if(!username.matches("(\\D|\\d| )*")) {
+        if (!username.matches("(\\D|\\d| )*")) {
             usernameT.setText("Indtast ordentligt navn");
             validated = false;
 
         }
-        if(!loginname.matches(("(\\D|\\d)*"))) {
+        if (!loginname.matches(("(\\D|\\d)*"))) {
             loginnameT.setText("Indtast ordentligt brugernavn");
             validated = false;
         }
         //TODO: Create rules for password
-        if(!password.matches("(.){4,100}")) {
+        if (!password.matches("(.){4,100}")) {
             passwordT.setText("Indtast ordentligt password");
             validated = false;
         }
         //TODO: Find regexp for password
-        if(email.matches("")) {
+        if (email.matches("")) {
             emailT.setText("Indtast ordentlig email");
             validated = false;
         }

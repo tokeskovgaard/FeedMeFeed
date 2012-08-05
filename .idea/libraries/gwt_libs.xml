@@ -1,12 +1,10 @@
 <component name="libraryTable">
   <library name="gwt-libs">
     <CLASSES>
-      <root url="jar://$GWT_PATH$/gwt-user.jar!/" />
       <root url="jar://$GWT_PATH$/gwt-servlet.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$GWT_PATH$/gwt-user.jar!/" />
       <root url="jar://$GWT_PATH$/gwt-servlet.jar!/" />
     </SOURCES>
   </library>

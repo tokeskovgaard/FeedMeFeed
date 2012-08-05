@@ -37,8 +37,8 @@ public class Login extends HttpServlet {
         checkOrSetSessionID(req, resp);
 
         out.println("<html><head>");
-        out.println("<link rel=\"stylesheet/less\" type=\"text/css\" href=\"Administration/Administration.less\">\n" +
-                "<script src=\"Administration/less-1.3.0.min.js\" type=\"text/javascript\"></script>");
+        out.println("<link rel=\"stylesheet/less\" type=\"text/css\" href=\"FeedSetup/FeedSetup.less\">\n" +
+                "<script src=\"FeedSetup/less-1.3.0.min.js\" type=\"text/javascript\"></script>");
         out.println("</head><body>");
         //DatabaseHandler dbHandler = new DatabaseHandler();
         //User user = dbHandler.getUser("klaus", "123456");

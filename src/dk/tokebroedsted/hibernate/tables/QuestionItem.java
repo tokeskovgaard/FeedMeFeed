@@ -1,8 +1,9 @@
 package dk.tokebroedsted.hibernate.tables;
 
-import com.sun.istack.internal.NotNull;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class QuestionItem {
@@ -18,6 +19,7 @@ public class QuestionItem {
     private Question question;
 
     private Integer numericAnswer;
+    private Boolean boolAnswer;
 
     @ManyToOne
     private User owner;
@@ -60,5 +62,9 @@ public class QuestionItem {
 
     public User getOwner() {
         return owner;
+    }
+
+    public Boolean getBoolAnswer() {
+        return boolAnswer;
     }
 }

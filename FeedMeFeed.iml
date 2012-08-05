@@ -27,12 +27,16 @@
     </content>
     <orderEntry type="jdk" jdkName="$JDK_NUMBER$" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="gwt-libs" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.21-bin" level="project" />
     <orderEntry type="library" name="hibernate-4.1.5" level="project" />
     <orderEntry type="library" name="log4j" level="project" />
-    <orderEntry type="module" module-name="Administration" />
+    <orderEntry type="module" module-name="FeedSetup" />
     <orderEntry type="module" module-name="User" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6 (2)" level="project" />
+    <orderEntry type="module" module-name="Commons" />
+    <orderEntry type="module" module-name="Feed" />
   </component>
 </module>
 

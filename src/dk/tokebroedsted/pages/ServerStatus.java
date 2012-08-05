@@ -1,13 +1,10 @@
 package dk.tokebroedsted.pages;
 
-import dk.tokebroedsted.hibernate.HibernateUtil;
+import dk.tokebroedsted.URLImp;
 import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.hibernate.tables.*;
-import org.hibernate.Session;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,10 +17,15 @@ import java.util.List;
  * Time: 13:07
  * To change this template use File | Settings | File Templates.
  */
-public class ServerStatus extends HttpServlet {
+public class ServerStatus extends ServletImpl {
+
+    public static URLImp url() {
+        return new URLImp("ServerStatus");
+    }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void renderBody(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        //To change body of implemented methods use File | Settings | File Templates.
         ServletOutputStream out = resp.getOutputStream();
 
         {
@@ -114,6 +116,7 @@ public class ServerStatus extends HttpServlet {
             out.println("</table>");
         }
     }
+
 
     private void printAsTableRow(ServletOutputStream out, boolean header, Object... columns) throws IOException {
         out.println("<tr>");

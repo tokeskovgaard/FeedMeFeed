@@ -1,7 +1,6 @@
 package dk.tokebroedsted.user.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
@@ -31,7 +30,6 @@ public interface UserService extends RemoteService {
     String createUser(UserGWT user);
 
     List<FeedGWT> getSubscribedFeeds(UserGWT user);
-
 
 
     /**
