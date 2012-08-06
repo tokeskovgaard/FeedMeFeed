@@ -25,9 +25,9 @@ public class FeedContentPanel extends FlowPanel {
         getElement().setInnerHTML("<style type=\"text/css\">" + currentFeed.getCss() + "</style>");
 
 
-        for (FeedItemGWT feedItemGWT : currentFeed.getFeedItems()) {
-            FeedContentItem feedContentItem = new FeedContentItem(feedGWT, feedItemGWT, feedService);
-            add(feedContentItem);
-        }
+//        for (FeedItemGWT feedItemGWT : currentFeed.getFeedItems()) {
+//            FeedContentItem feedContentItem = new FeedContentItem(feedGWT, feedItemGWT, feedService);
+//            add(feedContentItem);
+//        }
     }
 }

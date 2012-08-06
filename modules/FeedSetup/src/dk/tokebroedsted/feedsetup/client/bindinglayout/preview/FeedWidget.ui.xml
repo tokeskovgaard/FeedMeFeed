@@ -1,0 +1,8 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel styleName="feed">
+        <g:HTML ui:field="css"/>
+        <g:FlowPanel ui:field="feedItems"/>
+    </g:HTMLPanel>
+</ui:UiBinder>

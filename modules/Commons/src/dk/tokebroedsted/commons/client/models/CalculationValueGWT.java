@@ -11,11 +11,21 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  */
 public class CalculationValueGWT implements IsSerializable {
 
-    public enum Type {sum}
-
+    private String variableId;
     private String name;
     private String value;
-    private Type type;
+
+    public CalculationValueGWT() {
+    }
+
+    public CalculationValueGWT(String variableId, String value) {
+        this.variableId = variableId;
+        this.value = value;
+    }
+
+    public String getVariableId() {
+        return variableId;
+    }
 
     public String getName() {
         return name;

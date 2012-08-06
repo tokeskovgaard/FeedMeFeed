@@ -1,0 +1,18 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <ui:style>
+        .panel {
+            margin-left: 30px;
+            margin-top: 5px;
+        }
+
+        .image {
+            height: 14px;
+            margin-right: 5px;
+        }
+    </ui:style>
+    <g:FlowPanel styleName="{style.panel}">
+        <g:Image ui:field="deleteImage" url="pics/red_x.png" styleName="{style.image}"/>
+        <g:InlineLabel ui:field="name"/>
+    </g:FlowPanel>
+</ui:UiBinder>

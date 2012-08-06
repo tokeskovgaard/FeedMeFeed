@@ -14,7 +14,7 @@ public class FeedItemGWT implements IsSerializable {
     private int id;
     private int feedId;
 
-    private FeedItemGWT() {
+    public FeedItemGWT() {
     }
 
     public FeedItemGWT(int feedId, List<InputItemGWT> inputItems) {
@@ -34,6 +34,15 @@ public class FeedItemGWT implements IsSerializable {
         return inputItems;
     }
 
+    public InputItemGWT getInputItem(String variableId) {
+        for (InputItemGWT inputItem : inputItems) {
+            if (inputItem.getVariableId().equals(variableId)) {
+                return inputItem;
+            }
+        }
+        return null;
+    }
+
     public int getFeedId() {
         return feedId;
     }
@@ -45,5 +54,18 @@ public class FeedItemGWT implements IsSerializable {
             }
         }
         return new QuestionItemGWT(question, id);
+    }
+
+    public CalculationValueGWT getCalculationValue(String variableId) {
+        for (CalculationValueGWT calculationValue : calculationValues) {
+            if (calculationValue.getVariableId().equals(variableId)) {
+                return calculationValue;
+            }
+        }
+        return null;
+    }
+
+    public List<CalculationValueGWT> getCalculationValues() {
+        return calculationValues;
     }
 }

@@ -47,7 +47,7 @@ public class CalculationItemView extends FlowPanel {
                 saveLabel.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {
-                        CalculationGWT calculationGWT = new CalculationGWT(null, nameInput.getValue(), calculationInput.getValue());
+                        CalculationGWT calculationGWT = new CalculationGWT(null, nameInput.getValue(), calculationInput.getValue(), CalculationGWT.Type.text);
                         feedItemSetup.getFeed().getCalculations().add(calculationGWT);
                         updateView();
                         dialog.hide();

@@ -24,7 +24,7 @@ public class FeedContentItem extends FlowPanel {
         String html = feedGWT.getHtml();
 
         for (InputItemGWT inputItem : feedItemGWT.getInputItems()) {
-            html = html.replaceAll(inputItem.getVariabelId(), inputItem.getValue());
+            html = html.replaceAll(inputItem.getVariableId(), inputItem.getValue());
         }
 
 //        for (CalculationItemGWT calculationItem : feedItemGWT.getCalculationItems()) {

@@ -22,7 +22,7 @@ public class InputItemView extends FlowPanel {
         titel.addStyleName("titel");
         add(titel);
         for (InputGWT feedInput : feedSetupView.getFeed().getInputs()) {
-            Label listItem = new Label(feedInput.getName() + " - " + feedInput.getVariabelId());
+            Label listItem = new Label(feedInput.getName() + " - " + feedInput.getVariableId());
             listItem.addStyleName("list-item");
             add(listItem);
         }

@@ -22,8 +22,8 @@ public class InputItemGWT implements IsSerializable {
         this.inputGWT = inputGWT;
     }
 
-    public String getVariabelId() {
-        return inputGWT.getVariabelId();
+    public String getVariableId() {
+        return inputGWT.getVariableId();
     }
 
     public String getValue() {
@@ -41,5 +41,6 @@ public class InputItemGWT implements IsSerializable {
     public int getId() {
         return id;
     }
+
 
 }

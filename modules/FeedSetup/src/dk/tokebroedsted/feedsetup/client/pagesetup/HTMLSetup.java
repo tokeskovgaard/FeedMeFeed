@@ -45,7 +45,7 @@ public class HTMLSetup extends FlowPanel {
             @Override
             public void onKeyUp(KeyUpEvent event) {
                 feedItemSetup.getFeed().setCss(css.getValue());
-                feedItemSetup.getFeed().setHTML(html.getValue());
+                feedItemSetup.getFeed().setHtml(html.getValue());
 
                 feedItemSetup.previewView.updatePreview(generatePreviewHTML());
             }
@@ -60,7 +60,7 @@ public class HTMLSetup extends FlowPanel {
         //TODO make sure it is safe html
         String htmlText = html.getText();
         for (InputGWT feedInput : feedItemSetup.getFeed().getInputs()) {
-            htmlText = htmlText.replaceAll(feedInput.getVariabelId(), feedInput.getName());
+            htmlText = htmlText.replaceAll(feedInput.getVariableId(), feedInput.getName());
         }
 
         for (QuestionGWT question : feedItemSetup.getFeed().getQuestions()) {

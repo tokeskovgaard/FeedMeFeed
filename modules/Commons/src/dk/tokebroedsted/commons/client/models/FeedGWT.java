@@ -8,7 +8,7 @@ import java.util.List;
 public class FeedGWT implements IsSerializable {
 
     private String title;
-    private String css;
+    private String css = ".feed{}\n\n.feed-item{}";
     private String html;
     private Integer feedId;
 
@@ -16,7 +16,7 @@ public class FeedGWT implements IsSerializable {
     private List<QuestionGWT> questions = new ArrayList<QuestionGWT>();
     private List<CalculationGWT> calculations = new ArrayList<CalculationGWT>();
 
-    private List<FeedItemGWT> feedItems = new ArrayList<FeedItemGWT>();
+    //    private List<FeedItemGWT> feedItems = new ArrayList<FeedItemGWT>();
     private boolean hasBeenInstantiated;
 
     public String getTitle() {
@@ -31,7 +31,7 @@ public class FeedGWT implements IsSerializable {
         return html;
     }
 
-    public void setHTML(String html) {
+    public void setHtml(String html) {
         this.html = html;
     }
 
@@ -63,9 +63,11 @@ public class FeedGWT implements IsSerializable {
         return feedId;
     }
 
+/*
     public void setFeedItems(List<FeedItemGWT> feedItems) {
         this.feedItems = feedItems;
     }
+*/
 
     public void setHasBeenInstantiated(boolean hasBeenInstantiated) {
         this.hasBeenInstantiated = hasBeenInstantiated;
@@ -75,9 +77,9 @@ public class FeedGWT implements IsSerializable {
         return hasBeenInstantiated;
     }
 
-    public List<FeedItemGWT> getFeedItems() {
-        return feedItems;
-    }
+//    public List<FeedItemGWT> getFeedItems() {
+//        return feedItems;
+//    }
 
     public void setQuestions(ArrayList<QuestionGWT> questions) {
         this.questions = questions;

@@ -1,0 +1,25 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <ui:style>
+        .panel {
+            border: 1px black solid;
+            padding: 10px;
+            background-color: ivory;
+        }
+    </ui:style>
+    <g:FlowPanel styleName="{style.panel}">
+        <g:Label>Oprettelse af ny udregning.</g:Label>
+        <g:InlineLabel>Navn:</g:InlineLabel>
+        <g:TextBox ui:field="name"/>
+        <g:ListBox ui:field="type"/>
+        <g:HTML>
+            <br/>
+        </g:HTML>
+        <g:TextArea ui:field="calculation"/>
+        <g:HTML>
+            <br/>
+        </g:HTML>
+        <g:Button ui:field="save">Gem</g:Button>
+        <g:Button ui:field="cancel">Annuller</g:Button>
+    </g:FlowPanel>
+</ui:UiBinder>

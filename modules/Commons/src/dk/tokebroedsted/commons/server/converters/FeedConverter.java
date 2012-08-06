@@ -65,7 +65,7 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
         FeedGWT feedGWT = new FeedGWT();
         feedGWT.setTitle(feed.getTitle());
         feedGWT.setCss(feed.getCss() == null ? "" : feed.getCss());
-        feedGWT.setHTML(feed.getHtml() == null ? "" : feed.getHtml());
+        feedGWT.setHtml(feed.getHtml() == null ? "" : feed.getHtml());
         feedGWT.setFeedId(feed.getId());
         feedGWT.setInputs(inputs);
         feedGWT.setQuestions(questionGWTs);

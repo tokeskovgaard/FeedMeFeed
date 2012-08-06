@@ -4,8 +4,16 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class InputGWT implements IsSerializable {
 
+    public InputGWT() {
+    }
+
+    public InputGWT(String name, Type type) {
+        this.name = name;
+        this.type = type;
+    }
+
     public enum Type {
-        string
+        string, numeric, date
     }
 
     private Integer id;
@@ -30,7 +38,7 @@ public class InputGWT implements IsSerializable {
         return type;
     }
 
-    public String getVariabelId() {
+    public String getVariableId() {
         return "<%input " + name + "%>";
     }
 

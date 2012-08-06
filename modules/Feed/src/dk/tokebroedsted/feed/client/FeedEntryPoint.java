@@ -59,7 +59,7 @@ public class FeedEntryPoint implements EntryPoint {
             feedService.getFeedItems(selectedFeed, new DefaultCallback<List<FeedItemGWT>>() {
                 @Override
                 public void onSuccess(List<FeedItemGWT> result) {
-                    selectedFeed.setFeedItems(result);
+//                    selectedFeed.setFeedItems(result);
                     selectedFeed.setHasBeenInstantiated(true);
                     feedContentPanel.renderFeed(tabPanel.getSelectedFeed());
                 }
