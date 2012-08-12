@@ -18,10 +18,10 @@
           <element id="library" level="project" name="gwt-libs" />
         </element>
       </element>
-      <element id="gwt-compiler-output" facet="User/gwt/GWT" />
       <element id="gwt-compiler-output" facet="FeedSetup/gwt/GWT" />
       <element id="gwt-compiler-output" facet="Feed/gwt/GWT" />
       <element id="gwt-compiler-output" facet="Commons/gwt/GWT" />
+      <element id="gwt-compiler-output" facet="User/gwt/GWT" />
     </root>
   </artifact>
 </component>

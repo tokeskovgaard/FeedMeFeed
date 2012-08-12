@@ -1,4 +1,4 @@
-package dk.tokebroedsted.feedsetup.client.bindinglayout.preview;
+package dk.tokebroedsted.commons.client.preview;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

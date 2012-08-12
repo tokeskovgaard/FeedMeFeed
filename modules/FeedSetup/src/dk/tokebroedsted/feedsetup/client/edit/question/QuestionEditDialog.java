@@ -1,4 +1,4 @@
-package dk.tokebroedsted.feedsetup.client.bindinglayout;
+package dk.tokebroedsted.feedsetup.client.edit.question;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

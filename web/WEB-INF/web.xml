@@ -24,16 +24,6 @@
     </filter-mapping>
 
     <servlet>
-        <servlet-name>gwtServlet</servlet-name>
-        <servlet-class>dk.tokebroedsted.CustomRequestFactoryServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>gwtServlet</servlet-name>
-        <url-pattern>/gwtRequest</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>FeedSetupService</servlet-name>
         <servlet-class>dk.tokebroedsted.feedsetup.server.FeedSetupServiceImpl</servlet-class>
     </servlet>
@@ -41,32 +31,8 @@
         <servlet-name>FeedSetupService</servlet-name>
         <url-pattern>/FeedSetup/FeedSetupService</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>FeedSetup</servlet-name>
-        <servlet-class>dk.tokebroedsted.pages.FeedSetupPage</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>FeedSetup</servlet-name>
-        <url-pattern>/FeedSetup</url-pattern>
-    </servlet-mapping>
 
-    <servlet>
-        <servlet-name>ServerStatus</servlet-name>
-        <servlet-class>dk.tokebroedsted.pages.ServerStatus</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ServerStatus</servlet-name>
-        <url-pattern>/ServerStatus</url-pattern>
-    </servlet-mapping>
 
-    <servlet>
-        <servlet-name>User</servlet-name>
-        <servlet-class>dk.tokebroedsted.pages.UserPage</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>User</servlet-name>
-        <url-pattern>/User</url-pattern>
-    </servlet-mapping>
     <servlet>
         <servlet-name>UserService</servlet-name>
         <servlet-class>dk.tokebroedsted.user.server.UserServiceImpl</servlet-class>
@@ -78,14 +44,6 @@
 
 
     <servlet>
-        <servlet-name>Feed</servlet-name>
-        <servlet-class>dk.tokebroedsted.pages.FeedPage</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Feed</servlet-name>
-        <url-pattern>/Feed</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>FeedService</servlet-name>
         <servlet-class>dk.tokebroedsted.feed.server.FeedServiceImpl</servlet-class>
     </servlet>
@@ -95,35 +53,8 @@
     </servlet-mapping>
 
 
-    <servlet>
-        <servlet-name>Login</servlet-name>
-        <servlet-class>dk.tokebroedsted.Login</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/Login</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Logout</servlet-name>
-        <servlet-class>dk.tokebroedsted.Logout</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Logout</servlet-name>
-        <url-pattern>/Logout</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Error</servlet-name>
-        <servlet-class>dk.tokebroedsted.pages.ErrorPage</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Error</servlet-name>
-        <url-pattern>/Error</url-pattern>
-    </servlet-mapping>
-
     <welcome-file-list>
-        <welcome-file>dk.tokebroedsted.pages.HomePage</welcome-file>
+        <welcome-file>/Home</welcome-file>
     </welcome-file-list>
 
     <error-page>

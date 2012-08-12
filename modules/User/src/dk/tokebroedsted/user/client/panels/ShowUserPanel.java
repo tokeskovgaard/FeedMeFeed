@@ -20,7 +20,7 @@ import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
- * User: mads
+ * UserGWT: mads
  * Date: 7/18/12
  * Time: 4:15 PM
  * To change this template use File | Settings | File Templates.

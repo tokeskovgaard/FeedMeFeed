@@ -288,4 +288,39 @@ public class ModelFactory {
             throw e;
         }
     }
+
+    public static User getUser(String username, String password) {
+        Session session = HibernateHelper.getCurrentSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM User WHERE username = :username AND password = :password");
+            query.setParameter("username", username);
+            query.setParameter("password", password);
+            User user = (User) query.uniqueResult();
+            transaction.commit();
+            return user;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    public static void deleteUser(int id) {
+        Session session = HibernateHelper.getCurrentSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            SQLQuery query = session.createSQLQuery("DELETE FROM User WHERE Id = :Id");
+            query.setParameter("Id", id);
+            int result = query.executeUpdate();
+            if (result == 0)
+
+                transaction.commit();
+        } catch (RuntimeException e) {
+            transaction.rollback();
+            throw e;
+        }
+    }
+
+
 }

@@ -3,17 +3,12 @@ package dk.tokebroedsted.pages;
 import dk.tokebroedsted.URLImp;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 18-07-12
- * Time: 16:31
- * To change this template use File | Settings | File Templates.
- */
+@WebServlet(name = "FeedServlet", displayName = "Feed Servlet", urlPatterns = {"/Feed"})
 public class FeedPage extends ServletImpl {
 
     public static URLImp url() {

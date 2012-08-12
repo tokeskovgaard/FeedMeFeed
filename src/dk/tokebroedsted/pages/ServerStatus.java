@@ -5,18 +5,13 @@ import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.hibernate.tables.*;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 19-07-12
- * Time: 13:07
- * To change this template use File | Settings | File Templates.
- */
+@WebServlet("/ServerStatus")
 public class ServerStatus extends ServletImpl {
 
     public static URLImp url() {

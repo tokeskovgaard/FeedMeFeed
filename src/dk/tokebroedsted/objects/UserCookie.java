@@ -1,9 +1,8 @@
 package dk.tokebroedsted.objects;
 
 
-import dk.tokebroedsted.commons.client.models.UserGWT;
-import dk.tokebroedsted.hibernate.HibernateUtil;
-import dk.tokebroedsted.user.client.model.User;
+import dk.tokebroedsted.hibernate.ModelFactory;
+import dk.tokebroedsted.hibernate.tables.User;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +44,7 @@ public class UserCookie {
         if (!loginname.equals("") && !passwordHash.equals("")) {
             //DatabaseHandler dbHandler = new DatabaseHandler();
             //User user = dbHandler.getUser(username);
-            User user = HibernateUtil.getUser(loginname);
+            User user = ModelFactory.getUser(loginname);
             try {
                 if (passwordHash.equals(hash(user.getUsername() + user.getPassword()))) {
                     HttpSession session = req.getSession(true);
@@ -55,12 +54,10 @@ public class UserCookie {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-
-
         }
     }
 
-    public void setCookie(UserGWT user) {
+    public void setCookie(User user) {
         try {
             Cookie username = new Cookie("user", user.getLoginname());
             Cookie password = new Cookie("password", hash(user.getUsername() + user.getPassword()));
@@ -121,7 +118,15 @@ public class UserCookie {
             resp.addCookie(referrer);
             resp.sendRedirect("Login");
         }
+    }
 
+    public static User getLoggedInUser(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        String username = (String) session.getAttribute("user");
+        if (username != null) {
+            return ModelFactory.getUser(username);
+        }
+        return null;
     }
 
 

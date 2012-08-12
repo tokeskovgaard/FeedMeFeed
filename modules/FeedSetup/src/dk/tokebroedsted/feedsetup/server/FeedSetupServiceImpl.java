@@ -9,6 +9,7 @@ import dk.tokebroedsted.commons.client.models.QuestionGWT;
 import dk.tokebroedsted.commons.server.converters.FeedConverter;
 import dk.tokebroedsted.hibernate.ModelFactory;
 import dk.tokebroedsted.hibernate.tables.*;
+import dk.tokebroedsted.objects.UserCookie;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class FeedSetupServiceImpl extends RemoteServiceServlet implements FeedSe
 
     @Override
     public ArrayList<FeedGWT> getOwnedFeeds() {
-        User user = ModelFactory.getUser("toke");
+        User user = UserCookie.getLoggedInUser(getThreadLocalRequest());
         Set<Feed> createdFeeds = user.getCreatedFeeds();
 
         ArrayList<FeedGWT> ownedFeeds = new ArrayList<FeedGWT>();
@@ -33,9 +34,9 @@ public class FeedSetupServiceImpl extends RemoteServiceServlet implements FeedSe
 
     @Override
     public String saveFeed(FeedGWT feedGWT) {
-        User owner = ModelFactory.getUser("toke");
+        User owner = UserCookie.getLoggedInUser(getThreadLocalRequest());
 
-        Feed feed = new Feed();
+        Feed feed = new Feed(feedGWT.getId());
 
         feed.setOwner(owner);
         feed.setTitle(feedGWT.getTitle());

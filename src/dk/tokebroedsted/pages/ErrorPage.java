@@ -3,18 +3,13 @@ package dk.tokebroedsted.pages;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * Created with IntelliJ IDEA.
- * User: toke
- * Date: 18-07-12
- * Time: 14:05
- * To change this template use File | Settings | File Templates.
- */
+@WebServlet(urlPatterns = "/Error")
 public class ErrorPage extends ServletImpl {
 
     protected void renderBody(HttpServletRequest request, HttpServletResponse response) throws IOException {

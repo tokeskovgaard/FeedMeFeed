@@ -1,58 +1,33 @@
-package dk.tokebroedsted;
+package dk.tokebroedsted.login;
 
-import dk.tokebroedsted.commons.client.models.UserGWT;
-import dk.tokebroedsted.hibernate.HibernateUtil;
+import dk.tokebroedsted.hibernate.ModelFactory;
+import dk.tokebroedsted.hibernate.tables.User;
 import dk.tokebroedsted.objects.UserCookie;
+import dk.tokebroedsted.pages.ServletImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-/**
- * Created with IntelliJ IDEA.
- * User: mads
- * Date: 7/16/12
- * Time: 5:32 PM
- * To change this template use File | Settings | File Templates.
- */
-public class Login extends HttpServlet {
+@WebServlet(urlPatterns = "/Login")
+public class Login extends ServletImpl {
 
     static Logger logger = LoggerFactory.getLogger(Login.class);
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
-        logger.info("Hello World");
-
-
+    protected void renderBody(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ServletOutputStream out = resp.getOutputStream();
 
         checkOrSetSessionID(req, resp);
-
-        out.println("<html><head>");
-        out.println("<link rel=\"stylesheet/less\" type=\"text/css\" href=\"FeedSetup/FeedSetup.less\">\n" +
-                "<script src=\"FeedSetup/less-1.3.0.min.js\" type=\"text/javascript\"></script>");
-        out.println("</head><body>");
-        //DatabaseHandler dbHandler = new DatabaseHandler();
-        //User user = dbHandler.getUser("klaus", "123456");
-        //out.println("<p>" + user.getEmail() + "</p>");
-        String referrer = "UserPage"; // Fallback value
-        Cookie[] cookies = req.getCookies();
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals("referrer")) {
-                    referrer = cookies[i].getValue();
-                    break;
-                }
-            }
-        }
 
         if (!req.getParameterMap().containsKey("tryagain")) {
             out.println("Log venligst ind: <br/>");
@@ -64,10 +39,6 @@ public class Login extends HttpServlet {
                 "  Password: <input type=\"password\" name=\"password\" size=\"15\" /><br />" +
                 " <p><input type=\"submit\" value=\"Login\" /></p>" +
                 "</form>");
-
-
-        out.println("</body></html>");
-
     }
 
     private static String generateSessionId() throws UnsupportedEncodingException {
@@ -108,7 +79,7 @@ public class Login extends HttpServlet {
         ServletOutputStream out = resp.getOutputStream();
         String loginname = req.getParameter("loginname");
         String password = req.getParameter("password");
-        String referrer = "/User";
+        String referrer = "/FeedMeFeed/Home";
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
@@ -118,7 +89,7 @@ public class Login extends HttpServlet {
                 }
             }
         }
-        UserGWT user = HibernateUtil.getUser(loginname, password);
+        User user = ModelFactory.getUser(loginname, password);
         //DatabaseHandler dbHandler = new DatabaseHandler();
         //User user = dbHandler.getUser(loginname, password);
         if (user != null) {
@@ -130,9 +101,6 @@ public class Login extends HttpServlet {
         } else {
             // User with password does not exist.
             resp.sendRedirect("Login?tryagain=1");
-
         }
-
-
     }
 }

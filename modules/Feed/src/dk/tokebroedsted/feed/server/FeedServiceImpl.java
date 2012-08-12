@@ -1,7 +1,11 @@
 package dk.tokebroedsted.feed.server;
 
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import dk.tokebroedsted.commons.client.models.*;
+import dk.tokebroedsted.commons.client.models.FeedGWT;
+import dk.tokebroedsted.commons.client.models.FeedItemGWT;
+import dk.tokebroedsted.commons.client.models.InputItemGWT;
+import dk.tokebroedsted.commons.client.models.QuestionItemGWT;
 import dk.tokebroedsted.commons.server.converters.FeedConverter;
 import dk.tokebroedsted.commons.server.converters.FeedItemConverter;
 import dk.tokebroedsted.feed.client.FeedService;
@@ -10,6 +14,7 @@ import dk.tokebroedsted.hibernate.tables.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class FeedServiceImpl extends RemoteServiceServlet implements FeedService {
 

@@ -7,9 +7,12 @@ import java.util.List;
 
 public class FeedGWT implements IsSerializable {
 
+    private String owner;
+    private Integer subscribers;
+
     private String title;
     private String css = ".feed{}\n\n.feed-item{}";
-    private String html;
+    private String html = "";
     private Integer feedId;
 
     private List<InputGWT> inputs = new ArrayList<InputGWT>();
@@ -87,5 +90,21 @@ public class FeedGWT implements IsSerializable {
 
     public List<QuestionGWT> getQuestions() {
         return questions;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public Integer getSubscribers() {
+        return subscribers;
+    }
+
+    public void setSubscribers(Integer subscribers) {
+        this.subscribers = subscribers;
     }
 }

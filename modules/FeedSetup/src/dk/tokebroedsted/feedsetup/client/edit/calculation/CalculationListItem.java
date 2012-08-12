@@ -1,4 +1,4 @@
-package dk.tokebroedsted.feedsetup.client.bindinglayout;
+package dk.tokebroedsted.feedsetup.client.edit.calculation;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -9,25 +9,23 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
-import dk.tokebroedsted.commons.client.models.InputGWT;
+import dk.tokebroedsted.commons.client.models.CalculationGWT;
 
-public class UserInputListItem extends Composite {
+public class CalculationListItem extends Composite {
+    private CalculationGWT calculationGWT;
     private Command deleteCommand;
 
-    interface UserInputListItemUiBinder extends UiBinder<FlowPanel, UserInputListItem> {
+    interface CalculationListItemUiBinder extends UiBinder<FlowPanel, CalculationListItem> {
     }
 
-    private static UserInputListItemUiBinder ourUiBinder = GWT.create(UserInputListItemUiBinder.class);
-
-    private InputGWT inputGWT;
-
+    private static CalculationListItemUiBinder ourUiBinder = GWT.create(CalculationListItemUiBinder.class);
     @UiField InlineLabel name;
 
-    public UserInputListItem(InputGWT inputGWT) {
+    public CalculationListItem(CalculationGWT calculationGWT) {
         initWidget(ourUiBinder.createAndBindUi(this));
+        this.calculationGWT = calculationGWT;
 
-        this.inputGWT = inputGWT;
-        name.setText(inputGWT.getName());
+        name.setText(calculationGWT.getName());
     }
 
     public void setDeleteCommand(Command deleteCommand) {
@@ -41,7 +39,7 @@ public class UserInputListItem extends Composite {
 
     @UiHandler("name")
     void editInputItem(ClickEvent e) {
-        UserInputEditDialog inputEditDialog = new UserInputEditDialog(inputGWT, new Command() {
+        CalculationEditDialog inputEditDialog = new CalculationEditDialog(calculationGWT, new Command() {
             @Override
             public void execute() {
             }

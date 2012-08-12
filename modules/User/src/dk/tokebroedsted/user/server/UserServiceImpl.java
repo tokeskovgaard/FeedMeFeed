@@ -3,26 +3,24 @@ package dk.tokebroedsted.user.server;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.UserGWT;
-import dk.tokebroedsted.hibernate.HibernateUtil;
 import dk.tokebroedsted.hibernate.ModelFactory;
+import dk.tokebroedsted.hibernate.tables.Feed;
 import dk.tokebroedsted.objects.SessionHandler;
-import dk.tokebroedsted.user.client.model.User;
 import dk.tokebroedsted.user.client.UserService;
-import dk.tokebroedsted.user.client.model.Feed;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class UserServiceImpl extends RemoteServiceServlet implements UserService {
     // Implementation of sample interface method
 
-    private ArrayList<UserGWT> users;
+    private ArrayList<dk.tokebroedsted.commons.client.models.UserGWT> users;
 
     public UserServiceImpl() {
+        users = new ArrayList<dk.tokebroedsted.commons.client.models.UserGWT>();
 
-        users = new ArrayList<UserGWT>();
-
-        UserGWT user = new UserGWT();
+        dk.tokebroedsted.commons.client.models.UserGWT user = new dk.tokebroedsted.commons.client.models.UserGWT();
         user.setUsername("Mads Ravn");
         user.setEmail("madsravn@gmail.com");
         user.setLoginname("madsravn");
@@ -30,7 +28,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         user.setId(1);
         users.add(user);
 
-        user = new UserGWT();
+        user = new dk.tokebroedsted.commons.client.models.UserGWT();
         user.setUsername("Toke R. Brødsted");
         user.setEmail("tokebroedsted@gmail.com");
         user.setLoginname("tokeb");
@@ -39,28 +37,24 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         users.add(user);
     }
 
-    public String getMessage(String msg) {
-        return "Client said: \"" + msg + "\"<br>Server answered: \"Hi!\"";
-    }
-
-    public List<Feed> getFeeds() {
+    public List<FeedGWT> getFeeds() {
 
 //        String user = (String) getThreadLocalRequest().getSession().getAttribute("user");
 //        DatabaseHandler databaseHandler = new DatabaseHandler();
 //        databaseHandler.getFeedsForUser(user);
 
-        Feed feed = (Feed) HibernateUtil.getSomething(Feed.class, 0);
-        ArrayList<Feed> feeds = new ArrayList<Feed>();
-        feeds.add(feed);
+//        Feed feed = ModelFactory.getFeed(0);
+        ArrayList<FeedGWT> feeds = new ArrayList<FeedGWT>();
+//        feeds.add(feed);
 
         return feeds;
     }
 
-    public List<UserGWT> getUsers() {
+    public List<dk.tokebroedsted.commons.client.models.UserGWT> getUsers() {
 
-        /*dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) HibernateUtil.getSomething(dk.tokebroedsted.hibernate.tables.User.class, 1);
+        /*dk.tokebroedsted.hibernate.tables.UserGWT user = (dk.tokebroedsted.hibernate.tables.UserGWT) HibernateUtil.getSomething(dk.tokebroedsted.hibernate.tables.UserGWT.class, 1);
         log(user.toString());
-        User userGWT = new User();
+        UserGWT userGWT = new UserGWT();
         userGWT.setId(user.getId());
         userGWT.setEmail(user.getEmail());
         userGWT.setLoginname(user.getLoginname());
@@ -69,17 +63,17 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         users.add(userGWT);
         */
 
-        users = new ArrayList<UserGWT>();
+        users = new ArrayList<dk.tokebroedsted.commons.client.models.UserGWT>();
         for (dk.tokebroedsted.hibernate.tables.User user : ModelFactory.getAllUsers()) {
-            UserGWT userGWT = new UserGWT(user.getId(), user.getLoginname(), user.getUsername(), user.getEmail(), user.getPassword());
+            dk.tokebroedsted.commons.client.models.UserGWT userGWT = new dk.tokebroedsted.commons.client.models.UserGWT(user.getId(), user.getLoginname(), user.getUsername(), user.getEmail(), user.getPassword());
             users.add(userGWT);
         }
         return users;
     }
 
-    public User getUser(String username) {
+    public UserGWT getUser(String username) {
 
-        return new User();
+        return new UserGWT();
 
     }
 
@@ -94,7 +88,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
     }
 
     public Boolean createUser(int id, String loginname, String username, String password, String email) {
-        UserGWT user = new UserGWT(id, loginname, username, password, email);
+        dk.tokebroedsted.commons.client.models.UserGWT user = new dk.tokebroedsted.commons.client.models.UserGWT(id, loginname, username, password, email);
         users.add(user);
 
         return true;
@@ -103,12 +97,12 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
 
     public String deleteUser(int id) {
 
-        HibernateUtil.deleteUser(id);
+        ModelFactory.deleteUser(id);
 
         return "success";
     }
 
-    public String createUser(UserGWT userGWT) {
+    public String createUser(dk.tokebroedsted.commons.client.models.UserGWT userGWT) {
 
         dk.tokebroedsted.hibernate.tables.User user = new dk.tokebroedsted.hibernate.tables.User(userGWT.getLoginname(),
                 userGWT.getUsername(),
@@ -141,13 +135,13 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
 
 
     //TODO: Implement this method to get the feeds for a given user
-    public ArrayList<FeedGWT> getSubscribedFeeds(UserGWT user) {
-
-        ArrayList<FeedGWT> feeds = new ArrayList<FeedGWT>();
-        feeds = HibernateUtil.getSubscribtions(user);
-
-
-        return feeds;
+    public ArrayList<FeedGWT> getSubscribedFeeds(dk.tokebroedsted.commons.client.models.UserGWT user) {
+        Set<Feed> feedSubscriptions = ModelFactory.getUser(user.getUsername()).getFeedSubscriptions();
+        ArrayList<FeedGWT> subscriptions = new ArrayList<>();
+        for (Feed feedSubscription : feedSubscriptions) {
+            subscriptions.add(new FeedGWT());
+        }
+        return subscriptions;
     }
 
 

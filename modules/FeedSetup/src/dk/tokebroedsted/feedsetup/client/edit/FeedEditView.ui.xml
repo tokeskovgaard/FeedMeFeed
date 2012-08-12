@@ -1,6 +1,6 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:my='urn:import:dk.tokebroedsted.feedsetup.client.bindinglayout.preview'>
+             xmlns:my='urn:import:dk.tokebroedsted.commons.client.preview'>
     <ui:style>
         .top {
             width: 100%;

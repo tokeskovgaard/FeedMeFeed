@@ -1,11 +1,8 @@
+/*
 package dk.tokebroedsted.hibernate;
 
-import dk.tokebroedsted.commons.client.models.FeedGWT;
-import dk.tokebroedsted.commons.client.models.UserGWT;
-import dk.tokebroedsted.commons.server.converters.FeedConverter;
-import dk.tokebroedsted.commons.server.converters.UserConverter;
 import dk.tokebroedsted.hibernate.tables.Feed;
-import dk.tokebroedsted.user.client.model.User;
+import dk.tokebroedsted.hibernate.tables.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
@@ -42,50 +39,6 @@ public class HibernateUtil {
         return load;
     }
 
-    public static ArrayList<UserGWT> getUsers() {
-        logger.info("Initiating getUsers()");
-        Configuration config = new Configuration();
-        config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.User.class);
-        ArrayList<UserGWT> users = new ArrayList<UserGWT>();
-
-        Session session = HibernateHelper.getCurrentSession();
-        try {
-
-            HibernateHelper.beginTransaction();
-            Query queryResult = session.createQuery("from User");
-            java.util.List allUsers;
-            allUsers = queryResult.list();
-            for (int i = 0; i < allUsers.size(); i++) {
-                dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) allUsers.get(i);
-                logger.info("We found " + user.getUsername() + " users with our query.");
-                UserGWT mUser = new UserGWT(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
-                users.add(mUser);
-            }
-            HibernateHelper.commitTransaction();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-        return users;
-
-    }
-
-    public static void deleteUser(int id) {
-
-        logger.info("deleteUser called with: " + id);
-        Session session = HibernateHelper.getCurrentSession();
-
-        try {
-            session.beginTransaction();
-            dk.tokebroedsted.hibernate.tables.User user = new dk.tokebroedsted.hibernate.tables.User();
-            user.setId(id);
-            session.delete(user);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-    }
 
 
     public static void createUser(UserGWT user) {
@@ -120,36 +73,6 @@ public class HibernateUtil {
             dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) allUsers.get(i);
             logger.info("We found " + user.getUsername() + " users with our query.");
             User mUser = new User(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
-            users.add(mUser);
-        }
-        session.getTransaction().commit();
-        if (users.size() > 0) {
-            return users.get(0);
-        }
-        return null;
-    }
-
-    public static UserGWT getUser(String loginname, String password) {
-        logger.info("Initiating getUser with " + loginname + " and " + password);
-        Configuration config = new Configuration();
-        config.addAnnotatedClass(dk.tokebroedsted.hibernate.tables.User.class);
-        ArrayList<UserGWT> users = new ArrayList<UserGWT>();
-
-        Session session = HibernateHelper.getCurrentSession();
-        session.beginTransaction();
-        Query query = session.createQuery("from User where loginname = :loginname and password = :password");
-
-        query.setParameter("loginname", loginname);
-        query.setParameter("password", password);
-
-        java.util.List allUsers;
-        allUsers = query.list();
-        for (int i = 0; i < allUsers.size(); i++) {
-            dk.tokebroedsted.hibernate.tables.User user = (dk.tokebroedsted.hibernate.tables.User) allUsers.get(i);
-            logger.info("We found " + user.getUsername() + " users with our query.");
-            UserConverter userConverter = new UserConverter();
-            UserGWT mUser = userConverter.toGwtObject(user);
-            //User mUser = new User(user.getId(), user.getLoginname(), user.getUsername(), user.getPassword(), user.getEmail());
             users.add(mUser);
         }
         session.getTransaction().commit();
@@ -204,4 +127,4 @@ public class HibernateUtil {
     }
 
 
-}
+}*/

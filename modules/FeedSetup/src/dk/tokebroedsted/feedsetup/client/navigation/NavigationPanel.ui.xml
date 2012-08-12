@@ -1,0 +1,27 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <ui:style>
+        .label {
+            padding: 10px 20px;
+            font-weight: bold;
+            text-decoration: none;
+            line-height: 2.8em;
+            background-color: #E8EEF4;
+            color: green;
+            border-radius: 4px 4px 0 0;
+            -webkit-border-radius: 4px 4px 0 0;
+            -moz-border-radius: 4px 4px 0 0;
+        }
+
+        .label:hover {
+            background-color: #add8e6;
+            text-decoration: none;
+        }
+    </ui:style>
+    <g:HTMLPanel>
+        <nav>
+            <g:InlineLabel ui:field="showFeeds" styleName="{style.label}">Oprettede feeds</g:InlineLabel>
+            <g:InlineLabel ui:field="createFeed" styleName="{style.label}">Opret feed</g:InlineLabel>
+        </nav>
+    </g:HTMLPanel>
+</ui:UiBinder>

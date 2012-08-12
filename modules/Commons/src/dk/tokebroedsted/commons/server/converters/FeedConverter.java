@@ -69,6 +69,7 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
         feedGWT.setFeedId(feed.getId());
         feedGWT.setInputs(inputs);
         feedGWT.setQuestions(questionGWTs);
+        feedGWT.setOwner(feed.getOwner().getUsername());
 
         return feedGWT;
     }

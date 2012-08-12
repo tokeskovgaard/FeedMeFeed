@@ -1,15 +1,18 @@
+/*
 package dk.tokebroedsted.commons.server.calculations;
 
 import dk.tokebroedsted.hibernate.tables.Calculation;
 import dk.tokebroedsted.hibernate.tables.FeedItem;
 
+*/
 /**
  * Created with IntelliJ IDEA.
  * User: toke
  * Date: 20-07-12
  * Time: 17:52
  * To change this template use File | Settings | File Templates.
- */
+ *//*
+
 public class CalculationExpressionToValue {
     public static String subscribers = "<%subscribers%>";
     public static String replies = "<%replies%>";
@@ -22,7 +25,8 @@ public class CalculationExpressionToValue {
     public CalculationExpressionToValue(Calculation calculation, FeedItem feedItem) {
         String calculationExpression = calculation.getCalculation();
 
-        /*  Session session = HibernateHelper.getCurrentSession();
+        */
+/*  Session session = HibernateHelper.getCurrentSession();
         try {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM ");
@@ -33,7 +37,8 @@ public class CalculationExpressionToValue {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
-        }*/
+        }*//*
+
 //        calculationExpression = calculationExpression.replaceAll(total, )
     }
 
@@ -53,3 +58,4 @@ public class CalculationExpressionToValue {
     }
 
 }
+*/

@@ -1,12 +1,7 @@
 package dk.tokebroedsted.hibernate.tables;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
-
 import javax.persistence.*;
-import javax.xml.ws.RequestWrapper;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Feed {
@@ -31,6 +26,7 @@ public class Feed {
 
     @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Calculation> calculations;
+
 
     public Feed() {
     }

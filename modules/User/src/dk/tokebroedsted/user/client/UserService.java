@@ -5,31 +5,27 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.UserGWT;
-import dk.tokebroedsted.user.client.model.Feed;
-import dk.tokebroedsted.user.client.model.User;
 
 import java.util.List;
 
 @RemoteServiceRelativePath("UserService")
 public interface UserService extends RemoteService {
-    // Sample interface method of remote interface
-    String getMessage(String msg);
 
-    List<Feed> getFeeds();
+    List<FeedGWT> getFeeds();
 
-    List<UserGWT> getUsers();
+    List<dk.tokebroedsted.commons.client.models.UserGWT> getUsers();
 
     List<Integer> getInt();
 
-    User getUser(String username);
+    UserGWT getUser(String username);
 
     String deleteUser(int id);
 
     Boolean createUser(int id, String loginname, String username, String password, String email);
 
-    String createUser(UserGWT user);
+    String createUser(dk.tokebroedsted.commons.client.models.UserGWT user);
 
-    List<FeedGWT> getSubscribedFeeds(UserGWT user);
+    List<FeedGWT> getSubscribedFeeds(dk.tokebroedsted.commons.client.models.UserGWT user);
 
 
     /**

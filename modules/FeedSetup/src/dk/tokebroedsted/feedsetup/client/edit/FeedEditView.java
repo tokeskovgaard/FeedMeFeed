@@ -1,27 +1,35 @@
-package dk.tokebroedsted.feedsetup.client.bindinglayout;
+package dk.tokebroedsted.feedsetup.client.edit;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
+import dk.tokebroedsted.commons.client.DefaultCallback;
 import dk.tokebroedsted.commons.client.models.*;
 import dk.tokebroedsted.commons.client.previewhelp.DummyDataFactory;
-import dk.tokebroedsted.feedsetup.client.bindinglayout.preview.FeedWidget;
+import dk.tokebroedsted.feedsetup.client.FeedSetupEntryPoint;
+import dk.tokebroedsted.feedsetup.client.edit.calculation.CalculationEditDialog;
+import dk.tokebroedsted.feedsetup.client.edit.calculation.CalculationListItem;
+import dk.tokebroedsted.commons.client.preview.FeedWidget;
+import dk.tokebroedsted.feedsetup.client.edit.question.QuestionEditDialog;
+import dk.tokebroedsted.feedsetup.client.edit.question.QuestionListItem;
+import dk.tokebroedsted.feedsetup.client.edit.userinput.UserInputEditDialog;
+import dk.tokebroedsted.feedsetup.client.edit.userinput.UserInputListItem;
 
 import java.util.ArrayList;
 
-public class FeedSetupLayoutView extends Composite {
+public class FeedEditView extends Composite {
 
     private boolean isEditingHtml;
     private boolean isShowingSingleFeedItemPreview;
 
-    interface FeedSetupLayoutViewUiBinder extends UiBinder<HTMLPanel, FeedSetupLayoutView> {
+    interface FeedSetupLayoutViewUiBinder extends UiBinder<HTMLPanel, FeedEditView> {
     }
 
     private static FeedSetupLayoutViewUiBinder ourUiBinder = GWT.create(FeedSetupLayoutViewUiBinder.class);
@@ -31,17 +39,17 @@ public class FeedSetupLayoutView extends Composite {
     @UiField FlowPanel questionsPanel;
     @UiField FlowPanel calculationsPanel;
     @UiField TextArea editingArea;
-    @UiField FeedWidget feedWidget;
     @UiField Button addCalculationButton;
     @UiField Button addUserInputButton;
+    @UiField FeedWidget feedWidget;
 
     final FeedGWT feedGWT; // cannot be private
 
-    public FeedSetupLayoutView(FeedGWT feedGWT) {
+    public FeedEditView(FeedGWT feedGWT) {
         initWidget(ourUiBinder.createAndBindUi(this));
 
         //TODO Only for testing. Remove when going live!
-        {
+        if (feedGWT.getTitle() == null || feedGWT.getTitle().length() == 0) {
             feedGWT.setCss(".feed{\n" +
                     "background-color: gray;\n" +
                     "padding: 5px;\n" +
@@ -80,6 +88,7 @@ public class FeedSetupLayoutView extends Composite {
 
         isEditingHtml = true;
         editingArea.setValue(feedGWT.getHtml());
+        title.setValue(feedGWT.getTitle());
 
         for (InputGWT inputGWT : feedGWT.getInputs()) {
             addInputToView(inputGWT);
@@ -148,8 +157,19 @@ public class FeedSetupLayoutView extends Composite {
 
     @UiHandler("saveFeedButton")
     void saveFeed(ClickEvent e) {
-        Window.alert("Clicked saveFeedButton");
+        FeedSetupEntryPoint.feedService.saveFeed(feedGWT, new DefaultCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+            }
+        });
     }
+
+    @UiHandler("title")
+    void titleChanged(ChangeEvent event) {
+        feedGWT.setTitle(title.getValue());
+    }
+
 
     @UiHandler("addUserInputButton")
     void addUserInput(ClickEvent e) {

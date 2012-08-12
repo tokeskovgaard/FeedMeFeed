@@ -23,14 +23,14 @@ public class UserEntryPoint implements EntryPoint {
             @Override
             public void onClick(ClickEvent event) {
 
-                userService.getUsers(new AsyncCallback<List<User>>() {
+                userService.getUsers(new AsyncCallback<List<UserGWT>>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         Window.alert("Error:" + caught.getMessage());
                     }
 
                     @Override
-                    public void onSuccess(List<User> result) {
+                    public void onSuccess(List<UserGWT> result) {
 
                         Element e = DOM.getElementById("user-table");
                         if (e == null) {
@@ -38,7 +38,7 @@ public class UserEntryPoint implements EntryPoint {
                             FlowPanel flowPanel = new FlowPanel();
                             flowPanel.getElement().setId("user-table");
 
-                            for (User user : result) {
+                            for (UserGWT user : result) {
                                 FlowPanel flow = new FlowPanel();
                                 Label label = new Label(user.getUsername());
                                 label.setStyleName("user-table-label");

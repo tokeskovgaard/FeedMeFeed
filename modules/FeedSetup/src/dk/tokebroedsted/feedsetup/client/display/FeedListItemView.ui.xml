@@ -1,0 +1,15 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <ui:style>
+        .column {
+            display: inline;
+            padding: 5px;
+        }
+    </ui:style>
+    <g:FlowPanel>
+        <g:Label ui:field="name" styleName="{style.column}"/>
+        <g:Label ui:field="user" styleName="{style.column}"/>
+        <g:Label ui:field="subscribers" styleName="{style.column}"/>
+        <g:Label ui:field="delete" styleName="{style.column}">Slet</g:Label>
+    </g:FlowPanel>
+</ui:UiBinder>
