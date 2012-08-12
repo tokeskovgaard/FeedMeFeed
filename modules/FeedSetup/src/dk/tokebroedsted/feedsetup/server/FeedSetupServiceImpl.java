@@ -36,12 +36,18 @@ public class FeedSetupServiceImpl extends RemoteServiceServlet implements FeedSe
     public String saveFeed(FeedGWT feedGWT) {
         User owner = UserCookie.getLoggedInUser(getThreadLocalRequest());
 
-        Feed feed = new Feed(feedGWT.getId());
+
+        Feed feed;
+        if (feedGWT.getId() != null)
+            feed = new Feed(feedGWT.getId());
+        else
+            feed = new Feed();
 
         feed.setOwner(owner);
         feed.setTitle(feedGWT.getTitle());
         feed.setCss(feedGWT.getCss());
         feed.setHtml(feedGWT.getHtml());
+
         ModelFactory.save(feed);
 
         for (InputGWT inputGWT : feedGWT.getInputs()) {
