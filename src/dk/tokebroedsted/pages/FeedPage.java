@@ -21,6 +21,7 @@ public class FeedPage extends ServletImpl {
         out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\" />");
 
         out.println("<script type=\"text/javascript\" language=\"javascript\" src=\"Feed/feed.nocache.js\"></script>");
-        out.println("<div id=\"gwt_feed\"></div>");
+        out.println("<div id=\"gwt_navigation\"></div>");
+        out.println("<div id=\"gwt_content\"></div>");
     }
 }

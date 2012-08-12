@@ -1,42 +1,33 @@
 package dk.tokebroedsted.feed.client.tabs;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
+import dk.tokebroedsted.feed.client.FeedEntryPoint;
 
-public class Tab extends FlowPanel {
+public class Tab extends Composite {
+    interface TabbUiBinder extends UiBinder<Label, Tab> {
+    }
 
+    private static TabbUiBinder ourUiBinder = GWT.create(TabbUiBinder.class);
 
-    private boolean selected;
-    private final FeedGWT feedGWT;
+    private FeedGWT feedGWT;
 
-    public Tab(final TabPanel tabPanel, FeedGWT feedGWT) {
+    @UiField Label feedTitle;
+
+    public Tab(FeedGWT feedGWT) {
         this.feedGWT = feedGWT;
-
-        setStyleName("tab");
-        getElement().setInnerHTML(feedGWT.getTitle());
-
-        addDomHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                if (!selected)
-                    tabPanel.updateSelectedTab(Tab.this);
-            }
-        }, ClickEvent.getType());
+        initWidget(ourUiBinder.createAndBindUi(this));
+        feedTitle.setText(feedGWT.getTitle());
     }
 
-    public void setSelected(boolean selected) {
-        if (selected) {
-            setStyleName("tab selected");
-        } else {
-            setStyleName("tab");
-        }
-
-        this.selected = selected;
-    }
-
-    public FeedGWT getFeed() {
-        return feedGWT;
+    @UiHandler("feedTitle")
+    void selected(ClickEvent event) {
+        FeedEntryPoint.renderFeed(feedGWT);
     }
 }

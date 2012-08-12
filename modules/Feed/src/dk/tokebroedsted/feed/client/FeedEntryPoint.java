@@ -5,67 +5,56 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import dk.tokebroedsted.commons.client.CustomUncaughtExceptionHandler;
 import dk.tokebroedsted.commons.client.DefaultCallback;
-import dk.tokebroedsted.feed.client.content.FeedContentPanel;
-import dk.tokebroedsted.feed.client.controlpanel.ControlPanel;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.FeedItemGWT;
-import dk.tokebroedsted.feed.client.tabs.TabPanel;
+import dk.tokebroedsted.commons.client.preview.FeedWidget;
+import dk.tokebroedsted.feed.client.controlpanel.ControlPanel;
+import dk.tokebroedsted.feed.client.tabs.Tab;
 
 import java.util.List;
 
 public class FeedEntryPoint implements EntryPoint {
 
-    private RootPanel rootPanel;
-    private TabPanel tabPanel;
-    private FeedContentPanel feedContentPanel;
-    private ControlPanel controlPanel;
-    private FeedServiceAsync feedService;
+    public static FeedServiceAsync feedService;
+
+    public static FeedWidget feedWidget;
+    public static FeedGWT renderedFeed;
 
     @Override
     public void onModuleLoad() {
         GWT.setUncaughtExceptionHandler(new CustomUncaughtExceptionHandler());
 
-        rootPanel = RootPanel.get("gwt_feed");
-
         feedService = FeedService.App.getInstance();
 
-        tabPanel = new TabPanel(this);
-        rootPanel.add(tabPanel);
+        final RootPanel rootNavigationPanel = RootPanel.get("gwt_navigation");
+        RootPanel rootContentPanel = RootPanel.get("gwt_content");
 
-        controlPanel = new ControlPanel(feedService, tabPanel);
-        rootPanel.add(controlPanel);
+        rootContentPanel.add(new ControlPanel());
+        feedWidget = new FeedWidget();
+        rootContentPanel.add(feedWidget);
 
-        feedContentPanel = new FeedContentPanel(feedService);
-        rootPanel.add(feedContentPanel);
 
-        fillTabPanel(feedService);
-    }
-
-    private void fillTabPanel(final FeedServiceAsync feedService) {
         feedService.getUsersFeeds(new DefaultCallback<List<FeedGWT>>() {
             @Override
             public void onSuccess(List<FeedGWT> result) {
                 for (FeedGWT feedGWT : result) {
-                    tabPanel.addFeedAsTab(feedGWT);
+                    Tab tab = new Tab(feedGWT);
+                    rootNavigationPanel.add(tab);
                 }
-
-                renderFeed(tabPanel.getSelectedFeed());
+                if (result.size() > 0) {
+                    renderFeed(result.get(0));
+                }
             }
         });
     }
 
-    public void renderFeed(final FeedGWT selectedFeed) {
-        if (!selectedFeed.getHasBeenInstantiated()) {
-            feedService.getFeedItems(selectedFeed, new DefaultCallback<List<FeedItemGWT>>() {
-                @Override
-                public void onSuccess(List<FeedItemGWT> result) {
-//                    selectedFeed.setFeedItems(result);
-                    selectedFeed.setHasBeenInstantiated(true);
-                    feedContentPanel.renderFeed(tabPanel.getSelectedFeed());
-                }
-            });
-        } else {
-            feedContentPanel.renderFeed(selectedFeed);
-        }
+    public static void renderFeed(final FeedGWT feedGWT) {
+        renderedFeed = feedGWT;
+        feedService.getFeedItems(feedGWT, new DefaultCallback<List<FeedItemGWT>>() {
+            @Override
+            public void onSuccess(List<FeedItemGWT> result) {
+                feedWidget.renderFeedItems(feedGWT, result);
+            }
+        });
     }
 }

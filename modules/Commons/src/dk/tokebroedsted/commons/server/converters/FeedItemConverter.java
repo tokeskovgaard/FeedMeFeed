@@ -65,8 +65,8 @@ public class FeedItemConverter implements Converter<FeedItemGWT, FeedItem> {
         }
 
         Feed feed = feedItem.getFeed();
+        ArrayList<CalculationValueGWT> calculationValueGWTs = new ArrayList<>();
         for (Calculation calculation : feed.getCalculations()) {
-
         }
 
 

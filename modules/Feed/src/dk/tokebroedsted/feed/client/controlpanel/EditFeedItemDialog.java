@@ -11,6 +11,7 @@ import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.FeedItemGWT;
 import dk.tokebroedsted.commons.client.models.InputGWT;
 import dk.tokebroedsted.commons.client.models.InputItemGWT;
+import dk.tokebroedsted.feed.client.FeedEntryPoint;
 import dk.tokebroedsted.feed.client.FeedServiceAsync;
 
 import java.util.ArrayList;
@@ -29,7 +30,6 @@ public class EditFeedItemDialog extends DialogBox {
         setStyleName("edit-feed-item-dialog");
         setGlassEnabled(true);
         center();
-
 
         buildDialog();
     }
@@ -115,6 +115,7 @@ public class EditFeedItemDialog extends DialogBox {
                 }
             }
         });
+        FeedEntryPoint.renderFeed(selectedFeed);
         hide();
     }
 }

@@ -1,13 +1,11 @@
 package dk.tokebroedsted.commons.server.converters;
 
+import dk.tokebroedsted.commons.client.models.CalculationGWT;
 import dk.tokebroedsted.commons.client.models.FeedGWT;
 import dk.tokebroedsted.commons.client.models.InputGWT;
 import dk.tokebroedsted.commons.client.models.QuestionGWT;
 import dk.tokebroedsted.hibernate.ModelFactory;
-import dk.tokebroedsted.hibernate.tables.Feed;
-import dk.tokebroedsted.hibernate.tables.FeedInput;
-import dk.tokebroedsted.hibernate.tables.Question;
-import dk.tokebroedsted.hibernate.tables.User;
+import dk.tokebroedsted.hibernate.tables.*;
 
 import java.util.ArrayList;
 
@@ -62,6 +60,12 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
             questionGWTs.add(questionGWT);
         }
 
+        ArrayList<CalculationGWT> calculationGWTs = new ArrayList<CalculationGWT>();
+        for (Calculation calculation : feed.getCalculations()) {
+            CalculationGWT calculationGWT = new CalculationGWT(calculation.getId(), calculation.getName(), calculation.getCalculation(), CalculationGWT.Type.bool);
+            calculationGWTs.add(calculationGWT);
+        }
+
         FeedGWT feedGWT = new FeedGWT();
         feedGWT.setTitle(feed.getTitle());
         feedGWT.setCss(feed.getCss() == null ? "" : feed.getCss());
@@ -69,6 +73,7 @@ public class FeedConverter implements Converter<FeedGWT, Feed> {
         feedGWT.setFeedId(feed.getId());
         feedGWT.setInputs(inputs);
         feedGWT.setQuestions(questionGWTs);
+        feedGWT.setCalculations(calculationGWTs);
         feedGWT.setOwner(feed.getOwner().getUsername());
 
         return feedGWT;

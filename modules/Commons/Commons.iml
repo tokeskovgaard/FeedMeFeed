@@ -6,6 +6,9 @@
         <setting name="compilerMaxHeapSize" value="1024" />
         <setting name="gwtScriptOutputStyle" value="DETAILED" />
         <setting name="gwtSdkUrl" value="file://$GWT_PATH$" />
+        <packaging>
+          <module name="dk.tokebroedsted.commons.Commons" path="/Commons" />
+        </packaging>
       </configuration>
     </facet>
   </component>

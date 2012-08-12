@@ -20,6 +20,9 @@ public class FeedSetupServiceImpl extends RemoteServiceServlet implements FeedSe
     @Override
     public ArrayList<FeedGWT> getOwnedFeeds() {
         User user = UserCookie.getLoggedInUser(getThreadLocalRequest());
+        if (user == null) {
+            throw new RuntimeException("No user is logged in.");
+        }
         Set<Feed> createdFeeds = user.getCreatedFeeds();
 
         ArrayList<FeedGWT> ownedFeeds = new ArrayList<FeedGWT>();

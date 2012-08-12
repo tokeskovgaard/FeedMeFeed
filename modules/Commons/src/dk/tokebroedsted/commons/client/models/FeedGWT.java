@@ -19,9 +19,6 @@ public class FeedGWT implements IsSerializable {
     private List<QuestionGWT> questions = new ArrayList<QuestionGWT>();
     private List<CalculationGWT> calculations = new ArrayList<CalculationGWT>();
 
-    //    private List<FeedItemGWT> feedItems = new ArrayList<FeedItemGWT>();
-    private boolean hasBeenInstantiated;
-
     public String getTitle() {
         return title;
     }
@@ -66,24 +63,6 @@ public class FeedGWT implements IsSerializable {
         return feedId;
     }
 
-/*
-    public void setFeedItems(List<FeedItemGWT> feedItems) {
-        this.feedItems = feedItems;
-    }
-*/
-
-    public void setHasBeenInstantiated(boolean hasBeenInstantiated) {
-        this.hasBeenInstantiated = hasBeenInstantiated;
-    }
-
-    public boolean getHasBeenInstantiated() {
-        return hasBeenInstantiated;
-    }
-
-//    public List<FeedItemGWT> getFeedItems() {
-//        return feedItems;
-//    }
-
     public void setQuestions(ArrayList<QuestionGWT> questions) {
         this.questions = questions;
     }
@@ -106,5 +85,9 @@ public class FeedGWT implements IsSerializable {
 
     public void setSubscribers(Integer subscribers) {
         this.subscribers = subscribers;
+    }
+
+    public void setCalculations(ArrayList<CalculationGWT> calculations) {
+        this.calculations = calculations;
     }
 }
