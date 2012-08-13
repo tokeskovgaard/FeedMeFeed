@@ -7,13 +7,14 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.Composite;
 import dk.tokebroedsted.commons.client.DefaultCallback;
 import dk.tokebroedsted.commons.client.FeedItemService;
 import dk.tokebroedsted.commons.client.models.QuestionGWT;
 import dk.tokebroedsted.commons.client.models.QuestionItemGWT;
 
-public class BoolQuestionFragment extends QuestionFragment {
-    interface BoolFragmentUiBinder extends UiBinder<CheckBox, BoolQuestionFragment> {
+public class BoolQuestionWidget extends Composite {
+    interface BoolFragmentUiBinder extends UiBinder<CheckBox, BoolQuestionWidget> {
     }
 
     private static BoolFragmentUiBinder ourUiBinder = GWT.create(BoolFragmentUiBinder.class);
@@ -23,20 +24,10 @@ public class BoolQuestionFragment extends QuestionFragment {
 
     @UiField CheckBox boolFragment;
 
-    public BoolQuestionFragment(QuestionGWT questionGWT) {
+    public BoolQuestionWidget(QuestionGWT questionGWT, QuestionItemGWT questionItemGWT) {
         initWidget(ourUiBinder.createAndBindUi(this));
         this.questionGWT = questionGWT;
-    }
-
-    @Override
-    public QuestionGWT getQuestionGWT() {
-        return questionGWT;
-    }
-
-    @Override
-    public void setValue(QuestionItemGWT questionItemGWT) {
         this.questionItemGWT = questionItemGWT;
-        boolFragment.setValue(Boolean.TRUE.equals(questionItemGWT.getBoolAnswer()));
     }
 
     @UiHandler("boolFragment")

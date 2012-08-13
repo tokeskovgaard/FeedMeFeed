@@ -6,13 +6,10 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
-import dk.tokebroedsted.commons.client.fragment.fragments.BoolCalculationFragment;
-import dk.tokebroedsted.commons.client.fragment.fragments.CalculationFragment;
 import dk.tokebroedsted.commons.client.fragment.fragments.Fragment;
 import dk.tokebroedsted.commons.client.fragment.fragments.HtmlFragment;
+import dk.tokebroedsted.commons.client.fragment.fragments.calculation.CalculationFragment;
 import dk.tokebroedsted.commons.client.fragment.fragments.input.InputFragment;
-import dk.tokebroedsted.commons.client.fragment.fragments.input.StringInputFragment;
-import dk.tokebroedsted.commons.client.fragment.fragments.question.BoolQuestionFragment;
 import dk.tokebroedsted.commons.client.fragment.fragments.question.QuestionFragment;
 import dk.tokebroedsted.commons.client.models.*;
 
@@ -29,46 +26,37 @@ public class FeedItemWidget extends Composite {
     public FeedItemWidget(LinkedList<Fragment> htmlFragments, FeedItemGWT feedItemGwt) {
         initWidget(ourUiBinder.createAndBindUi(this));
 
-        Widget result;
         for (Fragment fragment : htmlFragments) {
             if (fragment instanceof HtmlFragment) {
-                rootPanel.add(new HtmlFragment(((HtmlFragment) fragment).getHtml()));
+                rootPanel.add(((HtmlFragment) fragment).createFragment(null));
             } else if (fragment instanceof InputFragment) {
-                rootPanel.add(getAdjustedInputFragment(feedItemGwt, (InputFragment) fragment));
+                rootPanel.add(getFragmentWidget(feedItemGwt, (InputFragment) fragment));
             } else if (fragment instanceof QuestionFragment) {
-                rootPanel.add(getAdjustedQuestionFragment(feedItemGwt, (QuestionFragment) fragment));
+                rootPanel.add(getFragmentWidget(feedItemGwt, (QuestionFragment) fragment));
             } else if (fragment instanceof CalculationFragment) {
-                rootPanel.add(getAdjustedCalculationFragment(feedItemGwt, (CalculationFragment) fragment));
+                rootPanel.add(getFragmentWidget(feedItemGwt, (CalculationFragment) fragment));
             }
         }
     }
 
-    private InputFragment getAdjustedInputFragment(FeedItemGWT feedItemGWT, InputFragment fragment) {
+    private Widget getFragmentWidget(FeedItemGWT feedItemGWT, InputFragment fragment) {
         InputGWT inputGWT = fragment.getInputGWT();
         InputItemGWT inputItem = feedItemGWT.getInputItem(inputGWT.getVariableId());
 
-        StringInputFragment fragmentCopy = new StringInputFragment(inputGWT);
-        fragmentCopy.setValue(inputItem);
-        return fragmentCopy;
+        return fragment.createFragment(inputItem);
     }
 
-    private CalculationFragment getAdjustedCalculationFragment(FeedItemGWT feedItemGwt, CalculationFragment fragment) {
+    private Widget getFragmentWidget(FeedItemGWT feedItemGwt, CalculationFragment fragment) {
         CalculationGWT calculationGwt = fragment.getCalculationGWT();
         CalculationValueGWT calculationValue = feedItemGwt.getCalculationValue(calculationGwt.getVariableId());
 
-        BoolCalculationFragment fragmentCopy = new BoolCalculationFragment(calculationGwt);
-        if (calculationValue != null)
-            fragmentCopy.setValue(calculationValue.getValue());
-
-        return fragmentCopy;
+        return fragment.createFragment(calculationValue);
     }
 
-    private QuestionFragment getAdjustedQuestionFragment(FeedItemGWT feedItemGwt, QuestionFragment fragment) {
+    private Widget getFragmentWidget(FeedItemGWT feedItemGwt, QuestionFragment fragment) {
         QuestionGWT questionGWT = fragment.getQuestionGWT();
         QuestionItemGWT questionItem = feedItemGwt.getQuestionItem(questionGWT);
 
-        BoolQuestionFragment fragmentCopy = new BoolQuestionFragment(questionGWT);
-        fragmentCopy.setValue(questionItem);
-        return fragmentCopy;
+        return fragment.createFragment(questionItem);
     }
 }

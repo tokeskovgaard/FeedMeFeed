@@ -1,0 +1,53 @@
+<mockup version="1.0" skin="sketch" measuredW="643" measuredH="573" mockupW="514" mockupH="530">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="129" y="43" w="514" h="530" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::ButtonBar" x="144" y="124" w="-1" h="-1" measuredW="264" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Feeds%2C%20Administration%2C%20Ops%E6tning</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::TabBar" x="185" y="168" w="386" h="322" measuredW="161" measuredH="100" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>0</selectedIndex>
+        <text>Film%2C%20B%F8ger</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextArea" x="211" y="221" w="227" h="70" measuredW="200" measuredH="140" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <size>10</size>
+        <text>Titel%3A%20Batman%0AGenre%3A%20Action%0AImdb%3A%20www.imdb.com/batman%20%0ABeskrivelse%3A%20Ipsum%20apsum%20delorium...</text>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::SearchBox" x="451" y="168" w="-1" h="-1" measuredW="120" measuredH="25" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>search</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::TextArea" x="211" y="342" w="227" h="70" measuredW="200" measuredH="140" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <size>10</size>
+        <text>Titel%3A%20Shaolin%20Soccer%0AGenre%3A%20Awesome%0AImdb%3A%20www.imdb.com/shaolinsoccer%20%0ABeskrivelse%3A%20Ipsum%20apsum%20delorium...</text>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="297" y="306" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>.%20.%20.%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="211" y="193" w="77" h="20" measuredW="74" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>tilf%F8jtilfeed%26bm%3Btilf%F8jtilfeed.bmml%26bm%3Btilf%F8jtilfeed.bmml%26bm%3Btilf%F8jtilfeed.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2282%2C150%2C159%2C170%22%20href%3D%22tilf%25C3%25B8jtilfeed.bmml%22%20alt%3D%22tilf%F8jtilfeed%22%20id%3D%2211%22/%3E</map>
+        <text>Opret%20ny</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

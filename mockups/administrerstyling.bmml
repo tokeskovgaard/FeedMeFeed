@@ -1,0 +1,43 @@
+<mockup version="1.0" skin="sketch" measuredW="643" measuredH="573" mockupW="514" mockupH="530">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="129" y="43" w="514" h="530" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::ButtonBar" x="144" y="124" w="-1" h="-1" measuredW="264" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>1</selectedIndex>
+        <text>Feeds%2C%20Administration%2C%20Ops%E6tning</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::TabBar" x="185" y="168" w="386" h="322" measuredW="280" measuredH="100" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>0</selectedIndex>
+        <text>Administrer%20oprettede%2C%20Opret%20ny</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="297" y="306" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>.%20.%20.%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::VerticalTabBar" x="198" y="202" w="344" h="273" measuredW="200" measuredH="136" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>0</selectedIndex>
+        <text>Film%0AB%F8ger</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::ButtonBar" x="252" y="208" w="-1" h="-1" measuredW="142" measuredH="29" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>1</selectedIndex>
+        <text>Brugere%2C%20Styling</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextArea" x="252" y="268" w="-1" h="-1" measuredW="200" measuredH="140" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Redigering%20af%20Feed.%0ADer%20m%E5%20kun%20%E6ndres%20i%20det%20visuelle.%0A%20%0AInput%20og%20sp%F8rgsm%E5l%20m%E5%20ikke%20%E6ndres</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
