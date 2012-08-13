@@ -5,6 +5,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import dk.tokebroedsted.commons.client.fragment.fragments.Fragment;
 import dk.tokebroedsted.commons.client.fragment.fragments.HtmlFragment;
@@ -26,6 +27,7 @@ public class FeedItemWidget extends Composite {
     public FeedItemWidget(LinkedList<Fragment> htmlFragments, FeedItemGWT feedItemGwt) {
         initWidget(ourUiBinder.createAndBindUi(this));
 
+        //TODO Problem with html tags being splitted because InnerHTML tags instead of raw html
         for (Fragment fragment : htmlFragments) {
             if (fragment instanceof HtmlFragment) {
                 rootPanel.add(((HtmlFragment) fragment).createFragment(null));

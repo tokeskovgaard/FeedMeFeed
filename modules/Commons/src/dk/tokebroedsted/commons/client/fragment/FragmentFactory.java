@@ -18,125 +18,62 @@ public class FragmentFactory {
 
     public static LinkedList<Fragment> buildFragmentList(FeedGWT feedGWT) {
         LinkedList<Fragment> fragmentList = new LinkedList<Fragment>();
-        String html = feedGWT.getHtml();
-//        int index = 0;
-//        int newIndex;
-
 
         RegExp regExp = RegExp.compile("<%(input|question|calculation)\\s(.*?)%>");
-        /*       SplitResult split = regExp.split(html);
-        String splitString = "";
-        for (int i = 0; i < split.length(); i++) {
-            splitString += split.get(i) + "###\n";
-        }
-        Window.alert(splitString);*/
-
-
-        int lastIndex = 0;
         MatchResult matchResult;
 
-        while ((matchResult = regExp.exec(html)) != null) {
-            fragmentList.add(new HtmlFragment(html.substring(lastIndex, matchResult.getIndex())));
-
-            String totalString = matchResult.getGroup(0);
+        String remainingHtml = feedGWT.getHtml();
+        while ((matchResult = regExp.exec(remainingHtml)) != null) {
+            String htmlThatMatched = matchResult.getGroup(0);
             String type = matchResult.getGroup(1);
             String variableId = matchResult.getGroup(2);
+
+            String passedHtml = remainingHtml.substring(0, matchResult.getIndex());
+            fragmentList.add(new HtmlFragment(passedHtml));
+
+            Fragment fragment = null;
             if ("input".equals(type)) {
-                fragmentList.add(new InputFragment(geInput(feedGWT, variableId)));
+                fragment = geInputFragment(feedGWT, variableId);
             } else if ("question".equals(type)) {
-                fragmentList.add(new QuestionFragment(getQuestion(feedGWT, variableId)));
+                fragment = getQuestionFragment(feedGWT, variableId);
             } else if ("calculation".equals(type)) {
-                fragmentList.add(new CalculationFragment(getCalculation(feedGWT, variableId)));
-            } else {
-                fragmentList.add(new HtmlFragment(totalString));
+                fragment = getCalculationFragment(feedGWT, variableId);
             }
+            if (fragment == null) {
+                fragment = new HtmlFragment(htmlThatMatched);
+            }
+            fragmentList.add(fragment);
 
-            html = html.substring(matchResult.getIndex());
-            lastIndex = matchResult.getIndex();
+            remainingHtml = remainingHtml.substring(matchResult.getIndex() + htmlThatMatched.length());
         }
-        if (lastIndex < html.length()) {
-            fragmentList.add(new HtmlFragment(html.substring(lastIndex, html.length())));
+        if (remainingHtml.length() > 0) {
+            fragmentList.add(new HtmlFragment(remainingHtml));
         }
-
-//        RegExp regExp = RegExp.compile("<%([question|calculation])\\s(.+?)%>");
-
-        /*//TODO Use matcher instead
-        while ((newIndex = html.indexOf("<%", index)) != -1) {
-            String pureHtml = html.substring(index, newIndex);
-            fragmentList.add(new HtmlFragment(pureHtml));
-
-            String remainingHTML = html.substring(newIndex);
-
-            boolean foundMatch = false;
-            for (InputGWT inputGwt : feedGWT.getInputs()) {
-                String variableId = inputGwt.getVariableId();
-                if (remainingHTML.startsWith(variableId)) {
-                    index = newIndex + variableId.length();
-                    if (InputGWT.Type.string.equals(inputGwt.getType()))
-                        fragmentList.add(new InputFragment(inputGwt));
-                    foundMatch = true;
-                }
-            }
-            if (foundMatch)
-                continue;
-
-            for (QuestionGWT questionGWT : feedGWT.getQuestions()) {
-                String variableId = questionGWT.getVariableId();
-                if (remainingHTML.startsWith(variableId)) {
-                    index = newIndex + variableId.length();
-                    foundMatch = true;
-                    if (questionGWT.getType().equals(QuestionGWT.Type.bool))
-                        fragmentList.add(new QuestionFragment(questionGWT));
-                }
-            }
-            if (foundMatch)
-                continue;
-
-            for (CalculationGWT calculationGwt : feedGWT.getCalculations()) {
-                String variableId = calculationGwt.getVariableId();
-                if (remainingHTML.startsWith(variableId)) {
-                    index = newIndex + variableId.length() + 2;
-                    if (CalculationGWT.Type.bool.equals(calculationGwt.getType()))
-                        fragmentList.add(new CalculationFragment(calculationGwt));
-                    foundMatch = true;
-                }
-            }
-            if (foundMatch)
-                continue;
-
-            pureHtml = html.substring(index, index + "<%".length());
-            fragmentList.add(new HtmlFragment(pureHtml));
-            index += "<%input ".length();
-        }
-
-        if (index < html.length()) {
-            fragmentList.add(new HtmlFragment(html.substring(index, html.length())));
-        }*/
         return fragmentList;
     }
 
-    private static InputGWT geInput(FeedGWT feedGWT, String variableId) {
+    private static InputFragment geInputFragment(FeedGWT feedGWT, String variableId) {
         for (InputGWT inputGWT : feedGWT.getInputs()) {
-            if (inputGWT.getVariableId().equals(variableId))
-                return inputGWT;
+            if (inputGWT.getName().equals(variableId))
+                return new InputFragment(inputGWT);
         }
-        throw new RuntimeException("No input matched");
-
+        return null;
     }
 
-    private static CalculationGWT getCalculation(FeedGWT feedGWT, String variableId) {
+    private static CalculationFragment getCalculationFragment(FeedGWT feedGWT, String variableId) {
         for (CalculationGWT calculationGWT : feedGWT.getCalculations()) {
-            if (calculationGWT.getVariableId().equals(variableId))
-                return calculationGWT;
+            if (calculationGWT.getName().equals(variableId))
+                return new CalculationFragment(calculationGWT);
         }
-        throw new RuntimeException("No calculation matched");
+
+        return null;
     }
 
-    private static QuestionGWT getQuestion(FeedGWT feedGWT, String variableId) {
+    private static QuestionFragment getQuestionFragment(FeedGWT feedGWT, String variableId) {
         for (QuestionGWT questionGWT : feedGWT.getQuestions()) {
-            if (questionGWT.getVariableId().equals(variableId))
-                return questionGWT;
+            if (questionGWT.getName().equals(variableId))
+                return new QuestionFragment(questionGWT);
         }
-        throw new RuntimeException("No question matched");
+        return null;
     }
 }
