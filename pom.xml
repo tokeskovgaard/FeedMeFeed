@@ -8,6 +8,7 @@
     <artifactId>feedmebuild</artifactId>
     <version>1.0</version>
 
+    <!-- TODO: Mangler stadig alle javax. dependencies -->
     <dependencies>
 
         <dependency>
@@ -141,6 +142,25 @@
 
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
