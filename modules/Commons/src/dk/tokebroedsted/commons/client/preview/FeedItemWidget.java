@@ -3,10 +3,7 @@ package dk.tokebroedsted.commons.client.preview;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import dk.tokebroedsted.commons.client.fragment.fragments.Fragment;
 import dk.tokebroedsted.commons.client.fragment.fragments.HtmlFragment;
 import dk.tokebroedsted.commons.client.fragment.fragments.calculation.CalculationFragment;
@@ -39,6 +36,13 @@ public class FeedItemWidget extends Composite {
                 rootPanel.add(getFragmentWidget(feedItemGwt, (CalculationFragment) fragment));
             }
         }
+
+        HTMLPanel htmlPanel = new HTMLPanel("<span class=\"<div id=\"test\"\\>Titel: <%input titel%></span>\n" +
+                "<br />\n" +
+                "Spg: <%question spg%>\n" +
+                "<br />\n" +
+                "Bool: <%calculation bool%>");
+        rootPanel.add(htmlPanel);
     }
 
     private Widget getFragmentWidget(FeedItemGWT feedItemGWT, InputFragment fragment) {

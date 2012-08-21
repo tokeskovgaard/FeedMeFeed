@@ -36,7 +36,7 @@ public abstract class ServletImpl extends HttpServlet {
     private void printHeader(ServletOutputStream out, User user) throws IOException {
         out.println("<header>");
         out.println("<div id=\"title\">");
-        out.println("<h1>Tokebroedsted.dk</h1>");
+        out.println("<h1>FeedMeFeed</h1>");
         out.println("</div>");
 
         String loginTitle = "Log på";
