@@ -9,6 +9,7 @@
     <version>1.0</version>
 
     <!-- TODO: Mangler stadig alle javax. dependencies -->
+    <!-- Testing git - Mads -->
     <dependencies>
 
         <dependency>
@@ -138,8 +139,6 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.6.6</version>
         </dependency>
-
-
 
     </dependencies>
 
